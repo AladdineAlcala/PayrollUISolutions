@@ -1,0 +1,18 @@
+
+<h2>{{ title }}</h2>
+
+<div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
+
+<ng-container *ngIf="employee$|async">
+
+    <button id="addemp" routerLink="/employee/add" > Add Employee </button>
+    <hr>
+    <app-employee-list 
+    [employeetablelist$]="employee$"
+    (selectedEmp)="selectedEmptoDelete($event)"
+    >
+    </app-employee-list>
+    
+</ng-container>
+
+

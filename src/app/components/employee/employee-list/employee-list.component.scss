@@ -1,0 +1,13 @@
+
+table th , table td{
+    text-align: center;
+}
+
+table tr:nth-child(even){
+    background-color: #e4e3e3
+}
+
+th {
+  background: #333;
+  color: #fff;
+}

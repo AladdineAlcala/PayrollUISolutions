@@ -1,0 +1,98 @@
+<h1>Add New Employee</h1>
+
+<pre>valid: {{empForm.valid |json}}</pre>
+<pre>pristine :{{empForm.pristine |json}}</pre>
+<pre>dirty :{{empForm.dirty |json}}</pre>
+<pre>invalid {{empForm.invalid |json}}</pre>
+<pre>value {{empForm.value |json}}</pre>
+
+<form (ngSubmit)="register(empForm)" #empForm="ngForm">
+  <table class="table table-primary">
+    <tr>
+      <td>Id:</td>
+      <td>
+        <input type="text"
+          name="emp_ID" [(ngModel)]="employeeModel.emp_ID"
+          ngModel required minlength="5"
+          #empId="ngModel"
+          >
+        <p *ngIf="empId.dirty && empId.hasError('required')"> Employee Id is required here..</p>
+        <p *ngIf="empId.errors?.['minlength']"> Employee Id should be minimum of 5 characters </p>
+      </td>
+    </tr>
+    <tr>
+      <td>lastname:</td>
+      <td>
+        <input type="text" name="lname" [(ngModel)]="employeeModel.lname" ngModel required #lname="ngModel"
+          [ngModelOptions]="{updateOn:'blur'}">
+        <p *ngIf="lname.dirty && lname.hasError('required')"> Last name is required here..</p>
+      </td>
+    </tr>
+    <tr>
+      <td>firstname:</td>
+      <td>
+        <input type="text" name="fname" [(ngModel)]="employeeModel.fname" ngModel required minlength="2"
+          #fname="ngModel">
+        <p *ngIf="fname.dirty && fname.hasError('required')"> First name is required here..</p>
+      </td>
+    </tr>
+    <tr>
+      <td>gender:</td>
+      <td>
+        <select name="gender" [(ngModel)]="employeeModel.gender">
+          <option value="Male">Male</option>
+          <option value="Femail">Female</option>
+
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>date of birth:</td>
+      <td>
+        <input type="datetime" name="dob" [(ngModel)]="employeeModel.dob" #dob="ngModel">
+      </td>
+    </tr>
+
+    <tr>
+      <td>address:</td>
+      <td>
+        <input type="text" name="address" [(ngModel)]="employeeModel.address" #address="ngModel">
+      </td>
+    </tr>
+
+    <tr>
+      <td>position:</td>
+      <td>
+        <select name="pos_Id" [(ngModel)]="selectedpositionval" (ngModelChange)="onDropDownPositionChange($event)" #pos_Id="ngModel" >
+          <option *ngFor="let position of positions$|async" [ngValue]="position.pos_Id">{{position.positionName}}</option>
+        </select>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>emp status:</td>
+      <td>
+        <select name="empStatus" [(ngModel)]="employeeModel.empStatus">
+          <option value="reg">Regular</option>
+          <option value="contract">Contract</option>
+
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>contact No:</td>
+      <td>
+        <input type="text" name="contactNo" [(ngModel)]="employeeModel.contactNo">
+      </td>
+    </tr>
+    <tr>
+      <td><button type="submit" [disabled]="empForm.invalid">Save</button></td>
+    </tr>
+  </table>
+</form>
+
+
+{{employee$|async|json}}

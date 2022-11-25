@@ -1,0 +1,26 @@
+table{
+  margin-top:20px;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+td{
+  
+  padding:6px 10px;
+}
+button {
+  border: 1px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 30px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+select{
+  width:100%;
+}
+
+input.ng-invalid.ng-dirty{
+  border:2px red solid;
+}

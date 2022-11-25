@@ -1,0 +1,54 @@
+
+
+<!-- {{employeetablelist$|async|json}} -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>FIRST NAME</th>
+      <th>LAST NAME</th>
+      <th>ADDRESS</th>
+      <th>CONTACT No</th>
+      <th>EMP STATUS</th>
+      <th>POSITION</th>
+      <th>
+
+      </th>
+    </tr>
+
+  </thead>
+  <tbody>
+
+    <ng-container *ngFor="let employee of employeetablelist$|async">
+      <tr>
+
+        <td>{{ employee.emp_ID }}</td>
+        <td>{{ employee.fname }}</td>
+        <td>{{ employee.lname }}</td>
+        <td>{{ employee.address }}</td>
+        <td>{{ employee.contactNo }}</td>
+        <td>{{ employee.empStatus }}</td>
+        <td>{{ employee?.position?.positionName || 'Not Available'}}</td>
+      
+        <td>
+
+          <button type="button"
+          [routerLink]="['/employee',employee.emp_ID]"
+          >
+          details
+          </button>
+
+          <button type="button"
+          [routerLink]="['/employee/edit',employee.emp_ID]"
+          >
+            edit
+          </button>
+    </td>
+  </tr>
+    </ng-container>
+      
+  </tbody>
+</table>
+
+
