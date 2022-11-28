@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, EMPTY, Observable } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
 import { Position } from 'src/app/models/position';
@@ -24,7 +25,8 @@ export class EmployeeCreateComponent implements OnInit {
   
   constructor(
     private empservice: EmployeeService,
-    private positionservice: PositionService
+    private positionservice: PositionService,
+    private route:Router
   ) {}
 
   ngOnInit(): void {
@@ -68,11 +70,17 @@ export class EmployeeCreateComponent implements OnInit {
 
   register(empForm: NgForm): void {
     console.log(this.employeeModel);
+
     if (empForm.valid) {
+
       this.employee$ = this.empservice.addEmployee(empForm.value);
-      empForm.reset();
+      //empForm.reset();
+
+     // this.route.navigateByUrl('/employee/details/${empForm.value["emp_ID"]}');
     } else {
-      console.log('error encounter');
+
+      console.log('required fields needed encounter');
+
     }
   }
 

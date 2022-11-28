@@ -11,8 +11,8 @@ const routes: Routes = [
 
   { path:'',redirectTo:'/home',pathMatch:'full'},
   { path:'employees',component:EmployeeComponent},
-  { path:'employee/detaii/:id',component:EmployeeDetailsComponent},
   { path:'employee/add',component:EmployeeCreateComponent},
+  { path:'employee/details/:id',component:EmployeeDetailsComponent},
   { path:'employee/edit/:id',component:EmployeeEditComponent},
   { path:'deduction',component:DeductionsComponent},
   { path:'**',component:HomeComponent,pathMatch:"full"}

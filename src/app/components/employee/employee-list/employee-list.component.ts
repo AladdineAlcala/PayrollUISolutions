@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input,Output, OnInit, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input,Output, OnInit, EventEmitter, ContentChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
 
@@ -10,10 +10,12 @@ import { Employee } from 'src/app/models/employee';
 })
 
 
-export class EmployeeListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit{
+
+  @ContentChild('pcontent') paragraph:ElementRef | undefined
 
   ngOnInit(): void {
-  
+ /*    console.log('text content at', + this.paragraph?.nativeElement.textContent); */
   }
 
 
@@ -21,10 +23,11 @@ export class EmployeeListComponent implements OnInit {
 
   @Output() selectedEmp=new EventEmitter<Employee>();
 
-
 /*   editEmp(emp:Employee){
     this.selectedEmp.emit(emp);
   }
  */
+
+
 
 }

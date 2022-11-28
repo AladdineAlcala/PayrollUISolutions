@@ -12,6 +12,7 @@ import { EmployeeCreateComponent } from './components/employee/employee-create/e
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
 import { FormsModule } from '@angular/forms';
+import { EmployeeService } from './services/employee.service';
 
 @NgModule({
   declarations: [

@@ -65,7 +65,7 @@
       <td>position:</td>
       <td>
         <select name="pos_Id" [(ngModel)]="selectedpositionval" (ngModelChange)="onDropDownPositionChange($event)" #pos_Id="ngModel" >
-          <option *ngFor="let position of positions$|async" [ngValue]="position.pos_Id">{{position.positionName}}</option>
+          <option *ngFor="let position of positions$|async" [ngValue]="position.pos_Id">{{position.positionName}}</option> 
         </select>
       </td>
     </tr>
