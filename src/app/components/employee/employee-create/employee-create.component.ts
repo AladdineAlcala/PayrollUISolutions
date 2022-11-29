@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, EMPTY, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, catchError, EMPTY, Observable, Subscription, tap } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
 import { Position } from 'src/app/models/position';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -13,7 +13,7 @@ import { PositionService } from 'src/app/services/position.service';
   styleUrls: ['./employee-create.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeeCreateComponent implements OnInit {
+export class EmployeeCreateComponent implements OnInit ,OnDestroy {
   employee$!: Observable<Employee>;
   positions$!: Observable<Position[]>;
 
@@ -22,24 +22,17 @@ export class EmployeeCreateComponent implements OnInit {
   
   errorMessageAction$=this.errorSubject.asObservable();
 
-  
+  employee:any;
+  employeeSubscription!:Subscription;
   constructor(
     private empservice: EmployeeService,
     private positionservice: PositionService,
-    private route:Router
+    private router:Router,
+    private route:ActivatedRoute
   ) {}
+ 
 
-  ngOnInit(): void {
-
-    this.positions$=this.positionservice.position$.pipe(catchError((error)=>{
-              this.errorSubject.next(error)
-                    return EMPTY;
-              }
-            )
-          );
-
-  }
-
+  
   employeeModel: any = {
     emp_ID: '',
     lname: '',
@@ -67,16 +60,39 @@ export class EmployeeCreateComponent implements OnInit {
     position:Position,
   };
 
+  ngOnInit(): void {
+
+    this.positions$=this.positionservice.position$.pipe(catchError((error)=>{
+              this.errorSubject.next(error)
+                    return EMPTY;
+              }
+            )
+          );
+
+  }
+
+
 
   register(empForm: NgForm): void {
-    console.log(this.employeeModel);
+   // console.log(this.employeeModel);
 
     if (empForm.valid) {
 
       this.employee$ = this.empservice.addEmployee(empForm.value);
       //empForm.reset();
 
-     // this.route.navigateByUrl('/employee/details/${empForm.value["emp_ID"]}');
+
+      this.employeeSubscription =this.employee$.subscribe({
+        next: (value:Employee) => this.employee=value,
+        error: (e) => console.error(e),
+        complete: () => {
+          if(this.employee){
+            // console.log(this.employee);
+             this.router.navigate(['/employees/details',this.employee.emp_ID],{relativeTo:this.route});
+         }
+        }
+      });
+        
     } else {
 
       console.log('required fields needed encounter');
@@ -84,8 +100,17 @@ export class EmployeeCreateComponent implements OnInit {
     }
   }
 
+  
+
   onDropDownPositionChange(e:any){
-    console.log(e);
+   // console.log(e);
     this.selectedpositionval=e;
+  }
+
+  ngOnDestroy(): void {
+    if(this.employeeSubscription){
+      this.employeeSubscription.unsubscribe();
+    }
+    
   }
 }

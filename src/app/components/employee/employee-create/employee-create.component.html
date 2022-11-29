@@ -1,11 +1,11 @@
 <h1>Add New Employee</h1>
 
-<pre>valid: {{empForm.valid |json}}</pre>
+<!-- <pre>valid: {{empForm.valid |json}}</pre>
 <pre>pristine :{{empForm.pristine |json}}</pre>
 <pre>dirty :{{empForm.dirty |json}}</pre>
 <pre>invalid {{empForm.invalid |json}}</pre>
 <pre>value {{empForm.value |json}}</pre>
-
+ -->
 <form (ngSubmit)="register(empForm)" #empForm="ngForm">
   <table class="table table-primary">
     <tr>
@@ -95,4 +95,4 @@
 </form>
 
 
-{{employee$|async|json}}
+<!-- {{employee$|async|json}} -->

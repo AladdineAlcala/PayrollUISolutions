@@ -5,21 +5,27 @@ import { EmployeeCreateComponent } from './components/employee/employee-create/e
 import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
 import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeResolver } from './components/employee/employee.resolver';
 import { HomeComponent } from './components/home/home.component';
+import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
 
-const routes: Routes = [
+const approutes: Routes = [
 
-  { path:'',redirectTo:'/home',pathMatch:'full'},
-  { path:'employees',component:EmployeeComponent},
-  { path:'employee/add',component:EmployeeCreateComponent},
-  { path:'employee/details/:id',component:EmployeeDetailsComponent},
-  { path:'employee/edit/:id',component:EmployeeEditComponent},
+  { path:'',component:HomeComponent},
+  { path:'home',component:HomeComponent},
+  { path:'employees',component:EmployeeComponent ,resolve:
+  {
+    emp:EmployeeResolver
+  }},
+  { path:'employees/add',component:EmployeeCreateComponent},
+  { path:'employees/details/:id',component:EmployeeDetailsComponent},
+  { path:'employees/edit/:id',component:EmployeeEditComponent},
   { path:'deduction',component:DeductionsComponent},
-  { path:'**',component:HomeComponent,pathMatch:"full"}
+  { path:'**',component:NotfoundpageComponent,pathMatch:'full'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(approutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,6 +1,6 @@
 export class ResponseDTO{
     isSuccess:boolean=false
-    result!:Object[]
+    result!:any
     errorMessages:string[]=[]
     displayMessage:string=""
 }

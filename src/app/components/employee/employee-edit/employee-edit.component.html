@@ -1,1 +1,105 @@
-<p>employee-edit works!</p>  {{id}}
+<!-- <p>employee-edit works!</p>  {{id}} -->
+
+<!-- <pre>value {{edit_empForm.value |json}}</pre> -->
+<br>
+
+<table>
+    <tr>
+       
+        <td>
+            <button type="button" (click)="onDelete()" > Delete </button>
+        </td>
+    </tr>
+</table>
+<br>
+
+<form (ngSubmit)="onUpdate(edit_empForm)"  method="post" #edit_empForm="ngForm" >
+    <table class="table table-primary">
+        <tr>
+          <td>Id:</td>
+          <td>
+            <input type="text"
+              name="emp_ID" [(ngModel)]="employeeEditModel.emp_ID"
+              ngModel required minlength="5"
+              #empId="ngModel"
+              >
+            <p *ngIf="empId.dirty && empId.hasError('required')"> Employee Id is required here..</p>
+            <p *ngIf="empId.errors?.['minlength']"> Employee Id should be minimum of 5 characters </p>
+          </td>
+        </tr>
+        <tr>
+          <td>lastname:</td>
+          <td>
+            <input type="text" name="lname" [(ngModel)]="employeeEditModel.lname" ngModel required #lname="ngModel"
+              [ngModelOptions]="{updateOn:'blur'}">
+            <p *ngIf="lname.dirty && lname.hasError('required')"> Last name is required here..</p>
+          </td>
+        </tr>
+        <tr>
+          <td>firstname:</td>
+          <td>
+            <input type="text" name="fname" [(ngModel)]="employeeEditModel.fname" ngModel required minlength="2"
+              #fname="ngModel">
+            <p *ngIf="fname.dirty && fname.hasError('required')"> First name is required here..</p>
+          </td>
+        </tr>
+        <tr>
+          <td>gender:</td>
+          <td>
+            <select name="gender" [(ngModel)]="employeeEditModel.gender">
+              <option value="Male">Male</option>
+              <option value="Femail">Female</option>
+    
+            </select>
+          </td>
+        </tr>
+    
+        <tr>
+          <td>date of birth:</td>
+          <td>
+            <input type="datetime" name="dob" [(ngModel)]="employeeEditModel.dob" #dob="ngModel">
+          </td>
+        </tr>
+    
+        <tr>
+          <td>address:</td>
+          <td>
+            <input type="text" name="address" [(ngModel)]="employeeEditModel.address" #address="ngModel">
+          </td>
+        </tr>
+    
+        <tr>
+          <td>position:</td>
+          <td>
+            <select name="pos_Id" [(ngModel)]="selectedpositionval" (ngModelChange)="onDropDownPositionChange($event)" #pos_Id="ngModel" >
+              <option *ngFor="let position of positions$|async" [ngValue]="position.pos_Id">{{position.positionName}}</option> 
+            </select>
+          </td>
+        </tr>
+    
+    
+        <tr>
+          <td>emp status:</td>
+          <td>
+            <select name="empStatus" [(ngModel)]="employeeEditModel.empStatus">
+              <option value="reg">Regular</option>
+              <option value="contract">Contract</option>
+    
+            </select>
+          </td>
+        </tr>
+    
+        <tr>
+          <td>contact No:</td>
+          <td>
+            <input type="text" name="contactNo" [(ngModel)]="employeeEditModel.contactNo">
+          </td>
+        </tr>
+        <tr>
+          <td><button type="submit" [disabled]="edit_empForm.invalid">Save</button></td>
+        </tr>
+      </table>
+    
+</form>
+
+

@@ -12,9 +12,9 @@ export class Employee{
     contactNo:string=""
     emailAdd:string=""
     date_Hired:Date=new Date()
-    baseRate!:number
-    baseHour!:number
-    allowance!:number
+    baseRate:number=0
+    baseHour:number=0
+    allowance:number=0
     empStatus:string=""
     socialsecNum:string=""
     pagibigNum:string=""

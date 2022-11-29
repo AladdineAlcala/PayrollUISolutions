@@ -32,15 +32,15 @@
         <td>{{ employee?.position?.positionName || 'Not Available'}}</td>
       
         <td>
-
+         <!--  [routerLink]="['/employee/details',employee.emp_ID]" -->
           <button type="button"
-          [routerLink]="['/employee/details',employee.emp_ID]"
+           [routerLink]="['details',employee.emp_ID]" 
           >
           details
           </button>
 
           <button type="button"
-          [routerLink]="['/employee/edit',employee.emp_ID]"
+          [routerLink]="['edit',employee.emp_ID]"
           >
             edit
           </button>

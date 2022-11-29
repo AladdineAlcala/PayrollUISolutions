@@ -19,10 +19,6 @@ export class EmployeeService {
 
   getEmployees$=this.getAllEmployee();
 
-  newEmp!:Employee;
-
-  //addEmployee$=this.addEmployee(this.newEmp)
-
   private getAllEmployee():Observable<Employee[]>
   {
     return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`)
@@ -33,13 +29,23 @@ export class EmployeeService {
           
            );
   }
+  
 
+  public getEmployee(id:string):Observable<Employee> {
+    return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/`+ id )
+          .pipe(
+            map((data) => data.result as Employee ),
+              catchError(this.handleError)
+          );
+  }
+  
 
   public addEmployee(emp:Employee):Observable<Employee>{
 
-    return this.http.post<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`,emp)
+    return this.http.post<Employee>(`${environment.base_apiUrl}/${this.url}`,emp)
             .pipe(
-              map(data => data.result[0] as Employee),
+              map((data) => data
+              ),
               catchError(this.handleError)
             );
   }

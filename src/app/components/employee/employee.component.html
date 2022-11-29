@@ -5,7 +5,7 @@
 
 <ng-container *ngIf="employee$|async">
 
-    <button id="addemp" routerLink="/employee/add" > Add Employee </button>
+    <button id="addemp" routerLink="add" > Add Employee </button>
     <hr>
     <app-employee-list 
     [employeetablelist$]="employee$"

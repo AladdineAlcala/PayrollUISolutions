@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Type } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, Observable, of } from 'rxjs';
+import { ActivatedRoute, Data } from '@angular/router';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, of } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -27,20 +28,26 @@ export class EmployeeComponent implements OnInit {
   
   errorMessageAction$=this.errorSubject.asObservable();
 
-  constructor(private empservice:EmployeeService) {
+  constructor(private activatedRoute:ActivatedRoute) {
   
   }
 
 
   ngOnInit(): void { 
 
-   this.employee$= this.empservice.getEmployees$
+    //data comes from resolver
+    
+    this.employee$=this.activatedRoute.data.pipe(map((data:Data)=>data?.['emp']))
+
+  /*  this.employee$= this.empservice.getEmployees$
             .pipe(catchError((error)=>{
               this.errorSubject.next(error)
                     return EMPTY;
               }
             )
-          );
+          ); */
+
+
   }
   
 
