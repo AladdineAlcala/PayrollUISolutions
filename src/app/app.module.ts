@@ -11,9 +11,11 @@ import { EmployeeDetailsComponent } from './components/employee/employee-details
 import { EmployeeCreateComponent } from './components/employee/employee-create/employee-create.component';
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
-import { FormsModule } from '@angular/forms';
-import { EmployeeService } from './services/employee.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
+import { ErrorpageComponent } from './components/errorpage/errorpage.component';
+import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,15 +27,23 @@ import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.co
     EmployeeCreateComponent,
     HomeComponent,
     EmployeeEditComponent,
-    NotfoundpageComponent
+    NotfoundpageComponent,
+    ErrorpageComponent,
+    DeductionCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+
+  
+}

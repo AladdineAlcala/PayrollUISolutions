@@ -1,18 +1,19 @@
 
 <h2>{{ title }}</h2>
+<!-- {{(employee$|async).length}} -->
 
 <div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
 
 <ng-container *ngIf="employee$|async">
 
-    <button id="addemp" routerLink="add" > Add Employee </button>
+    <button type="button" routerLink="add" > Add Employee </button>
     <hr>
     <app-employee-list 
     [employeetablelist$]="employee$"
-    (selectedEmp)="selectedEmptoDelete($event)"
     >
     </app-employee-list>
     
 </ng-container>
 
 
+<!-- (selectedEmp)="selectedEmptoDelete($event)" -->

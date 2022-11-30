@@ -1,0 +1,54 @@
+<br>
+
+<h1>Create New Deduction</h1>
+
+<div class="mainerr"> <span *ngIf="!createdeductionForm?.valid && createdeductionForm?.touched" > Pls. Enter valid data</span></div>
+<form [formGroup]="createdeductionForm" (ngSubmit)="onSaveCreateDeduction()" novalidate >
+  <table>
+    <tr>
+      <td>Description:</td>
+      <td>
+        <input type="text" id="deductiondescription" formControlName="deductiondescription">
+        <span *ngIf="!createdeductionForm.get('deductiondescription')?.valid && createdeductionForm.get('deductiondescription')?.touched" > Pls. Enter valid description</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Type:</td>
+      <td>
+        <div *ngFor="let type of deductiontypes">
+            <label>
+                <input
+                type="radio" 
+                id="deductiontype"
+                [value]="type.toLowerCase()"
+                formControlName="deductiontype"
+                >
+                {{type}}
+            </label>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Code:</td>
+      <td>
+        <input type="text" id="deductioncode" formControlName="deductioncode">
+        <span *ngIf="!createdeductionForm.get('deductioncode')?.valid && createdeductionForm.get('deductioncode')?.touched" > Pls. Enter valid description</span>
+      </td>
+    </tr>
+
+    <tr>
+      <td> </td>
+      <td>
+        <label><input type="checkbox" id="is_default" formControlName="is_default"> Default </label>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <button type="submit" [disabled]="!createdeductionForm.valid">Submit</button>
+      </td>
+    </tr>
+  </table>
+</form>

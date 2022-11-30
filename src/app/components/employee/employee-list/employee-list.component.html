@@ -34,13 +34,13 @@
         <td>
          <!--  [routerLink]="['/employee/details',employee.emp_ID]" -->
           <button type="button"
-           [routerLink]="['details',employee.emp_ID]" 
+           [routerLink]="[employee.emp_ID,'details']" 
           >
           details
           </button>
 
           <button type="button"
-          [routerLink]="['edit',employee.emp_ID]"
+          [routerLink]="[employee.emp_ID,'edit']"
           >
             edit
           </button>

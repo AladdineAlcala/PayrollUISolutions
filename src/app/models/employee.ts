@@ -1,3 +1,4 @@
+import { Observable } from "rxjs"
 import { Position } from "./position"
 
 export class Employee{
@@ -27,4 +28,10 @@ export class Employee{
     pos_Id:string=""
     position:Position=new Position()
    
+}
+
+
+export interface EmployeeResolved{
+    employee: Observable<Employee[]>;
+    error:any;
 }

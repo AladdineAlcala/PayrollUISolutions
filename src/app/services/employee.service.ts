@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, Subject, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { Employee } from '../models/employee';
 import { ResponseDTO } from '../models/ResponseDTO';
 import { environment } from 'src/environments/environment';
@@ -13,6 +13,8 @@ import { environment } from 'src/environments/environment';
 
 export class EmployeeService {
   
+  empCountSubj=new Subject<number>();
+
   private url="employees";
 
   constructor( private http:HttpClient) { }
@@ -30,6 +32,7 @@ export class EmployeeService {
            );
   }
   
+
 
   public getEmployee(id:string):Observable<Employee> {
     return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/`+ id )
@@ -55,6 +58,8 @@ export class EmployeeService {
       return 'Unknown Error occured..Please try again';
     });
   }
-
   
+
+ 
+
 }

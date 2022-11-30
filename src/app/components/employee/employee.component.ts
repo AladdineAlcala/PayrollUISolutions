@@ -1,59 +1,72 @@
-import { ChangeDetectionStrategy, Component, OnInit, Type } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Type,
+} from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, of } from 'rxjs';
-import { Employee } from 'src/app/models/employee';
+import { BehaviorSubject, catchError, count, EMPTY, map, Observable, of } from 'rxjs';
+import { Employee, EmployeeResolved } from 'src/app/models/employee';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
 import { EmployeeService } from 'src/app/services/employee.service';
-
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-
 export class EmployeeComponent implements OnInit {
+  title: string = 'Employee List';
 
-  title:string="Employee List";
+  employee$!: Observable<any>;
+
+  errorMessage: string = '';
   
-  employee$!:Observable<Employee[]>;
+  empCount:number=0;
+  resposeDTO!: ResponseDTO;
+ 
+  private errorSubject = new BehaviorSubject<string>('');
 
-  errorMessage:string="";
+  errorMessageAction$ = this.errorSubject.asObservable();
 
-  resposeDTO!:ResponseDTO;
+  constructor(private empService:EmployeeService, private activatedRoute: ActivatedRoute) {}
 
-  private errorSubject=new BehaviorSubject<string>('');
+  ngOnInit(): void {
+/*     //data comes from resolver
+    const resolveData:EmployeeResolved=this.activatedRoute.snapshot.data['empres'];
+    this.errorMessage=resolveData.error;
+    this.errorSubject.next(this.errorMessage);
+    this.employee$=resolveData.employee; */
+
+ this.employee$ = this.activatedRoute.data.pipe(
+      map((data: Data) => data?.['empres']),
+      catchError((error) => {
+       // console.log(error)
+        this.errorSubject.next(error);
+        return EMPTY;
+      })
+    ); 
   
-  errorMessageAction$=this.errorSubject.asObservable();
-
-  constructor(private activatedRoute:ActivatedRoute) {
-  
-  }
-
-
-  ngOnInit(): void { 
-
-    //data comes from resolver
+     this.employee$.subscribe(result=>{
+     // console.log(result.length);
+     const totalcount=result.length;
+      this.empService.empCountSubj.next(totalcount);
+    });
+ 
     
-    this.employee$=this.activatedRoute.data.pipe(map((data:Data)=>data?.['emp']))
 
-  /*  this.employee$= this.empservice.getEmployees$
+    /*  this.employee$= this.empservice.getEmployees$
             .pipe(catchError((error)=>{
               this.errorSubject.next(error)
                     return EMPTY;
               }
             )
           ); */
-
-
   }
-  
 
   //Delete Employee
-  selectedEmptoDelete(selected:Employee):void{
+  /*   selectedEmptoDelete(selected:Employee):void{
     console.log(selected);
- }
-
+ } */
 }
