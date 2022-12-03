@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { BehaviorSubject, catchError, count, EMPTY, map, Observable, of } from 'rxjs';
+
+
 import { Employee, EmployeeResolved } from 'src/app/models/employee';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -17,6 +19,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeComponent implements OnInit {
+
   title: string = 'Employee List';
 
   employee$!: Observable<any>;
@@ -33,12 +36,14 @@ export class EmployeeComponent implements OnInit {
   constructor(private empService:EmployeeService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    
 /*     //data comes from resolver
     const resolveData:EmployeeResolved=this.activatedRoute.snapshot.data['empres'];
     this.errorMessage=resolveData.error;
     this.errorSubject.next(this.errorMessage);
     this.employee$=resolveData.employee; */
 
+  //---------------------------------------------------------------
  this.employee$ = this.activatedRoute.data.pipe(
       map((data: Data) => data?.['empres']),
       catchError((error) => {
@@ -48,11 +53,11 @@ export class EmployeeComponent implements OnInit {
       })
     ); 
   
-     this.employee$.subscribe(result=>{
+/*      this.employee$.subscribe(result=>{
      // console.log(result.length);
      const totalcount=result.length;
       this.empService.empCountSubj.next(totalcount);
-    });
+    }); */
  
     
 
@@ -63,10 +68,15 @@ export class EmployeeComponent implements OnInit {
               }
             )
           ); */
+
+  
   }
 
   //Delete Employee
   /*   selectedEmptoDelete(selected:Employee):void{
     console.log(selected);
  } */
+
+
+
 }

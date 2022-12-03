@@ -1,4 +1,24 @@
 
+<div class="container-fluid mt-3">
+
+    <div class="row my-4">
+
+        <div class="com-sm-12">
+           
+            <div class="mx-3">
+                <h2 class="text-info">Title Here</h2>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
 
 <p>employee-details works!</p> <b>{{empId}} </b> 
 
@@ -8,6 +28,13 @@
     <tr>
         <td>
             <button type="button" (click)="onEditEmployee()" >Edit Employee</button>
+        </td>
+        <td>
+            <button type="button" (click)="onDelete()">Delete</button>
+        </td>
+
+        <td>
+            <button type="button" (click)="onCancel()">Cancel (Return to Employees)</button>
         </td>
     </tr>
 </table>

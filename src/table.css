@@ -1,0 +1,53 @@
+
+table .payrolltable {
+    border-collapse: separate;
+    border-spacing: 0;
+    color: #4a4a4d;
+    margin-bottom: 44px;
+    width: 100%;
+    font: 11px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+th
+{
+    padding: 10px 15px;
+    vertical-align: middle;
+}
+
+td {
+    padding: 5px 5px;
+    vertical-align: middle;
+}
+thead {
+    background: #395870;
+    background: linear-gradient(#49708f, #293f50);
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+  
+}
+
+th:first-child {
+    text-align: left;
+}
+
+th:last-child {
+    border-top-right-radius: 5px;
+}
+
+tbody tr:nth-child(even) {
+    background: #f0f0f2;
+}
+
+td {
+    border-bottom: 1px solid #cecfd5;
+    border-right: 1px solid #cecfd5;
+}
+
+    td:first-child {
+        border-left: 1px solid #cecfd5;
+    }
+
+table:last-child {
+    margin-bottom: 0;
+}

@@ -1,54 +1,71 @@
-
-
 <!-- {{employeetablelist$|async|json}} -->
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>FIRST NAME</th>
-      <th>LAST NAME</th>
-      <th>ADDRESS</th>
-      <th>CONTACT No</th>
-      <th>EMP STATUS</th>
-      <th>POSITION</th>
-      <th>
+<div class="row m-2">
+  <div class="col-sm-12 p-3">
 
-      </th>
-    </tr>
+    <div class="mt-2" *ngIf="(employeelist$|async) as emplist; else isloading;">
+  
+      <table class="table table-success table-stripe table-hover table-responsive table-sm">
+        <caption>List of Employees</caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FIRST NAME</th>
+            <th scope="col">LAST NAME</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">CONTACT No</th>
+            <th scope="col">EMP STATUS</th>
+            <th scope="col">POSITION</th>
+            <th>
+    
+            </th>
+          </tr>
+    
+        </thead>
+        <tbody>
+    
+          <ng-container *ngFor="let employee of emplist">
+            <tr>
+    
+              <td>{{ employee.emp_ID }}</td>
+              <td>{{ employee.fname }}</td>
+              <td>{{ employee.lname }}</td>
+              <td>{{ employee.address }}</td>
+              <td>{{ employee.contactNo }}</td>
+              <td>{{ employee.empStatus }}</td>
+              <td>{{ employee?.position?.positionName || 'Not Available'}}</td>
+    
+              <td>
+                <!-- [routerLink]="[employee.emp_ID] -->
+                <!--  [routerLink]="['/employee/details',employee.emp_ID]" -->
+               
 
-  </thead>
-  <tbody>
+            <a class="btn btn-primary"
+                [routerLink]="['',{outlets:{main:'employees/' +employee.emp_ID}}]"
+                >
+                <i class="bi bi-search fa-sm"></i>
+                </a>
 
-    <ng-container *ngFor="let employee of employeetablelist$|async">
-      <tr>
+ 
+              </td>
+            </tr>
+          </ng-container>
+    
+        </tbody>
+      </table>
+    </div>
+    
+    
+    <ng-template #isloading>
+      <p class="fs-4"> Loading .... Pls wait...</p>
+    </ng-template>
 
-        <td>{{ employee.emp_ID }}</td>
-        <td>{{ employee.fname }}</td>
-        <td>{{ employee.lname }}</td>
-        <td>{{ employee.address }}</td>
-        <td>{{ employee.contactNo }}</td>
-        <td>{{ employee.empStatus }}</td>
-        <td>{{ employee?.position?.positionName || 'Not Available'}}</td>
-      
-        <td>
-         <!--  [routerLink]="['/employee/details',employee.emp_ID]" -->
-          <button type="button"
-           [routerLink]="[employee.emp_ID,'details']" 
-          >
-          details
-          </button>
+  </div>
 
-          <button type="button"
-          [routerLink]="[employee.emp_ID,'edit']"
-          >
-            edit
-          </button>
-    </td>
-  </tr>
-    </ng-container>
-      
-  </tbody>
-</table>
+</div>
+
+
+
+
 
 

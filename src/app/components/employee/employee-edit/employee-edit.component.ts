@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   BehaviorSubject,
   catchError,
@@ -28,14 +28,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   constructor(
     private empservice: EmployeeService,
     private positionservice: PositionService,
-    private route: ActivatedRoute
+    private activatedroute: ActivatedRoute,
+    private router: Router
   ) {}
-
-  ngOnDestroy(): void {
-    if (this.employeeSubscription) {
-      this.employeeSubscription.unsubscribe();
-    }
-  }
 
   private errorSubject = new BehaviorSubject<string>('');
 
@@ -71,11 +66,15 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.id = this.activatedroute.snapshot.paramMap.get('id')!;
+
+    console.log(this.id);
     this.employeeSubscription = this.empservice
-      .getEmployee(this.id)
-      .subscribe((data) => (this.employeeEditModel = data));
+      .GetEmployee(this.id)
+      .subscribe((data) => {
+       // console.log(data);
+        this.employeeEditModel = data;
+      });
 
     this.positions$ = this.positionservice.position$.pipe(
       catchError((error) => {
@@ -85,10 +84,6 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDelete() {
-    console.log(this.id);
-  }
-
   onUpdate(empForm: NgForm) {
     console.log(empForm.value);
   }
@@ -96,5 +91,15 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   onDropDownPositionChange(e: any) {
     // console.log(e);
     this.selectedpositionval = e;
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.activatedroute });
+  }
+
+  ngOnDestroy(): void {
+    if (this.employeeSubscription) {
+      this.employeeSubscription.unsubscribe();
+    }
   }
 }

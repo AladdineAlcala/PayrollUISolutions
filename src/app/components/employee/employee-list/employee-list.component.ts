@@ -12,14 +12,11 @@ import { Employee } from 'src/app/models/employee';
 
 export class EmployeeListComponent implements OnInit{
 
-  @ContentChild('pcontent') paragraph:ElementRef | undefined
-
   ngOnInit(): void {
- /*    console.log('text content at', + this.paragraph?.nativeElement.textContent); */
+
   }
 
-
-  @Input() employeetablelist$!:Observable<Employee[]> 
+  @Input() employeelist$!:Observable<Employee[]> 
 
   @Output() selectedEmp=new EventEmitter<Employee>();
 

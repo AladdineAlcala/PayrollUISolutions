@@ -1,44 +1,36 @@
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true} >Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/employees"routerLinkActive="active" >Employees</a>
-          </li>
-        
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/deduction" routerLinkActive="active">Deductions</a>
-          </li>
-        </ul>
-   
+<div class="d-flex bg-light" id="wrapper">
+
+  <!-- Sidebar-->
+  <div class="bg-light shadow" id="sidebar-wrapper">
+    <div class="sidebar-heading"><a class="navbar-brand navbar-logo" href="#">SalsResto.Payroll.Web</a></div>
+    <div class="link-wrapper">
+      <div class="list-group list-group-flush" id="sideList">
+        <router-outlet name="side"></router-outlet>
       </div>
     </div>
-  </nav>
-
-
-  <div class="container mt-2">
-    <main role="main" class="pb-3">
-        <router-outlet> </router-outlet>
-    </main>
   </div>
 
+  <!-- Page content wrapper-->
+  <div id="page-content-wrapper">
+
+    <!-- Top navigation-->
+    <app-navbar></app-navbar>
+
+    <!-- Page content-->
+    <div class="container-fluid">
+
+      <main role="main" class="pb-3">
+        <router-outlet name="main"> </router-outlet>
+      </main>
+    </div>
 
 
+  </div>
 
+</div>
 
-<!-- <nav>
-    <a routerLink="/"> Home </a> | <a routerLink="/employees">Employees</a> <b> {{empCount}} </b> | <a routerLink="/deduction">Deductions</a>
-</nav>
- -->
-
-
-
-
-
+<footer class="border-top footer text-muted">
+  <div class="container">
+      &copy; 2022 - Payroll.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+  </div>
+</footer>

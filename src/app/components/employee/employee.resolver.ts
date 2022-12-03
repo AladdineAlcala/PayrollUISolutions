@@ -3,7 +3,9 @@ import {
   Router,
   Resolve
 } from '@angular/router';
-import { catchError, delay, EMPTY, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, delay, EMPTY, Observable, of, throwError } from 'rxjs';
+
+
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -19,10 +21,10 @@ export class EmployeeResolver implements Resolve<Employee[]> {
 
   resolve(): Observable<Employee[]> | Promise<Employee[]> | Employee[] {
     return this.empservice.getEmployees$.pipe(
-      //delay(2000),
+     // delay(2000),
       catchError((error)=>{
         this.router.navigate(['/error']);
-        console.info('error has encountered by employee resolver');
+       // console.info('error has encountered by employee resolver');
         return throwError(()=> new Error('Could not load data........'))
 
        

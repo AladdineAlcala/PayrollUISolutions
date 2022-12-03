@@ -1,0 +1,50 @@
+
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+            class="fas fa-bars text-white"></i></button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+  
+  
+          <ul class="navbar-nav mt-2 mt-lg-0">
+
+           <!--  <div class="hori-selector">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+ -->
+            <li class="nav-item" id="homeui"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}><i
+                  class="fa-solid fa-house"></i>Home</a></li>
+  
+            <li class="nav-item" id="employeeui">
+              <a class="nav-link" [routerLink]="['',{outlets:{side:'employees',main:null}} ]"  routerLinkActive="active" >
+                <i class="bi bi-people-fill"></i>
+                   Employee 
+                  </a>
+            </li>
+            <li class="nav-item" id="timerecordui"><a class="nav-link" href="javascript:void(0);">
+              <i class="bi bi-calendar4-week"></i>
+               Attendance (DTR)
+              </a>
+            </li>
+            <li class="nav-item" id="deductionsui">
+              <a class="nav-link" [routerLink]="['',{outlets:{side:'deductions',main:null}} ]" routerLinkActive="active">
+                <i class="bi bi-bank"></i>
+                 Deductions 
+              </a>
+            </li>
+            <li class="nav-item" id="payrollui">
+              <a class="nav-link"
+              routerLink="/deduction" routerLinkActive="active" 
+              >
+                <i class="bi bi-wallet2"></i>
+                 Payroll
+               </a>
+            </li>
+  
+          </ul>
+        </div>
+  
+  
+      </nav>

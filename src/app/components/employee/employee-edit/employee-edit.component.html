@@ -3,15 +3,7 @@
 <!-- <pre>value {{edit_empForm.value |json}}</pre> -->
 <br>
 
-<table>
-    <tr>
-       
-        <td>
-            <button type="button" (click)="onDelete()" > Delete </button>
-        </td>
-    </tr>
-</table>
-<br>
+<!-- {{employeeEditModel.position.positionName}} -->
 
 <form (ngSubmit)="onUpdate(edit_empForm)"  method="post" #edit_empForm="ngForm" >
     <table class="table table-primary">
@@ -71,7 +63,8 @@
         <tr>
           <td>position:</td>
           <td>
-            <select name="pos_Id" [(ngModel)]="selectedpositionval" (ngModelChange)="onDropDownPositionChange($event)" #pos_Id="ngModel" >
+            <select name="pos_Id" [(ngModel)]="employeeEditModel.position.pos_Id" (ngModelChange)="onDropDownPositionChange($event)" #pos_Id="ngModel" >
+              <option value="" [disabled]>Please select position</option>    
               <option *ngFor="let position of positions$|async" [ngValue]="position.pos_Id">{{position.positionName}}</option> 
             </select>
           </td>
@@ -96,7 +89,10 @@
           </td>
         </tr>
         <tr>
-          <td><button type="submit" [disabled]="edit_empForm.invalid">Save</button></td>
+          <td class="d-flex justify-content-between" ><button type="submit" [disabled]="edit_empForm.invalid">Save</button>
+            <button type="button"  (click)="onCancel()" >Cancel</button>
+          </td>
+          <td></td>
         </tr>
       </table>
     
