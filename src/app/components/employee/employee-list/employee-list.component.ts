@@ -12,8 +12,11 @@ import { Employee } from 'src/app/models/employee';
 
 export class EmployeeListComponent implements OnInit{
 
+<<<<<<< HEAD
   displayedColumns: string[] = ['emp_ID', 'fname', 'lname','address','contactNo','empStatus','position','getdetails'];
 
+=======
+>>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
   ngOnInit(): void {
 
   }

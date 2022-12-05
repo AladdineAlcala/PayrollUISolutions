@@ -1,4 +1,72 @@
 <!-- {{employeetablelist$|async|json}} -->
+<<<<<<< HEAD
+=======
+
+<div class="row m-2">
+  <div class="col-sm-12 p-3">
+
+    <div class="mt-2" *ngIf="(employeelist$|async) as emplist; else isloading;">
+  
+      <table class="table table-success table-stripe table-hover table-responsive table-sm">
+        <caption>List of Employees</caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FIRST NAME</th>
+            <th scope="col">LAST NAME</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">CONTACT No</th>
+            <th scope="col">EMP STATUS</th>
+            <th scope="col">POSITION</th>
+            <th>
+    
+            </th>
+          </tr>
+    
+        </thead>
+        <tbody>
+    
+          <ng-container *ngFor="let employee of emplist">
+            <tr>
+    
+              <td>{{ employee.emp_ID }}</td>
+              <td>{{ employee.fname }}</td>
+              <td>{{ employee.lname }}</td>
+              <td>{{ employee.address }}</td>
+              <td>{{ employee.contactNo }}</td>
+              <td>{{ employee.empStatus }}</td>
+              <td>{{ employee?.position?.positionName || 'Not Available'}}</td>
+    
+              <td>
+                <!-- [routerLink]="[employee.emp_ID] -->
+                <!--  [routerLink]="['/employee/details',employee.emp_ID]" -->
+               
+
+            <a class="btn btn-primary"
+                [routerLink]="['',{outlets:{main:'employees/' +employee.emp_ID}}]"
+                >
+                <i class="bi bi-search fa-sm"></i>
+                </a>
+
+ 
+              </td>
+            </tr>
+          </ng-container>
+    
+        </tbody>
+      </table>
+    </div>
+    
+    
+    <ng-template #isloading>
+      <p class="fs-4"> Loading .... Pls wait...</p>
+    </ng-template>
+
+  </div>
+
+</div>
+
+>>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
 
 <div class="row ms-2">
 
@@ -67,9 +135,12 @@
     </div>
 
 
+<<<<<<< HEAD
     <ng-template #isloading>
       <p class="fs-4"> Loading .... Pls wait...</p>
     </ng-template>
+=======
+>>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
 
   </div>
 

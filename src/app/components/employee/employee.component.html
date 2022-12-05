@@ -19,6 +19,7 @@
 
             <div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
 
+<<<<<<< HEAD
             <div class="d-flex flex-column justify-content-start border rounded-2 mx-3 p-3">
                 
                
@@ -36,6 +37,16 @@
                     <app-employee-list 
                     [employeelist$]="employee$"
                     (selectedEmp)="OnselectedEmp($event)"
+=======
+            <div class="border rounded-2 shadow mx-3">
+
+                <ng-container *ngIf="employee$|async">
+
+                    <button type="button" class="btn btn-success m-3" [routerLink]="['',{outlets:{main:'employees/add'}}]" > Add Employee </button>
+                
+                    <app-employee-list 
+                    [employeelist$]="employee$"
+>>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
                     >
                     </app-employee-list>
                     

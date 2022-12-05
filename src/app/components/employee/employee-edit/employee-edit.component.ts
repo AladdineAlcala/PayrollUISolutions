@@ -68,14 +68,22 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.activatedroute.snapshot.paramMap.get('id')!;
 
+<<<<<<< HEAD
     //console.log(this.id);
 
+=======
+    console.log(this.id);
+>>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
     this.employeeSubscription = this.empservice
       .GetEmployee(this.id)
       .subscribe((data) => {
        // console.log(data);
         this.employeeEditModel = data;
+<<<<<<< HEAD
     });
+=======
+      });
+>>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
 
     this.positions$ = this.positionservice.position$.pipe(
       catchError((error) => {
