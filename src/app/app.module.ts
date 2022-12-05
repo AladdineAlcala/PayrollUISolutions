@@ -1,35 +1,46 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './components/employee/employee.component';
-import { EmployeeListComponent } from './components/employee/employee-list/employee-list.component';
-import { DeductionsComponent } from './components/deductions/deductions.component';
-import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
-import { EmployeeCreateComponent } from './components/employee/employee-create/employee-create.component';
+
 import { HomeComponent } from './components/home/home.component';
-import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
+
+import { DeductionsComponent } from './components/deductions/deductions.component';
+import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
+import { DeductionMainComponent } from './components/deductions/deduction-main/deduction-main.component';
+import { DeductionsidebarComponent } from './components/deductions/deductionsidebar/deductionsidebar.component';
+
+import { PayrollsidebarComponent } from './components/payroll/payrollsidebar/payrollsidebar.component';
+import { PayrollMainComponent } from './components/payroll/payroll-main/payroll-main.component';
+
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
-import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpServiceInterceptor } from './interceptors/http-service.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NavbarComponent } from './shared/navbar/navbar.component';
+
+import { EmployeeModule } from './components/employee/employee.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
-    EmployeeListComponent,
     DeductionsComponent,
-    EmployeeDetailsComponent,
-    EmployeeCreateComponent,
     HomeComponent,
-    EmployeeEditComponent,
     NotfoundpageComponent,
     ErrorpageComponent,
-    DeductionCreateComponent
+    DeductionCreateComponent,
+    NavbarComponent,
+    DeductionsidebarComponent,
+    PayrollMainComponent,
+    PayrollsidebarComponent,
+    DeductionMainComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -37,13 +48,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    EmployeeModule
+
   ],
-  providers: [],
+  providers: [
+           {provide:HTTP_INTERCEPTORS,useClass:HttpServiceInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-
-
-  
-}
+export class AppModule { }

@@ -1,19 +1,62 @@
 
-<h2>{{ title }}</h2>
+
+<div class="container-fluid mt-3">
+    
+    <div class="row my-4">
+
+        <div class="com-sm-12">
+           
+            <div class="mx-3">
+                <h2 class="text-info">{{ title }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
+
+            <div class="d-flex flex-column justify-content-start border rounded-2 mx-3 p-3">
+                
+               
+
+                <div class="ms-3 mt-3">
+                    <button mat-fab color="warn" aria-label="Create New Employee" [routerLink]="['',{outlets:{main:'employees/add'}}]" >
+                        <mat-icon>person_add</mat-icon>
+                    </button>
+                </div>
+
+
+                <ng-container *ngIf="employee$|async">
+
+               <!--      <button type="button" class="btn btn-success m-3" [routerLink]="['',{outlets:{main:'employees/add'}}]" > Add Employee </button> -->
+                    <app-employee-list 
+                    [employeelist$]="employee$"
+                    (selectedEmp)="OnselectedEmp($event)"
+                    >
+                    </app-employee-list>
+                    
+                </ng-container>
+
+            </div>
+           
+
+      
+
+        </div>
+
+    </div>
+
+</div>
+
 <!-- {{(employee$|async).length}} -->
 
-<div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
 
-<ng-container *ngIf="employee$|async">
 
-    <button type="button" routerLink="add" > Add Employee </button>
-    <hr>
-    <app-employee-list 
-    [employeetablelist$]="employee$"
-    >
-    </app-employee-list>
-    
-</ng-container>
+
 
 
 <!-- (selectedEmp)="selectedEmptoDelete($event)" -->

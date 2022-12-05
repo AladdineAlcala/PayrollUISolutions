@@ -12,14 +12,13 @@ import { Employee } from 'src/app/models/employee';
 
 export class EmployeeListComponent implements OnInit{
 
-  @ContentChild('pcontent') paragraph:ElementRef | undefined
+  displayedColumns: string[] = ['emp_ID', 'fname', 'lname','address','contactNo','empStatus','position','getdetails'];
 
   ngOnInit(): void {
- /*    console.log('text content at', + this.paragraph?.nativeElement.textContent); */
+
   }
 
-
-  @Input() employeetablelist$!:Observable<Employee[]> 
+  @Input() employeelist$!:Observable<Employee[]> 
 
   @Output() selectedEmp=new EventEmitter<Employee>();
 
@@ -28,6 +27,8 @@ export class EmployeeListComponent implements OnInit{
   }
  */
 
-
+  selectEmployee(emp:Employee){
+    this.selectedEmp.emit(emp);
+  }
 
 }

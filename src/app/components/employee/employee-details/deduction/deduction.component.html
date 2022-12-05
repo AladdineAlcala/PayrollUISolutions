@@ -1,0 +1,9 @@
+<p>deduction works!</p>
+
+<div *ngIf="(employee_deduction$|async) as deductions">
+
+    <div *ngFor="let deduction of deductions.empDeductionSettings">{{deduction.empDeduction_ID}} | {{ deduction.deductionDetails.description}}  </div>
+
+</div>
+
+

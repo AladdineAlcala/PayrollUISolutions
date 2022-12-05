@@ -19,6 +19,7 @@ export class EmployeeService {
 
   constructor( private http:HttpClient) { }
 
+
   getEmployees$=this.getAllEmployee();
 
   private getAllEmployee():Observable<Employee[]>
@@ -33,8 +34,11 @@ export class EmployeeService {
   }
   
 
+  public GetEmployee(id:string):Observable<Employee>{
+   return this.getEmployee(id);
+  }
 
-  public getEmployee(id:string):Observable<Employee> {
+  private getEmployee(id:string) {
     return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/`+ id )
           .pipe(
             map((data) => data.result as Employee ),
@@ -43,8 +47,15 @@ export class EmployeeService {
   }
   
 
-  public addEmployee(emp:Employee):Observable<Employee>{
+   
+  /**
+   * AddEmployee
+ */
+  public AddEmployee(employee:Employee):Observable<Employee> {
+    return this.addEmployee(employee);
+  }
 
+  private addEmployee(emp:Employee){
     return this.http.post<Employee>(`${environment.base_apiUrl}/${this.url}`,emp)
             .pipe(
               map((data) => data
@@ -53,7 +64,11 @@ export class EmployeeService {
             );
   }
 
-  private handleError(error:Error){
+
+
+
+
+ handleError(error:Error){
      return throwError(()=>{
       return 'Unknown Error occured..Please try again';
     });

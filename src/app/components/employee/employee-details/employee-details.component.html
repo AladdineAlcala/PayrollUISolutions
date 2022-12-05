@@ -1,6 +1,118 @@
+<div class="container-fluid mt-3">
+
+    <div class="border shadow rounded-2 m-2 bg-light">
+
+        <!--profile row-->
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                    <!--profile section-->
+                    <div class="d-lg-flex flex-row m-3 justify-content-start">
+        
+                            <div class="col-sm-12 col-md-4 pt-4" id="empImage">
+                                
+                                <div class="align-middle text-center m-2">
+
+                                    <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="rounded-circle" alt="...">
+        
+                                </div>
+                               
+                            </div>
+        
+        
+        
+                            <div class="w-100 p-3" id="information">
+        
+                                <div class="d-flex flex-column gap-2">
+        
+                                    <div class="row border rounded-2 px-2 pt-3 m-0 bg-black text-white">
+        
+                                        <div class="d-flex flex-column gap-2 align-middle">
+                                                <div class="fs-1 fw-bold font-monospace text-info">{{employee.emp_ID}}</div>
+                                                <p class="fs-6">Employee No:</p>
+                                        </div>
+        
+                                    </div>
+                                    
+                                    <div class="d-flex flex-row align-middle justify-content-between">
+                                        <p class="fs-6 text-primary"> Basic Profile </p>
+                                        <button class="btn btn-primary btn-sm">Edit</button>
+                                    </div>
+                                    <div class="row row-cols-2 justify-content-between p-2">
+        
+                                        <div class="d-flex p-2 justify-content-between border-bottom col-md-5">
+                                            <div class="fw-bold">FIRSTNAME:</div>
+                                            <div class="text-secondary">{{employee.fname}}</div>
+                                        </div>
+        
+                                        <div class="d-flex p-2 justify-content-between border-bottom col-md-5">
+                                            <div class="fw-bold">LASTNAME:</div>
+                                            <div class="text-secondary">{{employee.lname}}</div>
+                                        </div>
+                                    </div>
+        
+        
+                                    <div class="row row-cols-2 justify-content-between p-2">
+        
+                                        <div class="d-flex p-2 justify-content-between border-bottom col-md-5">
+                                            <div class="fw-bold">MIDDLE:</div>
+                                            <div class="text-secondary">{{employee.middle}}</div>  
+                                        </div>
+        
+                                        <div class="d-flex p-2 justify-content-between border-bottom col-md-5">
+                                            <div class="fw-bold">GENDER:</div>
+                                            <div class="text-secondary">{{employee.gender}}</div>
+                                        </div>
+        
+        
+                                    </div>
+        
+                                    <div class="d-flex p-2 justify-content-between border-bottom">
+                                        <div class="fw-bold">ADDRESS:</div>
+                                        <div class="text-secondary">{{employee.address}}</div>
+                                    </div>
+        
+                                </div>
+        
+        
+                            </div>
+        
+                    </div>
+  
+
+            </div>
+
+        </div>
+
+        <!-- employee tab section-->
+        <div class="row">
+            
+            <div class="col-sm-12">
+
+                    <div class="m-4 border rounded-2 p-3" id="emptab-container">
+
+                        <tabtemplate-employee
+                         [empprofiledata$]="_employee$"
+                         >
+                         Loading .....
+                         </tabtemplate-employee>
+                          
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
-<p>employee-details works!</p> <b>{{empId}} </b> 
+
+
+
+
+
+
+<!-- <p>employee-details works!</p> <b>{{empId}} </b> 
 
 <br>
 
@@ -9,5 +121,12 @@
         <td>
             <button type="button" (click)="onEditEmployee()" >Edit Employee</button>
         </td>
+        <td>
+            <button type="button" (click)="onDelete()">Delete</button>
+        </td>
+
+        <td>
+            <button type="button" (click)="onCancel()">Cancel (Return to Employees)</button>
+        </td>
     </tr>
-</table>
+</table> -->

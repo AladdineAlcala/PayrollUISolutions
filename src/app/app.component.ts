@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from './services/employee.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +9,13 @@ export class AppComponent implements OnInit {
 
   empCount:number=0;
 
-  constructor(private empService:EmployeeService ) { }
+  constructor( ) { }
 
   ngOnInit(): void {
     
-    this.empService.empCountSubj.subscribe(cnt=>{
+/*     this.empService.empCountSubj.subscribe(cnt=>{
       this.empCount=cnt
-    });
+    }); */
   }
   
 

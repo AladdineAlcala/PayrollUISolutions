@@ -91,7 +91,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
     // console.log(this.employeeModel);
 
     if (empForm.valid) {
-      this.new_created_employee$ = this.empservice.addEmployee(empForm.value);
+      this.new_created_employee$ = this.empservice.AddEmployee(empForm.value);
       //empForm.reset();
 
       this.employeeSubscription = this.new_created_employee$.subscribe({
@@ -100,8 +100,8 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
         complete: () => {
           if (this.employee) {
             // console.log(this.employee);
-            this.router.navigate(['../',this.employee.emp_ID,'details'], {relativeTo: this.route,
-            });
+            //this.router.navigate(['./',{outlets:{main:['employees/all']}}],{relativeTo:this.activatedRoute.firstChild}) 
+            this.router.navigate(['',{outlets:{main:['employees', this.employee.emp_ID]}}], {relativeTo: this.route});
           }
         },
       });
