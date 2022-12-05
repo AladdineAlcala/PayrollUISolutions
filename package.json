@@ -24,10 +24,6 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
-<<<<<<< HEAD
-=======
-    "font-awesome": "^4.7.0",
->>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
     "jquery": "^3.6.1",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.6.15",

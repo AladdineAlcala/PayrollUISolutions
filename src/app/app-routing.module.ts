@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
-<<<<<<< HEAD
 import { DeductionMainComponent } from './components/deductions/deduction-main/deduction-main.component';
-=======
-import { DeductionmainComponent } from './components/deductions/deductionmain/deductionmain.component';
->>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
 import { DeductionsComponent } from './components/deductions/deductions.component';
 import { DeductionsidebarComponent } from './components/deductions/deductionsidebar/deductionsidebar.component';
 import { EmployeeCreateComponent } from './components/employee/employee-create/employee-create.component';
@@ -18,11 +14,8 @@ import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
 import { PayrollsidebarComponent } from './components/payroll/payrollsidebar/payrollsidebar.component';
-<<<<<<< HEAD
 
 
-=======
->>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
 
 const approutes: Routes = [
 
@@ -44,11 +37,7 @@ const approutes: Routes = [
 
   { path:'deductions',component:DeductionsidebarComponent,outlet:"side"},
   { path:'deductions/main',
-<<<<<<< HEAD
           component:DeductionMainComponent,
-=======
-          component:DeductionmainComponent,
->>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
           outlet:"main" 
          /*  resolve:{
                   empres:EmployeeResolver

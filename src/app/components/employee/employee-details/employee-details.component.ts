@@ -7,7 +7,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import Swal from 'sweetalert2';
 import { DataService } from '../data.service';
 
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-employee-details',
@@ -90,7 +90,6 @@ export class EmployeeDetailsComponent implements OnInit,OnDestroy {
     this.router.navigate(['',{outlets:{main:['employees','all']}}],{relativeTo:this.activatedRoute})
     //this.router.navigateByUrl('/employees/all');
   }
-<<<<<<< HEAD
 
 
 /*   change_Tab_Event(event:any){
@@ -103,6 +102,4 @@ export class EmployeeDetailsComponent implements OnInit,OnDestroy {
    }
   }
 
-=======
->>>>>>> a5aa619761684ad7d6312ee7654f8db949c692d8
 }
