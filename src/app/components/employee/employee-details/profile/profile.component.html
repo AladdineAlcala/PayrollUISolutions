@@ -1,3 +1,45 @@
-<div class="d-flex my-2">
-    <p>{{profileEmp.emailAdd}}</p>
+
+<div class="container-fluid">
+    <div class="row row-cols-lg-2 mt-2 no-gutters">
+        <div class="col-2">
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">DATE HIRED:</div>
+                <div class="text-secondary">{{profileEmp.date_Hired| date:'longDate'}}</div>
+            </div>
+    
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">EMPLOYEMENT STATUS:</div>
+                <div class="text-secondary">{{profileEmp.empStatus}}</div>
+            </div>
+        
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">DATE OF BIRTH:</div>
+                <div class="text-secondary">{{profileEmp.dob| date: 'longDate' }}</div>
+            </div>
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">CONTACT NO:</div>
+                <div class="text-secondary">{{profileEmp.contactNo}}</div>
+            </div>
+
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">MARITAL STATUS:</div>
+                <div class="text-secondary">{{profileEmp.maritalstatus}}</div>
+            </div>
+
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">POSITION:</div>
+                <div class="text-secondary">{{profileEmp.position && profileEmp.position.positionName}}</div>
+            </div>
+
+            <div class="d-flex my-2 p-2 justify-content-between border-bottom">
+                <div class="fw-bold">EMAIL ADDRESS:</div>
+                <div class="text-secondary">{{profileEmp.emailAdd}}</div>
+            </div>
+
+           
+        </div>
+        
+    </div>
 </div>
+
+

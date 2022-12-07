@@ -1,4 +1,4 @@
 export class Position{
-    pos_Id!:number;
-    positionName:string=""
+    pos_Id:number=0;
+    positionName:string="";
 }

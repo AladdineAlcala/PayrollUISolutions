@@ -11,8 +11,10 @@ import {
   map,
   Observable,
 } from 'rxjs';
+import { DeductionDetails } from 'src/app/models/deductiondetails';
 import { Employee } from 'src/app/models/employee';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
+import { DeductionService } from 'src/app/services/deduction.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -28,6 +30,7 @@ export class EmployeeComponent implements OnInit {
 
   employee$!: Observable<any>;
 
+
   errorMessage: string = '';
 
   empCount: number = 0;
@@ -38,32 +41,31 @@ export class EmployeeComponent implements OnInit {
   errorMessageAction$ = this.errorSubject.asObservable();
 
   constructor(
-    private empService: EmployeeService,
     private activatedRoute: ActivatedRoute,
     private router:Router
   ) {}
 
   ngOnInit(): void {
-    /*     //data comes from resolver
-    const resolveData:EmployeeResolved=this.activatedRoute.snapshot.data['empres'];
-    this.errorMessage=resolveData.error;
-    this.errorSubject.next(this.errorMessage);
-    this.employee$=resolveData.employee; */
-
-    this.employee$ = this.activatedRoute.data.pipe(
-      map((data: Data) => data?.['empres']),
+    //comes from employee resolver
+   this.employee$ = this.activatedRoute.data.pipe(
+      map((data: Data) => data?.['employeeresolver']),
       catchError((error) => {
         // console.log(error)
         this.errorSubject.next(error);
         return EMPTY;
       })
-    );
+    ); 
+     
 
-    this.employee$.subscribe((result) => {
+
+
+
+
+/*     this.employee$.subscribe((result) => {
       // console.log(result.length);
       const totalcount = result.length;
       this.empService.empCountSubj.next(totalcount);
-    });
+    }); */
 
     /*  this.employee$= this.empservice.getEmployees$
             .pipe(catchError((error)=>{
@@ -78,6 +80,6 @@ export class EmployeeComponent implements OnInit {
 
   /*     Selected Event */
   OnselectedEmp(emp: Employee): void {
-    this.router.navigate(['',{outlets:{main:['employees', emp.emp_ID]}}], {relativeTo: this.activatedRoute});
+    this.router.navigate(['',{outlets:{main:['employees', emp.emp_ID,'profile']}}], {relativeTo: this.activatedRoute});
   }
 }

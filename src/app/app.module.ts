@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './components/home/home.component';
 
-import { DeductionsComponent } from './components/deductions/deductions.component';
 import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
 import { DeductionMainComponent } from './components/deductions/deduction-main/deduction-main.component';
 import { DeductionsidebarComponent } from './components/deductions/deductionsidebar/deductionsidebar.component';
@@ -30,7 +29,6 @@ import { EmployeeModule } from './components/employee/employee.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DeductionsComponent,
     HomeComponent,
     NotfoundpageComponent,
     ErrorpageComponent,
@@ -51,8 +49,9 @@ import { EmployeeModule } from './components/employee/employee.module';
     EmployeeModule
 
   ],
-  providers: [
-           {provide:HTTP_INTERCEPTORS,useClass:HttpServiceInterceptor,multi:true}
+  providers:
+   [
+   {provide:HTTP_INTERCEPTORS,useClass:HttpServiceInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })

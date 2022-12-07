@@ -1,35 +1,31 @@
 import { Injectable } from '@angular/core';
-import {
-  Router,
-  Resolve
-} from '@angular/router';
+import { Router, Resolve } from '@angular/router';
 import { catchError, delay, EMPTY, Observable, of, throwError } from 'rxjs';
-
 
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { GetdeductionResolver } from '../deductions/getdeduction.resolver';
+import { GetemployeeResolver } from './getemployee.resolver';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EmployeeResolver implements Resolve<Employee[]> {
-  constructor(private empservice: EmployeeService, private router: Router) {}
+export class EmployeeResolver implements Resolve<{empresolver:any,deductionresolver:any}> {
 
-  private handleError(){
-     return of(null)
-  }
+  constructor(
+      protected employee:GetemployeeResolver,
+      protected deduction:GetdeductionResolver
+    ) 
+    {}
 
-  resolve(): Observable<Employee[]> | Promise<Employee[]> | Employee[] {
-    return this.empservice.getEmployees$.pipe(
-      delay(2000),
-      catchError((error)=>{
-        this.router.navigate(['/error']);
-       // console.info('error has encountered by employee resolver');
-        return throwError(()=> new Error('Could not load data........'))
+      
 
-       
+  async resolve(route:any):Promise<any> {
 
-      })
-    );
-  }
+      const emp=await this.employee.resolve(route);
+
+    return {employee,deduction }
+    
+
+  
 }

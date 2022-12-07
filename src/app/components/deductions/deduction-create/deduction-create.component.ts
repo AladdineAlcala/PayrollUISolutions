@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./deduction-create.component.css']
 })
 export class DeductionCreateComponent implements OnInit {
+  
   deductiontypes=["Goverment","InHouse"]
   createdeductionForm!: FormGroup;
 
@@ -22,6 +23,7 @@ export class DeductionCreateComponent implements OnInit {
     });
     
   }
+
 
   onSaveCreateDeduction(){
       console.log(this.createdeductionForm);
