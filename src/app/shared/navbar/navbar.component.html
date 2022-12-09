@@ -23,7 +23,8 @@
                    Employee 
                   </a>
             </li>
-            <li class="nav-item" id="timerecordui"><a class="nav-link" href="javascript:void(0);">
+            <li class="nav-item" id="timerecordui">
+              <a class="nav-link" [routerLink]="['',{outlets:{side:'attendance',main:null}} ]" routerLinkActive="active">
               <i class="bi bi-calendar4-week"></i>
                Attendance (DTR)
               </a>

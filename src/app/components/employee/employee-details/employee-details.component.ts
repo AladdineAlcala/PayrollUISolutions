@@ -6,8 +6,8 @@ import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 import Swal from 'sweetalert2';
-import { DeductionDataService } from '../../deductions/deduction-data.service';
-import { DataService } from '../employee-data.service';
+import { DeductionDataService } from '../../../services/deduction-data.service';
+import { EmployeeDataService } from '../../../services/employee-data.service';
 
 @Component({
   selector: 'app-employee-details',
@@ -20,7 +20,7 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private empservice: EmployeeService,
-    private empDataService: DataService,
+    private empDataService: EmployeeDataService,
     private deductionDataService: DeductionDataService
   ) {}
 
@@ -31,6 +31,7 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
   public _employee$!: Observable<Employee>;
 
   employeesubscription: Subscription = new Subscription();
+  employeedeductionsubs:Subscription=new Subscription();
 
   deductionlist$!: Observable<any>;
 
@@ -72,6 +73,12 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
       this.deductionDataService.getCurdeductionlist();
     });
 
+
+    this.employeedeductionsubs=this.empDataService.employeeSource.asObservable().pipe(map(data => data.empDeductionSettings)).subscribe(result=>{
+     // console.log(result);
+      this.empDataService.employeedeductionSource.next(result);
+
+});
 
   }
 

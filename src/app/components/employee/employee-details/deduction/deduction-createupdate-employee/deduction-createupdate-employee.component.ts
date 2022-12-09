@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DeductionDataService } from 'src/app/components/deductions/deduction-data.service';
+import { DeductionDataService } from 'src/app/services/deduction-data.service';
 import { DeductionDetails } from 'src/app/models/deductiondetails';
 import { EmpDeductionSettings } from 'src/app/models/employeedeductions';
+import { IDeductionEmployee } from 'src/app/models/employeedeductionsManipulation';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeDataService } from '../../../../../services/employee-data.service';
 
 @Component({
   selector: 'app-deduction-createupdate-employee',
@@ -19,6 +22,7 @@ export class DeductionCreateUpdateEmployeeComponent implements OnInit {
 
 
   deductions:DeductionDetails[]=[{} as DeductionDetails]
+  empdeductions:EmpDeductionSettings[]=[{} as EmpDeductionSettings]
 
   createemployeedeductionForm!:FormGroup;
 
@@ -30,7 +34,9 @@ export class DeductionCreateUpdateEmployeeComponent implements OnInit {
   constructor(
     private router:Router,
     private activatedRoute:ActivatedRoute,
-    private deductiondataService:DeductionDataService
+    private deductionDataService:DeductionDataService,
+    private employeeService:EmployeeService,
+    private employeeDataService:EmployeeDataService
   ) 
   {
   
@@ -40,23 +46,23 @@ export class DeductionCreateUpdateEmployeeComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params:Params)=>{
         this.optmode=params['mode'];
         this.allow=params['allow'];
-        //console.log(this.optmode);
+      
     });
 
     this.createemployeedeductionForm=new FormGroup({
       'deductiondetail':new FormControl('',[Validators.required]),
-      'deductionAmount':new FormControl('',[Validators.required,Validators.pattern(/^[.\d]+$/)]),
+      'deductionAmount':new FormControl('',[Validators.required,Validators.pattern(/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/)]),
       'is_Active':new FormControl(true)
-    },{
-      updateOn:'blur'
     }
     );
 
-    this.deductiondataService.deductionlistdataSource.subscribe(data=>{
+    this.deductionDataService.deductionlistdataSource.subscribe(data=>{
      this.deductions=data;
     })
 
     this.empId=this.activatedRoute.snapshot.paramMap.get('id')!;
+     
+    /* this.employeeDataService.employeedeductionSource.subscribe(result=> console.log(result))  */
 
   }
   
@@ -66,21 +72,48 @@ export class DeductionCreateUpdateEmployeeComponent implements OnInit {
 
   onSubmitDeduction(){
 
-    if(this.optmode==='add')
-    {
+    if(this.createemployeedeductionForm.valid){
+      
+          if(this.optmode==='add')
+          {
+            
+            console.log(this.createemployeedeductionForm.status);
+        
+            const employeededuction={
+                emp_ID:this.empId,
+                d_Id:this.createemployeedeductionForm.value.deductiondetail.d_Id,
+                d_amount:this.createemployeedeductionForm.value.deductionAmount,
+                is_Active:this.createemployeedeductionForm.value.is_Active,
+              // empDeduction_ID:0
+                }
+        
+              this.employeeService.EmployeeDeductionCreate(employeededuction).subscribe(data=>{
 
-/*      const employeededuction= {
-       // empDeduction_ID:this.createemployeedeductionForm.value.deductiondetail.d_Id,
-        emp_ID:this.empId,
-        d_Id:this.createemployeedeductionForm.value.deductiondetail.d_Id,
-        d_amount:this.createemployeedeductionForm.value.deductionAmount,
-        is_Active:this.createemployeedeductionForm.value.
-        } */
+                    const newDeduction=data;
 
+                    this.createemployeedeductionForm.reset();
+                    
+                    this.employeeDataService.employeedeductionSource.subscribe(data=>{
 
-      console.log(this.createemployeedeductionForm.value);
+                      this.empdeductions=[...data,newDeduction];
+                     
+                   
+                    });
+
+                    //console.log(this.empdeductions);
+                    this.employeeDataService.employeedeductionSource.next(this.empdeductions);
+              })
+                
+           
+            
+            
+
+          }
+
+      
     }
-   
+    
+    
 
   }
 

@@ -19,7 +19,7 @@ import { TabtemplateComponent } from './employee-details/tabtemplate/tabtemplate
 import { WageComponent } from './employee-details/wage/wage.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { EmployeeComponent } from './employee.component';
+import { EmployeeComponent } from './employee-main/employee.component';
 import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.component';
 
 
@@ -63,7 +63,8 @@ import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.comp
     AdvancesComponent,
     CashbondComponent,
     DeductionComponent,
-    ProfileComponent
+    ProfileComponent,
+    MatTableModule
   ]
 })
 export class EmployeeModule {}

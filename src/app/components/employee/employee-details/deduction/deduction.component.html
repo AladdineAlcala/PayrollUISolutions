@@ -16,7 +16,7 @@
         <table class="table table-sm">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>#</th>
               <th>DEDUCTION DETAILS</th>
               <th>TYPE</th>
               <th>AMOUNT</th>
@@ -25,9 +25,9 @@
           </thead>
           <tbody>
 
-            <ng-container *ngFor="let deduction of deductions.empDeductionSettings">
+            <ng-container *ngFor="let deduction of deductions;let i = index" [attr.data-index]="i">
               <tr>
-                <td>{{deduction.empDeduction_ID}}</td>
+                <td>{{i + 1}}</td>
                 <td>
                   <div class="d-flex flex-column">
                     <div> {{deduction.deductionDetails.description}}</div>

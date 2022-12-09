@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
-import { DataService } from '../../employee-data.service';
+import { EmployeeDataService } from '../../../../services/employee-data.service';
 
 @Component({
   selector: 'app-wage',
@@ -13,7 +13,7 @@ export class WageComponent implements OnInit,OnDestroy {
   empwageSubscription:Subscription=new Subscription()
   employee_wages$!: Observable<Employee>;
 
-  constructor(private empDataService:DataService) {}
+  constructor(private empDataService:EmployeeDataService) {}
 
   employee:Employee={} as Employee;
 

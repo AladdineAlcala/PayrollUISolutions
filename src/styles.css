@@ -4,6 +4,9 @@
 
 :root {
     --bs-body-font-family: 'Roboto', sans-serif;
+    --bs-body-bg:#c8f4f9;
+
+    
 }
 
 
@@ -417,6 +420,7 @@ legend + * {
 
 #wrapper {
     overflow-x: hidden;
+    
 }
 
 #sidebar-wrapper {

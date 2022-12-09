@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { AttendanceMainComponent } from './components/attendance/attendance-main/attendance-main.component';
+import { AttendanceSidebarComponent } from './components/attendance/attendance-sidebar/attendance-sidebar.component';
 
 import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
 import { DeductionMainComponent } from './components/deductions/deduction-main/deduction-main.component';
@@ -14,7 +16,7 @@ import { EmployeeDetailsComponent } from './components/employee/employee-details
 import { ProfileComponent } from './components/employee/employee-details/profile/profile.component';
 import { WageComponent } from './components/employee/employee-details/wage/wage.component';
 import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
-import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeComponent } from './components/employee/employee-main/employee.component';
 import { EmployeesidebarComponent } from './components/employee/employeesidebar/employeesidebar.component';
 import { GetemployeeResolver } from './components/employee/getemployee.resolver';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
@@ -84,7 +86,17 @@ const approutes: Routes = [
     component: EmployeeEditComponent,
     outlet: 'main',
   },
-
+  {
+    path:'attendance',
+    component:AttendanceSidebarComponent,
+    outlet:'side'
+  },
+  {
+    path: 'attendance/main',
+    component: AttendanceMainComponent,
+    outlet: 'main'
+  }
+  ,
   { path: 'deductions', component: DeductionsidebarComponent, outlet: 'side' },
   {
     path: 'deductions/main',
@@ -103,7 +115,7 @@ const approutes: Routes = [
 
   { path: 'payroll', component: PayrollsidebarComponent },
 
-  { path: 'error', component: ErrorpageComponent },
+  { path: 'error', component: ErrorpageComponent,outlet: 'main' },
   { path: '**', component: NotfoundpageComponent, pathMatch: 'full' },
 ];
 

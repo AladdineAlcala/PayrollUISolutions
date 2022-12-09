@@ -1,1 +1,77 @@
-<p>deduction-main works!</p>
+
+<div class="container-fluid mt-3">
+   
+    <div class="border rounded-2 shadow" id="main-container">
+
+        <div class="d-flex flex-row justify-content-between">
+            <div class="mt-4 ms-4" id="page-title">
+                 <h2 class="fs-2">{{title}}</h2>
+            </div>
+            <div class="m-3" id="close-button">
+                <button 
+                type="button"
+                 class="btn-close btn-close-black"
+                  aria-label="Close"
+                  ></button>
+            </div>
+        </div>
+        <hr>
+
+
+        <!--table-->
+
+        <div class="m-3 deduction-table-container">
+
+            <div>
+
+                <ng-container *ngIf="(deductionList$ |async) as deductionsDataSource; else isLoading;" >
+
+                    <table mat-table  [dataSource]="deductionsDataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="d_id">
+                            <th mat-header-cell *matHeaderCellDef>#</th>
+                            <td mat-cell *matCellDef="let element">{{element.d_Id}}</td>
+               
+                        </ng-container>
+    
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef>Description</th>
+                            <td mat-cell *matCellDef="let element">{{element.description}}</td>
+                        </ng-container>
+    
+                        
+                        <ng-container matColumnDef="d_type">
+                            <th mat-header-cell *matHeaderCellDef>Type</th>
+                            <td mat-cell *matCellDef="let element">{{element.d_type}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="deductioncode">
+                            <th mat-header-cell *matHeaderCellDef>Is Default</th>
+                            <td mat-cell *matCellDef="let element">{{element.deductioncode}}</td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="is_default">
+                            <th mat-header-cell *matHeaderCellDef>Is Default</th>
+                            <td mat-cell *matCellDef="let element">{{element.is_defualt}}</td>
+                        </ng-container>
+                        
+                        <tr mat-header-row *matHeaderRowDef="deductionColumns"></tr>
+    
+                        <tr mat-row *matRowDef="let row; columns: deductionColumns;"></tr>
+    
+    
+                    </table>
+
+                </ng-container>
+            
+                <ng-template #isLoading>
+                    <p>Loading data..Pls wait ......</p>
+                </ng-template>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,13 +1,19 @@
 
 <div class="p-2 border shadow" id="deduction-form" >
-    <div class="m-2">
+    <div class=" d-flex flex-row justify-content-between m-2">
         <p class="fs-6 text-secondary"> Add New Payroll Deduction to employee</p>
+        <button 
+        type="button"
+         class="btn-close btn-close-black"
+          aria-label="Close"
+          [routerLink]="['',{outlets:{main:['employees',empId,'deduction']}}]"
+          ></button>
     </div>
     
     <form 
     class="px-2"
     [formGroup]="createemployeedeductionForm" 
-    (click)="onSubmitDeduction()"
+    (ngSubmit)="onSubmitDeduction()"
     >
 
         <div class="col-sm-12 m-2">
@@ -37,8 +43,22 @@
             </label>
           </div>
 
-        <div class="d-flex align-bottom justify-content-end mt-1">
-            <button type="submit" mat-flat-button color="primary" [disabled]="createemployeedeductionForm.invalid" >{{optmode==='add'?"Save" :"Update"}}</button>
+        <div class="d-flex align-bottom justify-content-end mt-1 gap-4">
+            <button 
+                type="submit"
+                mat-flat-button 
+                color="primary"
+                [disabled]="createemployeedeductionForm.invalid" 
+                >
+              {{optmode==='add'?"Save" :"Update"}}
+            </button>
+
+            <button 
+            type="submit"
+            mat-flat-button
+            >
+            Reset
+        </button>
         </div>
 
     </form>

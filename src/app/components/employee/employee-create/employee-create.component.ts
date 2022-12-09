@@ -91,6 +91,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
     // console.log(this.employeeModel);
 
     if (empForm.valid) {
+
       this.new_created_employee$ = this.empservice.AddEmployee(empForm.value);
       //empForm.reset();
 
@@ -101,10 +102,11 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
           if (this.employee) {
             // console.log(this.employee);
             //this.router.navigate(['./',{outlets:{main:['employees/all']}}],{relativeTo:this.activatedRoute.firstChild}) 
-            this.router.navigate(['',{outlets:{main:['employees', this.employee.emp_ID]}}], {relativeTo: this.route});
+            this.router.navigate(['',{outlets:{main:['employees', this.employee.emp_ID,'profile']}}], {relativeTo: this.route});
           }
         },
       });
+
     } else {
       console.log('required fields needed encounter');
     }
