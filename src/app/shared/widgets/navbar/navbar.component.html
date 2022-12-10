@@ -14,30 +14,35 @@
               <div class="right"></div>
             </div>
  -->
-            <li class="nav-item" id="homeui"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}><i
+            <li class="nav-item" id="homeui">
+              <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}><i
                   class="fa-solid fa-house"></i>Home</a></li>
   
             <li class="nav-item" id="employeeui">
-              <a class="nav-link" [routerLink]="['',{outlets:{side:'employees',main:null}} ]"  routerLinkActive="active" >
+              <a class="nav-link" 
+              [routerLink]="['',{outlets:{side:'employees',main:null}} ]"  routerLinkActive="active" >
                 <i class="bi bi-people-fill"></i>
                    Employee 
                   </a>
             </li>
             <li class="nav-item" id="timerecordui">
-              <a class="nav-link" [routerLink]="['',{outlets:{side:'attendance',main:null}} ]" routerLinkActive="active">
+              <a class="nav-link"
+               [routerLink]="['',{outlets:{side:'attendance',main:null}} ]" routerLinkActive="active">
               <i class="bi bi-calendar4-week"></i>
                Attendance (DTR)
               </a>
             </li>
             <li class="nav-item" id="deductionsui">
-              <a class="nav-link" [routerLink]="['',{outlets:{side:'deductions',main:null}} ]" routerLinkActive="active">
+              <a class="nav-link"
+                 [routerLink]="['',{outlets:{side:'deductions',main:null}} ]" routerLinkActive="active"
+                 >
                 <i class="bi bi-bank"></i>
                  Deductions 
               </a>
             </li>
             <li class="nav-item" id="payrollui">
               <a class="nav-link"
-              routerLink="/deduction" routerLinkActive="active" 
+              [routerLink]="['',{outlets:{side:'payroll',main:null}} ]"  routerLinkActive="active" 
               >
                 <i class="bi bi-wallet2"></i>
                  Payroll

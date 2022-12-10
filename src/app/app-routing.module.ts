@@ -22,6 +22,7 @@ import { GetemployeeResolver } from './components/employee/getemployee.resolver'
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
+import { PayrollperiodComponent } from './components/payroll/payrollperiod/payrollperiod.component';
 import { PayrollsidebarComponent } from './components/payroll/payrollsidebar/payrollsidebar.component';
 
 const routingConfiguration: ExtraOptions = {
@@ -113,8 +114,13 @@ const approutes: Routes = [
     outlet: 'main',
   },
 
-  { path: 'payroll', component: PayrollsidebarComponent },
-
+  { path: 'payroll', component: PayrollsidebarComponent,outlet:'side' },
+  {
+    path: 'payroll/period',
+    component:PayrollperiodComponent,
+    outlet: 'main',
+   
+  },
   { path: 'error', component: ErrorpageComponent,outlet: 'main' },
   { path: '**', component: NotfoundpageComponent, pathMatch: 'full' },
 ];

@@ -22,7 +22,7 @@ export class GetemployeeResolver implements Resolve<Employee[]> {
   ) {}
   resolve(): Observable<Employee[]> | Promise<Employee[]> | Employee[] {
     return this.empservice.getEmployees$.pipe(
-      delay(2000),
+     // delay(2000),
       catchError(() => {
         this.router.navigate(['',{outlets:{main:['error']}}], {relativeTo: this.activateRoute});
        // this.router.navigate(['/error']);

@@ -64,7 +64,9 @@ import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.comp
     CashbondComponent,
     DeductionComponent,
     ProfileComponent,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class EmployeeModule {}

@@ -1,0 +1,24 @@
+
+
+<div class="m-3 border rounded-2 shadow h-100 bg-light">
+
+    <div class="d-flex flex-row flex-start my-2 ms-2">
+        <button mat-button (click)="onaddPayrollPeriod()">
+            <mat-icon>add_circle</mat-icon> Add
+          </button>
+
+
+    </div>
+
+    <table-bootstrap
+    [HeadArray]="heads"
+    [GridArray]="grids"
+    (notifyDelete)="deletePayrollPeriod($event)"
+    (notifyEdit)="editPayrollPeriod($event)"
+    >
+    
+    </table-bootstrap>
+
+    
+</div>
+
