@@ -1,3 +1,7 @@
 .component-vh{
-    height:90vh;
+    height:100vh;
+}
+
+#comp-container{
+    height: 500px;
 }

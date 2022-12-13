@@ -741,11 +741,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 
-#main-container{
+#main-component-container{
     margin: 0 auto;
     width: 98%;
     border-color:#e0a030 1px solid;
     background: #67ced5;
-    color:#613500;
+ 
    
 }
+

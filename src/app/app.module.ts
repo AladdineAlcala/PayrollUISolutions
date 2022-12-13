@@ -25,6 +25,9 @@ import { TableBootstrapComponent } from "./shared/widgets/table-bootstrap/table-
 import { DynamictransformPipe } from './pipes/dynamictransform.pipe';
 import { ButtonLoadingComponent } from './shared/widgets/button-loading/button-loading.component';
 import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
+import { PayrollperiodCreateComponent } from './components/payroll/payrollperiod-create/payrollperiod-create.component';
+import { LoaderComponent } from './shared/widgets/loader/loader.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 
 @NgModule({
     declarations: [
@@ -45,7 +48,10 @@ import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
         TableBootstrapComponent,
         DynamictransformPipe,
         ButtonLoadingComponent,
-        SidebarComponent
+        SidebarComponent,
+        PayrollperiodCreateComponent,
+        LoaderComponent
+     
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: HttpServiceInterceptor, multi: true }
@@ -57,8 +63,8 @@ import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        EmployeeModule
-       
+        EmployeeModule,
+        MatProgressSpinnerModule
     ]
 })
 export class AppModule { }

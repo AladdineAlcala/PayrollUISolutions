@@ -15,14 +15,10 @@ import { EmployeeDataService } from '../../../services/employee-data.service';
   styleUrls: ['./employee-details.component.css'],
 })
 export class EmployeeDetailsComponent implements OnInit, OnDestroy {
+
+  readonly title:string="Employee Details";
+
   errorSubject: any;
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private empservice: EmployeeService,
-    private empDataService: EmployeeDataService,
-    private deductionDataService: DeductionDataService
-  ) {}
 
   empId!: string;
 
@@ -34,6 +30,16 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
   employeedeductionsubs:Subscription=new Subscription();
 
   deductionlist$!: Observable<any>;
+
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private empservice: EmployeeService,
+    private empDataService: EmployeeDataService,
+    private deductionDataService: DeductionDataService
+  ) {}
+
 
   ngOnInit(): void {
     //this.empId=this.activatedRoute.snapshot.paramMap.get('id')!;

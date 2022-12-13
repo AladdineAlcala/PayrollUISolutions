@@ -12,16 +12,19 @@
 
   <!-- Page content wrapper-->
   <div id="page-content-wrapper">
-
     <!-- Top navigation-->
     <app-navbar></app-navbar>
-
     <!-- Page content-->
+    
     <div class="container-fluid" id="mainform-container">
-
+      <loading></loading>
       <main role="main" class="pb-3">
+      
         <router-outlet name="main"> </router-outlet>
+
       </main>
+
+      
     </div>
 
 

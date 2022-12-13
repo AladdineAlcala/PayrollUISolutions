@@ -1,33 +1,32 @@
 
 <div class="container-fluid mt-3">
 
-    <div class="border rounded-2 shadow component-vh" id="main-container">
+    <div class="border rounded-2 shadow component-vh" id="main-component-container">
 
          <!--header-->
-         <div class="d-flex flex-row justify-content-between">
-            <div class="mt-4 ms-4" id="page-title">
-                 <h2 class="fs-2">{{title}}</h2>
-            </div>
-            <div class="m-3" id="close-button">
-                <button 
-                type="button"
-                 class="btn-close btn-close-black"
-                  aria-label="Close"
-                  ></button>
-            </div>
-        </div>
-        <hr>
+         <app-title-header [title]="title"></app-title-header>
 
         <div class="row row-cols-lg-2">
 
             <div class="col-sm-6">
 
-                <app-payrollperiodlist [payrollperiodlist$]="payrolperiods$" [heads]="heads" >
+                <div class="p-2" id="comp-container">
+                    <app-payrollperiodlist [payrollperiodlist$]="payrolperiods$" [heads]="heads" >
                  
-                </app-payrollperiodlist>
+                    </app-payrollperiodlist>
+                </div>
+
+            
 
             </div>
         
+
+            <div class="col-sm-6">
+
+               <div class="p2" id="comp-container">
+                <router-outlet> </router-outlet>
+               </div>
+            </div>
 
         </div>
 

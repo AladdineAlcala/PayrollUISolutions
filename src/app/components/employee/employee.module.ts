@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
+
 import { EmployeeCreateComponent } from './employee-create/employee-create.component';
 import { AdvancesComponent } from './employee-details/advances/advances.component';
 import { CashbondComponent } from './employee-details/cashbond/cashbond.component';
@@ -21,6 +22,7 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeComponent } from './employee-main/employee.component';
 import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.component';
+import { TitleHeaderComponent } from 'src/app/shared/widgets/title-header/title-header.component';
 
 
 
@@ -38,7 +40,8 @@ import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.comp
     CashbondComponent,
     DeductionComponent,
     ProfileComponent,
-    DeductionCreateUpdateEmployeeComponent
+    DeductionCreateUpdateEmployeeComponent,
+    TitleHeaderComponent
   ],
   imports:[
     RouterModule,
@@ -66,7 +69,8 @@ import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.comp
     ProfileComponent,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    TitleHeaderComponent
   ]
 })
 export class EmployeeModule {}

@@ -1,9 +1,12 @@
 <div class="container-fluid mt-3">
 
-    <div class="border shadow rounded-2 m-2 bg-light">
+    <div class="border shadow rounded-2 m-2" id="main-component-container">
 
       <!--   {{deductionlist$|async|json }} -->
       
+        <app-title-header [title]="title"></app-title-header>
+
+
         <!--profile row-->
         <div class="row">
 
@@ -32,7 +35,7 @@
         
                                         <div class="d-flex flex-column gap-2 align-middle">
                                                 <div class="fs-1 fw-bold font-monospace text-info">{{employee.emp_ID}}</div>
-                                                <p class="fs-6">Employee No:</p>
+                                                <p class="fs-6 text-light">Employee No:</p>
                                         </div>
         
                                     </div>
@@ -92,7 +95,7 @@
             
             <div class="col-sm-12">
 
-                    <div class="m-4 border rounded-2 p-3" id="emptab-container">
+                    <div class="m-4 border shadow rounded-2 p-3 bg-light" id="emptab-container">
 
                         <tabtemplate-employee
                          [empprofiledata$]="_employee$"
