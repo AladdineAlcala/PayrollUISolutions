@@ -7,8 +7,7 @@ import { EmpDeductionSettings } from 'src/app/models/employeedeductions';
   providedIn: 'root'
 })
 export class EmployeeDataService {
-
-
+  
 employee:Employee={} as Employee;
 employeeSource:BehaviorSubject<Employee>;
 

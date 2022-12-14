@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { PayrollPeriod } from 'src/app/models/payrollperiod';
 import { PayrollperiodService } from 'src/app/services/payrollperiod.service';
+import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store.service';
 
 @Component({
   selector: 'app-payrollperiod',
@@ -23,16 +24,14 @@ export class PayrollperiodComponent implements OnInit {
   ];
 
   constructor(
-    private payrollperiodService: PayrollperiodService
-   
+    private payrolperiodStore:PayrollPeriodStore
   ) {}
 
   ngOnInit(): void {
-    this.payrolperiods$ = this.payrollperiodService
-      .getallPayrollPeriod()
-      .pipe(map((result) => result));
+   
+   this.payrolperiodStore.load_initialState()
+   this.payrolperiods$= this.payrolperiodStore.state$.pipe(map(state => state.payrollperiods));
 
-    //this.payrollperiodService.getallPayrollPeriod().subscribe(data => console.log(data));
   }
 
   

@@ -1,15 +1,53 @@
-
 <div class="m-4 border rounded-2 bg-light shadow h-75">
-    <div class="d-flex flex-rox justify-content-between m-3">
-        <div class="ms-2">
-            <p class="fs-6 text-secondary">Add New Payroll Deduction</p>
-        </div>
-        <div>
-            <button 
-            type="button"
-             class="btn-close btn-close-black"
-              aria-label="Close"
-              ></button>
-        </div>
+  <div class="d-flex flex-rox justify-content-between m-3">
+    <div class="ms-2">
+      <p class="fs-6 text-secondary">Add New Payroll Deduction</p>
     </div>
+    <div>
+      <button type="button" class="btn-close btn-close-black" aria-label="Close"
+        [routerLink]="['',{outlets:{main:['payroll','period']}}]"></button>
+    </div>
+  </div>
+
+  <div class="m-3">
+
+    <form novalidate [formGroup]="payrollperiodForm" (ngSubmit)="onformSubmit()">
+    <!--   {{payrollperiodForm.status}} -->
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+
+        <mat-date-range-input formGroupName="daterange" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <!--     <mat-error *ngIf="daterange.get('start').hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="daterange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
+
+      </mat-form-field>
+
+
+
+      <div class="col-sm-5 ms-2 my-3">
+        <label class="form-label">Year Period:</label>
+        <input type="text" class="form-control" formControlName="payrollYear">
+      </div>
+
+      <div class="d-flex align-bottom justify-content-between ms-2 mt-1 ">
+        <button type="submit" mat-flat-button color="primary" [disabled]="payrollperiodForm.invalid">
+          {{optmode==='add'?"Save" :"Update"}}
+        </button>
+
+        <button type="submit" mat-flat-button (click)="onReset()" >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+
 </div>

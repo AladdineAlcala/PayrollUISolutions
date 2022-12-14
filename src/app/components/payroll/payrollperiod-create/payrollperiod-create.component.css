@@ -6,3 +6,7 @@
      border-radius:5px;
      background:#eff5f0;
  }
+
+ mat-form-field {
+    width: 90%;
+  }

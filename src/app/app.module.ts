@@ -27,7 +27,14 @@ import { ButtonLoadingComponent } from './shared/widgets/button-loading/button-l
 import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
 import { PayrollperiodCreateComponent } from './components/payroll/payrollperiod-create/payrollperiod-create.component';
 import { LoaderComponent } from './shared/widgets/loader/loader.component';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatNativeDateModule} from '@angular/material/core';
+
+import { PayrollDeductionScheduleComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionschedule.component';
+
 
 @NgModule({
     declarations: [
@@ -50,7 +57,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         ButtonLoadingComponent,
         SidebarComponent,
         PayrollperiodCreateComponent,
-        LoaderComponent
+        LoaderComponent,
+        PayrollDeductionScheduleComponent
      
     ],
     providers: [
@@ -64,7 +72,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         FormsModule,
         ReactiveFormsModule,
         EmployeeModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatNativeDateModule
     ]
 })
 export class AppModule { }

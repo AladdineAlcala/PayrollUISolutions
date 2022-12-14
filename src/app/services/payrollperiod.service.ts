@@ -1,45 +1,55 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, shareReplay, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PayrollPeriod } from '../models/payrollperiod';
 import { ResponseDTO } from '../models/ResponseDTO';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PayrollperiodService implements OnInit {
+export class PayrollperiodService {
+  url = 'payperiod';
 
-  url:string="";
+  constructor(
+    private http: HttpClient,
+  ) {}
 
-  constructor(private http:HttpClient)
-  { }
+  getallpayrollperiod$=this.getallpayrollperiod();
 
-
-  ngOnInit(): void {
-
-
-    throw new Error('Method not implemented.');
-  }
-
-  public getallPayrollPeriod():Observable<PayrollPeriod[]>{
-
-    return this.getallpayrollperiod().pipe( map((data:ResponseDTO) => data.result as PayrollPeriod[]),
+  private getallpayrollperiod() {
+    return this.http.get<ResponseDTO>(
+      `${environment.base_apiUrl}/${this.url}/all`
+    ).pipe(
+      map((data: ResponseDTO) => data.result as PayrollPeriod[]),
+      shareReplay(),
       catchError(this.handleError)
-      ); 
+    );
   }
 
-
-  private getallpayrollperiod(){
-      this.url="payperiod";
-      return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/all`);
+  public AddPayrollPeriod(newPayrollPeriod:PayrollPeriod){
+    return this.addpayrollperiod(newPayrollPeriod);
   }
 
+  private addpayrollperiod(newPayrollPeriod:PayrollPeriod){
+    return this.http.post<ResponseDTO>(
+      `${environment.base_apiUrl}/${this.url}`,
+      newPayrollPeriod)
+    .pipe(
+      map((data) => data),
+      catchError(this.handleError)
+    );
+  }
+
+  public removepayrollperiod(id:number){
+
+  }
   
- handleError(error:Error){
-   return throwError(()=>{
-    return 'Unknown Error occured..Please try again';
-  });
-}
 
+
+  handleError(error: Error) {
+    return throwError(() => {
+      return 'Unknown Error occured..Please try again';
+    });
+  }
 }

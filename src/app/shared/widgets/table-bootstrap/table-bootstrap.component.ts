@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { EventType } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,7 +6,7 @@ import { Observable } from 'rxjs';
   templateUrl: './table-bootstrap.component.html',
   styleUrls: ['./table-bootstrap.component.css']
 })
-export class TableBootstrapComponent implements OnInit {
+export class TableBootstrapComponent{
 
   @Input() HeadArray: any[] =[];
 
@@ -16,9 +15,6 @@ export class TableBootstrapComponent implements OnInit {
   @Output() notifyEdit:EventEmitter<any>=new EventEmitter();
   @Output() notifyDelete:EventEmitter<any>=new EventEmitter();
 
-  ngOnInit(): void {
-      console.log(this.HeadArray);
-  }
 
 
   onEdit(item:any):void{

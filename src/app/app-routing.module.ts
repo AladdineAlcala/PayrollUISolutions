@@ -22,6 +22,7 @@ import { GetemployeeResolver } from './components/employee/getemployee.resolver'
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
+import { PayrollDeductionScheduleComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionschedule.component';
 import { PayrollperiodCreateComponent } from './components/payroll/payrollperiod-create/payrollperiod-create.component';
 import { PayrollperiodComponent } from './components/payroll/payrollperiod/payrollperiod.component';
 import { PayrollsidebarComponent } from './components/payroll/payrollsidebar/payrollsidebar.component';
@@ -128,6 +129,20 @@ const approutes: Routes = [
             
           }
         ]
+   
+  },
+  {
+    path: 'payroll/deductionschedule',
+        component:PayrollDeductionScheduleComponent,
+        outlet: 'main',
+        /* children:[
+
+          {
+            path:'add',
+            component:PayrollperiodCreateComponent
+            
+          }
+        ] */
    
   },
   { path: 'error', component: ErrorpageComponent,outlet: 'main' },
