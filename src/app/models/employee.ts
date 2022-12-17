@@ -1,6 +1,6 @@
 import { Observable } from "rxjs"
 import { CashBond } from "./cashbond"
-import { EmpDeductionSettings } from "./employeedeductions";
+import { EmpDeductionSettings } from "./employeedeductionsettings";
 import { Position } from "./position"
 
 export class Employee{

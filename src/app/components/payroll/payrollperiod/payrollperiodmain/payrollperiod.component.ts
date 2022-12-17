@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 import { PayrollPeriod } from 'src/app/models/payrollperiod';
 import { PayrollperiodService } from 'src/app/services/payrollperiod.service';
-import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store.service';
+import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store';
 
 @Component({
   selector: 'app-payrollperiod',
@@ -11,6 +11,7 @@ import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store.service';
   styleUrls: ['./payrollperiod.component.css'],
 })
 export class PayrollperiodComponent implements OnInit {
+  
   title: string = 'Payroll Period List';
 
   payrolperiods$!: Observable<PayrollPeriod[]>;
@@ -29,7 +30,7 @@ export class PayrollperiodComponent implements OnInit {
 
   ngOnInit(): void {
    
-   this.payrolperiodStore.load_initialState()
+  // this.payrolperiodStore.load_initialState()
    this.payrolperiods$= this.payrolperiodStore.state$.pipe(map(state => state.payrollperiods));
 
   }

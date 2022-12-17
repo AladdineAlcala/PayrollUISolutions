@@ -15,9 +15,9 @@ export class PayrollperiodService {
     private http: HttpClient,
   ) {}
 
-  getallpayrollperiod$=this.getallpayrollperiod();
+  //getallpayrollperiod$=this.getallpayrollperiod();
 
-  private getallpayrollperiod() {
+  public getallpayrollperiod() {
     return this.http.get<ResponseDTO>(
       `${environment.base_apiUrl}/${this.url}/all`
     ).pipe(

@@ -1,66 +1,49 @@
 
 
+
+
 <div class="container-fluid mt-3">
-    
 
-    <div class="border rounded-2 shadow" id="main-component-container" >
+    <div class="border rounded-2 shadow component-vh" id="main-component-container">
 
-        <div class="d-flex flex-row justify-content-between">
-            <div class="mt-4 ms-4" id="page-title">
-                 <h2 class="fs-2">{{title}}</h2>
-            </div>
-            <div class="m-3" id="close-button">
-                <button 
-                type="button"
-                 class="btn-close btn-close-black"
-                  aria-label="Close"
-                  ></button>
-            </div>
-        </div>
-        <hr>
-
-
+         <!--header-->
+         <app-title-header [title_head]="title"></app-title-header>
         
-    <div class="row">
+         <div class="row">
 
-        <div class="col-sm-12">
-
-            <div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
-
-            <div class="d-flex flex-column justify-content-start p-3">
-
-                <div class="ms-3">
-                    <button mat-fab color="warn" aria-label="Create New Employee" [routerLink]="['',{outlets:{main:'employees/add'}}]" >
-                        <mat-icon>person_add</mat-icon>
-                    </button>
+            <div class="col-sm-12">
+        
+                <div *ngIf="errorMessageAction$|async as errorMessage "> {{ errorMessage}}</div>
+        
+                <div class="d-flex flex-column justify-content-start p-3">
+        
+                    <div class="ms-3">
+                        <button mat-fab color="warn" aria-label="Create New Employee" [routerLink]="['',{outlets:{main:'employees/add'}}]" >
+                            <mat-icon>person_add</mat-icon>
+                        </button>
+                    </div>
+        
+        
+                    <ng-container *ngIf="employee$|async">
+        
+                   <!--      <button type="button" class="btn btn-success m-3" [routerLink]="['',{outlets:{main:'employees/add'}}]" > Add Employee </button> -->
+                        <app-employee-list 
+                        [employeelist$]="employee$"
+                        (selectedEmp)="OnselectedEmp($event)"
+                        >
+                        </app-employee-list>
+                        
+                    </ng-container>
+        
                 </div>
-
-
-                <ng-container *ngIf="employee$|async">
-
-               <!--      <button type="button" class="btn btn-success m-3" [routerLink]="['',{outlets:{main:'employees/add'}}]" > Add Employee </button> -->
-                    <app-employee-list 
-                    [employeelist$]="employee$"
-                    (selectedEmp)="OnselectedEmp($event)"
-                    >
-                    </app-employee-list>
-                    
-                </ng-container>
-
+               
+        
+          
+        
             </div>
-           
-
-      
-
+        
         </div>
-
+        
+         
     </div>
-
-
-
-    </div>
-
-
-
 </div>
-

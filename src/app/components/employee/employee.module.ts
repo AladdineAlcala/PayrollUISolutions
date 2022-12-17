@@ -23,6 +23,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeComponent } from './employee-main/employee.component';
 import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.component';
 import { TitleHeaderComponent } from 'src/app/shared/widgets/title-header/title-header.component';
+import { SharedModule } from 'src/app/shared/widgets/shared.module';
 
 
 
@@ -41,7 +42,6 @@ import { TitleHeaderComponent } from 'src/app/shared/widgets/title-header/title-
     DeductionComponent,
     ProfileComponent,
     DeductionCreateUpdateEmployeeComponent,
-    TitleHeaderComponent
   ],
   imports:[
     RouterModule,
@@ -52,7 +52,8 @@ import { TitleHeaderComponent } from 'src/app/shared/widgets/title-header/title-
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   exports: [
     EmployeeComponent,
@@ -70,7 +71,7 @@ import { TitleHeaderComponent } from 'src/app/shared/widgets/title-header/title-
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    TitleHeaderComponent
+
   ]
 })
 export class EmployeeModule {}

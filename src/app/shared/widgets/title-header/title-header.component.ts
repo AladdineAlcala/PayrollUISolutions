@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class TitleHeaderComponent {
 
-@Input() title:string=" "
+@Input() title_head:string=" "
 
 
 

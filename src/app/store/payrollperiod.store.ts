@@ -43,9 +43,10 @@ export class PayrollPeriodStore extends BaseStore<PayrollPeriodState> {
   } */
 
   load_initialState() {
-    this.payrollperiodService.getallpayrollperiod$.subscribe((data) => {
-      console.log('init state...........');
-      this.setState((state)=> ({payrollperiods:[...data]}))
+    this.payrollperiodService.getallpayrollperiod().subscribe((data) => {
+     // console.log(data);
+    //  console.log('init state...........');
+     this.setState(()=>({ payrollperiods: [...data] }))
     });
   }
 }

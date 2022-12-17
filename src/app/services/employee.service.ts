@@ -5,7 +5,7 @@ import { Employee } from '../models/employee';
 import { ResponseDTO } from '../models/ResponseDTO';
 import { environment } from 'src/environments/environment';
 import { IDeductionEmployee } from '../models/employeedeductionsManipulation';
-import { EmpDeductionSettings } from '../models/employeedeductions';
+import { EmpDeductionSettings } from '../models/employeedeductionsettings';
 
 
 @Injectable({
@@ -94,12 +94,11 @@ export class EmployeeService {
   }
 
 
-
+  //https://localhost:7023/api/empdeductionsettings/GetDeductionByEmp/00001
   public GetEmployeeDeductionsByEmployeeId(empId:string):Observable<EmpDeductionSettings[]>
   {
       return this.GetEmployeeDeductionsByEmployeeId(empId);
   }
-
 
   private getEmployeeDeductionsSettings(empId:string){
     this.url="empdeductionsettings";

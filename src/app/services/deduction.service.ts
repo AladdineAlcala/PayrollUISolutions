@@ -22,13 +22,14 @@ export class DeductionService {
 
   getdeductions$=this.getAll();
 
-  private getAll():Observable<DeductionDetails[]>{
+  private getAll():Observable<ResponseDTO>{
     return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`)
-    .pipe(map(data=> data.result as DeductionDetails[])
+    .pipe(map(data=> data)
     ,
     catchError(this.handleError)
     )
   }
+
 
 
 

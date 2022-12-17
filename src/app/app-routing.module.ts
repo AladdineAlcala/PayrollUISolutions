@@ -22,9 +22,11 @@ import { GetemployeeResolver } from './components/employee/getemployee.resolver'
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
-import { PayrollDeductionScheduleComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionschedule.component';
-import { PayrollperiodCreateComponent } from './components/payroll/payrollperiod-create/payrollperiod-create.component';
-import { PayrollperiodComponent } from './components/payroll/payrollperiod/payrollperiod.component';
+import { PayrollDeductionScheduleComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionsched-main/payrolldeductionschedule.component';
+import { PayrolldeductionscheduleCreateComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionschedule-create/payrolldeductionschedule-create.component';
+import { PayrolldeductionscheduleCreatelistComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionschedule-createlist/payrolldeductionschedule-createlist.component';
+import { PayrollperiodCreateComponent } from './components/payroll/payrollperiod/payrollperiod-create/payrollperiod-create.component';
+import { PayrollperiodComponent } from './components/payroll/payrollperiod/payrollperiodmain/payrollperiod.component';
 import { PayrollsidebarComponent } from './components/payroll/payrollsidebar/payrollsidebar.component';
 
 const routingConfiguration: ExtraOptions = {
@@ -133,18 +135,26 @@ const approutes: Routes = [
   },
   {
     path: 'payroll/deductionschedule',
-        component:PayrollDeductionScheduleComponent,
-        outlet: 'main',
-        /* children:[
-
+    component:PayrollDeductionScheduleComponent,
+    outlet: 'main',
+      children:
+        [
           {
             path:'add',
-            component:PayrollperiodCreateComponent
+            component:PayrolldeductionscheduleCreateComponent
             
           }
-        ] */
+        ] 
    
   },
+  {
+    path: 'payroll/deductionschedule/deductionschedules',
+    component:PayrolldeductionscheduleCreatelistComponent,
+    outlet: 'main'
+      
+   
+  },
+
   { path: 'error', component: ErrorpageComponent,outlet: 'main' },
   { path: '**', component: NotfoundpageComponent, pathMatch: 'full' },
 ];

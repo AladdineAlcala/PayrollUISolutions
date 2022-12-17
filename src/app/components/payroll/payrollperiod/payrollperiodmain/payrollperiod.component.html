@@ -1,0 +1,35 @@
+
+<div class="container-fluid mt-3">
+
+    <div class="border rounded-2 shadow component-vh" id="main-component-container">
+
+         <!--header-->
+         <app-title-header [title_head]="title"></app-title-header>
+
+        <div class="row row-cols-lg-2">
+
+            <div class="col-sm-6">
+
+                <div class="p-2" id="comp-container">
+                    <app-payrollperiodlist [payrollperiodlist$]="payrolperiods$" [heads]="heads" >
+                 
+                    </app-payrollperiodlist>
+                </div>
+
+            
+
+            </div>
+        
+
+            <div class="col-sm-6">
+
+               <div class="p2" id="comp-container">
+                <router-outlet> </router-outlet>
+               </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

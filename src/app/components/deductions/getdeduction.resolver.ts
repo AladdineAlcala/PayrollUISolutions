@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot,
 } from '@angular/router';
-import { catchError, delay, Observable, of, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, of, throwError } from 'rxjs';
 import { DeductionDetails } from 'src/app/models/deductiondetails';
 import { DeductionService } from 'src/app/services/deduction.service';
 
@@ -24,6 +24,8 @@ export class GetdeductionResolver implements Resolve<DeductionDetails[]> {
     | DeductionDetails[] {
     return this.deductionService.getdeductions$.pipe(
       delay(2000),
+      map(data=> data.result as DeductionDetails[]),
+    
       catchError((error) => {
         this.router.navigate(['/error']);
         // console.info('error has encountered by employee resolver');

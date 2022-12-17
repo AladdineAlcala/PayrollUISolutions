@@ -1,0 +1,12 @@
+
+     <tabset>
+        <tab *ngFor="let tab of tabs" [heading]="tab.heading">
+
+            <div *ngIf="tab.content"> 
+                <div *ngFor="let empde of tab.content">  {{ empde.d_amount }} | {{ empde.employee.fname }} </div>
+                
+            </div>
+        </tab>
+    </tabset>
+
+   <!--  <div *ngFor="let tab of tabs">{{tab.heading}}</div> -->

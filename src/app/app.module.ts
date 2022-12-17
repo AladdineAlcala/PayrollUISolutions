@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpServiceInterceptor } from './interceptors/http-service.interceptor';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 
 import { NavbarComponent } from './shared/widgets/navbar/navbar.component';
 import { EmployeeModule } from './components/employee/employee.module';
@@ -15,25 +16,15 @@ import { HomeComponent } from './components/home/home.component';
 import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
 import { DeductionMainComponent } from './components/deductions/deduction-main/deduction-main.component';
 import { DeductionsidebarComponent } from './components/deductions/deductionsidebar/deductionsidebar.component';
-import { PayrollsidebarComponent } from './components/payroll/payrollsidebar/payrollsidebar.component';
-import { PayrollMainComponent } from './components/payroll/payroll-main/payroll-main.component';
 import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.component';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
-import { PayrollperiodComponent } from './components/payroll/payrollperiod/payrollperiod.component';
-import { PayrollperiodlistComponent } from './components/payroll/payrollperiod/payrollperiodlist/payrollperiodlist.component';
-import { TableBootstrapComponent } from "./shared/widgets/table-bootstrap/table-bootstrap.component";
-import { DynamictransformPipe } from './pipes/dynamictransform.pipe';
 import { ButtonLoadingComponent } from './shared/widgets/button-loading/button-loading.component';
 import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
-import { PayrollperiodCreateComponent } from './components/payroll/payrollperiod-create/payrollperiod-create.component';
 import { LoaderComponent } from './shared/widgets/loader/loader.component';
+import { SharedModule } from './shared/widgets/shared.module';
+import { PayrollModule } from './components/payroll/payroll.module';
+import { DatePipe } from '@angular/common';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import {MatNativeDateModule} from '@angular/material/core';
-
-import { PayrollDeductionScheduleComponent } from './components/payroll/payrolldeductionschedule/payrolldeductionschedule.component';
 
 
 @NgModule({
@@ -45,27 +36,20 @@ import { PayrollDeductionScheduleComponent } from './components/payroll/payrolld
         DeductionCreateComponent,
         NavbarComponent,
         DeductionsidebarComponent,
-        PayrollMainComponent,
-        PayrollsidebarComponent,
         DeductionMainComponent,
         AttendanceMainComponent,
         AttendanceSidebarComponent,
-        PayrollperiodComponent,
-        PayrollperiodlistComponent,
-        TableBootstrapComponent,
-        DynamictransformPipe,
         ButtonLoadingComponent,
         SidebarComponent,
-        PayrollperiodCreateComponent,
         LoaderComponent,
-        PayrollDeductionScheduleComponent
-     
     ],
     providers: [
+        DatePipe,
         { provide: HTTP_INTERCEPTORS, useClass: HttpServiceInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
     imports: [
+
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
@@ -73,9 +57,9 @@ import { PayrollDeductionScheduleComponent } from './components/payroll/payrolld
         ReactiveFormsModule,
         EmployeeModule,
         MatProgressSpinnerModule,
-        MatDatepickerModule,
-        MatFormFieldModule,
-        MatNativeDateModule
+        PayrollModule,
+        SharedModule
+       
     ]
 })
 export class AppModule { }

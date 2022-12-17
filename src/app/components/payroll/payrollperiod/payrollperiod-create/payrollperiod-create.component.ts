@@ -12,7 +12,7 @@ import {
   PayrollPeriod,
 } from 'src/app/models/payrollperiod';
 import { DatePipe } from '@angular/common';
-import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store.service';
+import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
 
 @Component({
@@ -24,15 +24,15 @@ export class PayrollperiodCreateComponent implements OnInit, OnDestroy {
   optmode: string = '';
   allow: boolean = false;
   lastId!: number;
+
   payrollperiodForm!: FormGroup;
+  
   payperiod$!:Observable<PayrollPeriod[]>;
 
   payperiodsubs: Subscription = new Subscription();
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
     private payperiodStore: PayrollPeriodStore
   ) {
     this.initForm();

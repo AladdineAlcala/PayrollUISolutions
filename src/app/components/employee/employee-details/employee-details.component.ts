@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { catchError, EMPTY, map, Observable, Subscription } from 'rxjs';
-import { DeductionDetails } from 'src/app/models/deductiondetails';
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 

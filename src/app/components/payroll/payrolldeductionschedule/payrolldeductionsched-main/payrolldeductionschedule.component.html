@@ -4,16 +4,18 @@
     <div class="border rounded-2 shadow component-vh" id="main-component-container">
 
          <!--header-->
-         <app-title-header [title]="title"></app-title-header>
+         <app-title-header [title_head]="title"></app-title-header>
 
         <div class="row row-cols-lg-2">
 
-            <div class="col-sm-6">
+            <div class="col-sm-7">
 
                 <div class="p-2" id="comp-container">
-                    <app-payrollperiodlist [payrollperiodlist$]="payrolperiods$" [heads]="heads" >
-                 
-                    </app-payrollperiodlist>
+
+                    <payrolldeductionsched-table>
+
+                    </payrolldeductionsched-table>
+
                 </div>
 
             
@@ -21,7 +23,7 @@
             </div>
         
 
-            <div class="col-sm-6">
+            <div class="col-sm-5">
 
                <div class="p2" id="comp-container">
                 <router-outlet> </router-outlet>

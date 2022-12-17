@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DeductionDataService } from 'src/app/services/deduction-data.service';
 import { DeductionDetails } from 'src/app/models/deductiondetails';
-import { EmpDeductionSettings } from 'src/app/models/employeedeductions';
+import { EmpDeductionSettings } from 'src/app/models/employeedeductionsettings';
 import { IDeductionEmployee } from 'src/app/models/employeedeductionsManipulation';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { EmployeeDataService } from '../../../../../services/employee-data.service';

@@ -25,7 +25,7 @@ export class DeductionMainComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.deductionList$=this.deductionService.getdeductions$.pipe(map(result => result))
+    this.deductionList$=this.deductionService.getdeductions$.pipe(map(data => data.result))
 
   }
 
