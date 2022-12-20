@@ -1,14 +1,16 @@
+import { PeriodDeductionSchedule } from "./perioddeductionschedule";
 
 export interface PayrollPeriod{
 
-    pNo:number;
+    pp_id:number;
 
     strtpd_d:Date;
   
     endpd_d:Date;
   
     prlYear:number;
-
+   
+    PeriodDeductionSchedules?:PeriodDeductionSchedule[]
   }
 
   export interface createPayrollPeriod{

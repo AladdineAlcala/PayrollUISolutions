@@ -1,4 +1,12 @@
-export class Position{
-    pos_Id:number=0;
-    positionName:string="";
+import { Employee } from "./employee";
+
+
+
+export interface Position{
+
+    pos_Id:number;
+    positionName:string;
+
+    Employees:Employee[];
+    
 }

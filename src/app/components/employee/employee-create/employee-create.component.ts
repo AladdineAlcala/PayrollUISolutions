@@ -67,7 +67,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
     bankpayrollaccn: '',
     bankaccNo: '',
     pos_Id: '',
-    position: Position,
+    position:{}as Position,
   };
 
   ngOnInit(): void {
@@ -88,9 +88,10 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
   }
 
   register(empForm: NgForm): void {
-    // console.log(this.employeeModel);
 
-    if (empForm.valid) {
+     console.log(empForm.value);
+
+if (empForm.valid) {
 
       this.new_created_employee$ = this.empservice.AddEmployee(empForm.value);
       //empForm.reset();
@@ -109,7 +110,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
 
     } else {
       console.log('required fields needed encounter');
-    }
+    } 
   }
 
   onDropDownPositionChange(e: any) {

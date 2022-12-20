@@ -62,7 +62,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     bankpayrollaccn: '',
     bankaccNo: '',
     pos_Id: '',
-    position: Position,
+    position:{}as Position
   };
 
   ngOnInit(): void {

@@ -1,0 +1,6 @@
+.table > :not(:first-child) {
+    border-top:0;
+}
+mat-icon{
+    cursor: pointer;
+}

@@ -57,10 +57,12 @@ export class EmployeeService {
  
    
   /**
-   * AddEmployee
+   * AddEmployee :Observable<Employee>
  */
   public AddEmployee(employee:Employee):Observable<Employee> {
-    return this.addEmployee(employee);
+
+    console.log(employee);
+   return this.addEmployee(employee);
   }
 
   private addEmployee(emp:Employee){

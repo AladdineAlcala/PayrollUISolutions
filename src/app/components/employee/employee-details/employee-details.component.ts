@@ -44,7 +44,7 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
     //this.empId=this.activatedRoute.snapshot.paramMap.get('id')!;
 
     this.activatedRoute.params.subscribe((params: Params) => {
-      // console.log(params);
+     //  console.log(params);
 
       this.empId = params['id'];
 

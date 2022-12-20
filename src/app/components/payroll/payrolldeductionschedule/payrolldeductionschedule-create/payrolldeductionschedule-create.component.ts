@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Observable, Subject, Subscription } from 'rxjs';
@@ -7,13 +7,15 @@ import { NotificationMessageService } from 'src/app/services/notification.servic
 import { PeriodDeductionScheduleService } from 'src/app/services/perioddeductionscheduled.service';
 import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store';
 import { DatePipe } from '@angular/common'
+import { PayrollDeductionScheduleStore } from 'src/app/store/payrolldeductionschedule.store';
+import { PeriodDeductionSchedule } from 'src/app/models/perioddeductionschedule';
 
 @Component({
   selector: 'app-payrolldeductionschedule-create',
   templateUrl: './payrolldeductionschedule-create.component.html',
   styleUrls: ['./payrolldeductionschedule-create.component.css'],
 })
-export class PayrolldeductionscheduleCreateComponent  implements OnDestroy {
+export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestroy {
   optmode: string = 'add';
 
   deductionscheduleForm!: FormGroup;
@@ -26,6 +28,9 @@ export class PayrolldeductionscheduleCreateComponent  implements OnDestroy {
 
   payrollperiod!:PayrollPeriod;
 
+  payrolldeductionschedtranslist$!:Observable<PeriodDeductionSchedule[]>
+
+
   constructor(
     private fb: FormBuilder,
     private service: PeriodDeductionScheduleService,
@@ -33,10 +38,17 @@ export class PayrolldeductionscheduleCreateComponent  implements OnDestroy {
     private router:Router,
     private activatedRoute:ActivatedRoute,
     private payrollperiodStore:PayrollPeriodStore,
+    private payrolldeductionscheduleStore:PayrollDeductionScheduleStore,
     public datepipe: DatePipe
+
   ) {
     this.initForm();
     
+  }
+  ngOnInit(): void {
+    this.payrolldeductionschedtranslist$=this.payrolldeductionscheduleStore.select(state=> state.payrolldeductionschedtranslist);
+
+    this.payrolldeductionschedtranslist$.subscribe(result => console.log(result));
   }
 
 
@@ -52,6 +64,7 @@ export class PayrolldeductionscheduleCreateComponent  implements OnDestroy {
   /**submit form */
   onSubmitForm() {
     if (this.optmode == 'add') {
+
       if (this.deductionscheduleForm.valid) {
         /** call httpservice */
 
@@ -68,19 +81,22 @@ export class PayrolldeductionscheduleCreateComponent  implements OnDestroy {
                 );
                 this.errorMessage = this.notificationservice.errormessage$;
               } else {
-                // navigate to deduction list
+                      // navigate to deduction list
 
-                //1. get payroll period details and pass it to next page as a parameter
+                      //1. get payroll period details and pass it to next page as a parameter
 
-                const payperiod$ = this.payrollperiodStore.select((state) => state.payrollperiods);
+                      const payperiod$ = this.payrollperiodStore.select((state) => state.payrollperiods);
 
-                 payperiod$.pipe(map(data=> data.find((p:PayrollPeriod) => p.pNo===pNo))).subscribe(result =>{
+                      //payperiod$.subscribe(result => console.warn(result));
 
-                  this.payrollperiod=result!
+                      payperiod$.pipe(map(data=> data.find((p:PayrollPeriod) => p.pp_id===pNo))).subscribe(result =>{
 
-                 });
+                          this.payrollperiod=result!
 
-                
+                      }); 
+
+                   
+                     
                         // path: 'payroll/deductionschedule/deductionschedules',
                         this.router.navigate(
                           [
@@ -88,7 +104,7 @@ export class PayrolldeductionscheduleCreateComponent  implements OnDestroy {
                             { outlets: { main: ['payroll', 'deductionschedule', 'deductionschedules'] } },
                           ],
                           {
-                            queryParams: {period: this.payrollperiod.pNo,from: this.datepipe.transform(this.payrollperiod.strtpd_d,'yyyy-MM-dd'),to: this.datepipe.transform(this.payrollperiod.endpd_d,'yyyy-MM-dd')},
+                            queryParams: {period: this.payrollperiod.pp_id,from: this.datepipe.transform(this.payrollperiod.strtpd_d,'yyyy-MM-dd'),to: this.datepipe.transform(this.payrollperiod.endpd_d,'yyyy-MM-dd')},
                             relativeTo: this.activatedRoute,
                           }
                         );

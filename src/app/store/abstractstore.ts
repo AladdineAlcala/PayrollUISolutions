@@ -1,5 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, distinctUntilChanged, map, Observable } from "rxjs";
+import { initialState } from "../models/payrollperiod";
 
 @Injectable({providedIn:'root'})
 export abstract class BaseStore<T>{
@@ -21,6 +22,8 @@ export abstract class BaseStore<T>{
     get state$():Observable<T>{
         return this._state.asObservable()
     }
+
+ 
 
   /*   protected setState(nextState:T):void{
         this._state.next(nextState);

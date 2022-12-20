@@ -17,7 +17,7 @@ export class PayrollperiodComponent implements OnInit {
   payrolperiods$!: Observable<PayrollPeriod[]>;
 
   heads: any[] = [
-    { Head: 'Period No', FieldName: 'pNo', FieldType: 'number' },
+    { Head: 'Period No', FieldName: 'pp_id', FieldType: 'number' },
     { Head: 'Start Date', FieldName: 'strtpd_d', FieldType: 'date' },
     { Head: 'End Date', FieldName: 'endpd_d', FieldType: 'date' },
     { Head: 'Year Period', FieldName: 'prlYear', FieldType: 'number' },
@@ -32,7 +32,8 @@ export class PayrollperiodComponent implements OnInit {
    
   // this.payrolperiodStore.load_initialState()
    this.payrolperiods$= this.payrolperiodStore.state$.pipe(map(state => state.payrollperiods));
-
+   
+  // this.payrolperiods$.subscribe(data=> console.log(data));
   }
 
   

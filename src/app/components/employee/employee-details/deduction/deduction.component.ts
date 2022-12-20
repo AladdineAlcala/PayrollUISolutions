@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { filter, map, merge, mergeMap, Observable, of, Subscription} from 'rxjs';
-import { Employee } from 'src/app/models/employee';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, Subscription} from 'rxjs';
 import { EmpDeductionSettings } from 'src/app/models/employeedeductionsettings';
 import { EmployeeDataService } from '../../../../services/employee-data.service';
 

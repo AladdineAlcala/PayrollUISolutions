@@ -1,18 +1,22 @@
 import { DeductionDetails } from "./deductiondetails"
 import { Employee } from "./employee"
+import {PayrollPeriodTransaction} from "./payrollperiodtransaction"
 
-export class EmpDeductionSettings{
+export interface EmpDeductionSettings{
 
-    empDeduction_ID:number=0;
-    emp_ID:string=" ";
-    d_Id:string= " ";
-    d_amount:number =0;
-    is_Active:boolean=false;
+    empdeduction_Id:string;
+    emp_Id:string;
+    deduction_Id:string;
+    d_amount:number;
+    is_active:boolean;
     
-    employee:Employee={ } as Employee;
-    deductionDetails:DeductionDetails={ } as DeductionDetails;
+    employee:Employee;
+    deductionDetails:DeductionDetails;
 
-    createdOn:Date=new Date();
-    updatedOn:Date=new Date();
-    lastAccessed:Date=new Date();
+    createdOn?:Date;
+    updatedOn?:Date;
+    lastAccessed?:Date;
 }
+
+
+

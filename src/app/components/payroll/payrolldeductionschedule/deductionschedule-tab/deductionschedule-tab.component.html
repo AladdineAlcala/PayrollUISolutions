@@ -1,12 +1,68 @@
 
-     <tabset>
-        <tab *ngFor="let tab of tabs" [heading]="tab.heading">
 
-            <div *ngIf="tab.content"> 
-                <div *ngFor="let empde of tab.content">  {{ empde.d_amount }} | {{ empde.employee.fname }} </div>
-                
-            </div>
-        </tab>
+<div class="mt-4">
+    
+  <tabset>
+      <tab #staticTabs *ngFor="let tab of tabs"  [heading]="tab.heading" (selectTab)="onSelect($event)">
+    
+        <ng-template tabHeading>
+    
+            <span class="ms-2 badge bg-primary">{{tab.content.length}}</span>
+          
+        </ng-template>
+    
+        <div class="mx-auto bg-light" *ngIf="tab.content" >
+      
+              <!--TO BE ADDED FEATURE -->
+              <!--     matSort (matSortChange)="sortData($event)" -->
+             <!--  {{tab.content|json}} -->
+  
+             
+            <table class="py-3 table table-striped table-hover border-start border-end border-bottom">
+                <thead>
+                    <tr>
+                        <th>EMP ID</th>
+                        <th>FIRSTNAME</th>
+                        <th>LASTNAME</th>
+                        <th class="th-sm">DEDUCTION</th>
+                        <th class="th-sm">ACTUAL DEDUCTION</th>
+                        <th class="text-center">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let empde of tab.content">
+                        <td> {{empde.emp_Id }}</td>
+                        <td> {{empde.employee.fname }}</td>
+                        <td> {{empde.employee.lname }}</td>
+                        <td class="text-start"> {{empde.d_amount|currency:"PHP":"symbol"}}</td>
+                        <td class="text-start">
+
+                          <div *ngIf="iseditmode">
+                            <input type="text" class="form-control text-end" [(ngModel)]="empde.d_amount" />
+                          </div>
+
+                          <div *ngIf="!iseditmode">
+                            {{empde.d_amount|currency:"PHP":"symbol"}}
+                          </div>
+                          
+
+                        </td>
+                        <td class="d-flex text-center justify-content-around">
+
+                          <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="edit" (click)="editDeductionSchedule(empde)"></mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="delete"></mat-icon>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    
+          <!--   <div *ngFor="let head of heads">{{head.Head}}</div> -->
+          <!--  <div *ngFor="let empde of tab.content">  {{ empde.d_amount }} | {{ empde.employee.fname }} </div> -->
+    
+        </div>
+    
+      </tab>
     </tabset>
-
-   <!--  <div *ngFor="let tab of tabs">{{tab.heading}}</div> -->
+  </div>
+  

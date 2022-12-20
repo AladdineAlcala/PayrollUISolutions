@@ -80,10 +80,10 @@ export class DeductionCreateUpdateEmployeeComponent implements OnInit {
             console.log(this.createemployeedeductionForm.status);
         
             const employeededuction={
-                emp_ID:this.empId,
-                d_Id:this.createemployeedeductionForm.value.deductiondetail.d_Id,
+                emp_Id:this.empId,
+                deduction_Id:this.createemployeedeductionForm.value.deductiondetail.deduction_Id,
                 d_amount:this.createemployeedeductionForm.value.deductionAmount,
-                is_Active:this.createemployeedeductionForm.value.is_Active,
+                is_active:this.createemployeedeductionForm.value.is_Active,
               // empDeduction_ID:0
                 }
         

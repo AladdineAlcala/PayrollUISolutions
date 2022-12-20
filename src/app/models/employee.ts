@@ -5,7 +5,7 @@ import { Position } from "./position"
 
 export class Employee{
 
-    emp_ID:string="";
+    emp_Id:string="";
     lname:string="";
     middle:string="";
     fname:string="";

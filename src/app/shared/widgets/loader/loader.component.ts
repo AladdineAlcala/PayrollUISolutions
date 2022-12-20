@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
@@ -8,8 +8,11 @@ import { LoadingService } from 'src/app/services/loading.service';
 })
 export class LoaderComponent {
   
+  message:string="";
+
   loading$=this.loadingService.loading$;
-  
+  message$=this.loadingService.message$
+
   constructor(public loadingService:LoadingService) {
 
     //this.loadingService.loadingOn()

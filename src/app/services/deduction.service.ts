@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, shareReplay, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {DeductionDetails} from '../models/deductiondetails'
 import { Employee } from '../models/employee';
@@ -20,16 +20,16 @@ export class DeductionService {
 
   }
 
-  getdeductions$=this.getAll();
+  //getdeductions$=this.getAll();
 
-  private getAll():Observable<ResponseDTO>{
+  public getAllDeductionDetails(){
     return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`)
-    .pipe(map(data=> data)
+    .pipe(map(data=> data),
+    shareReplay()
     ,
     catchError(this.handleError)
     )
   }
-
 
 
 

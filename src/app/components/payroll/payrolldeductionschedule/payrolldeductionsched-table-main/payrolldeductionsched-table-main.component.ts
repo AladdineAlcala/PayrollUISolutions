@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'payrolldeductionsched-table',
-  templateUrl: './payrolldeductionsched-table.component.html',
-  styleUrls: ['./payrolldeductionsched-table.component.css']
+  templateUrl: './payrolldeductionsched-table-main.component.html',
+  styleUrls: ['./payrolldeductionsched-table-main.component.css']
 })
 export class PayrolldeductionschedTableComponent {
 

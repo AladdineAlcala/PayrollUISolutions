@@ -1,32 +1,49 @@
-
 <div class="container-fluid mt-3">
 
-    <div class="border rounded-2 shadow component-vh" id="main-component-container">
+  <div class="border rounded-2 shadow component-vh" id="main-component-container">
 
-         <!--header-->
-         <app-title-header [title_head]="title"></app-title-header>
-        
-         <div class="row">
+    <!--header-->
+    <app-title-header [title_head]="title"></app-title-header>
 
-            <div class="col-sm-12">
-        
-                <!--add content here --->
-                
-                <div class="m-4 w-auto">
-                    <div class="pt-3 px-2">
-                        <deductionschedule-tab [deductionslist$]="empdeductionlist$">
+    <div class="row">
 
-                        </deductionschedule-tab>
-                      </div>
-                </div>
-        
-            
-        
-            </div>
-        
+      <div class="col-sm-12">
+
+        <!--add content here --->
+
+        <div class="m-2 pt-3 px-2 w-auto h-100">
+
+          <mat-card >
+            <mat-card-header>
+              <mat-card-title>List of Deduction Schedules </mat-card-title>
+
+            </mat-card-header>
+           
+            <mat-card-content>
+
+              <deductionschedule-tab [deductionslist$]="empdeductionlist$">
+
+              </deductionschedule-tab>
+
+            </mat-card-content>
+            <mat-card-actions align="end" class="me-2">
+                <button 
+                mat-flat-button 
+                color="primary"
+                (click)="onSavePayrollDeductionTrans()">
+                {{(hasSave$|async)==true? "Delete" : "Save"}}
+              </button>
+            </mat-card-actions>
+          </mat-card>
+
         </div>
-        
-         
-    </div>
-</div>
 
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

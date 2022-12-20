@@ -80,6 +80,6 @@ export class EmployeeComponent implements OnInit {
 
   /*     Selected Event */
   OnselectedEmp(emp: Employee): void {
-    this.router.navigate(['',{outlets:{main:['employees', emp.emp_ID,'profile']}}], {relativeTo: this.activatedRoute});
+    this.router.navigate(['',{outlets:{main:['employees', emp.emp_Id,'profile']}}], {relativeTo: this.activatedRoute});
   }
 }

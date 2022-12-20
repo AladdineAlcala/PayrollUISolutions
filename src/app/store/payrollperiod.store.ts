@@ -38,14 +38,10 @@ export class PayrollPeriodStore extends BaseStore<PayrollPeriodState> {
     );
   }
 
-/*   getlastid(): Observable<number> {
-    return this.state$.pipe(map((state) => state.payrollperiods.length));
-  } */
 
   load_initialState() {
     this.payrollperiodService.getallpayrollperiod().subscribe((data) => {
      // console.log(data);
-    //  console.log('init state...........');
      this.setState(()=>({ payrollperiods: [...data] }))
     });
   }

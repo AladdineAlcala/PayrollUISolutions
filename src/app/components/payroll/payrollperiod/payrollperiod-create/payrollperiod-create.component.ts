@@ -80,7 +80,7 @@ export class PayrollperiodCreateComponent implements OnInit, OnDestroy {
     if (this.payrollperiodForm.valid) {
       if (this.optmode === 'add') {
         const newPayPeriod: PayrollPeriod = {
-          pNo: this.lastId,
+          pp_id: this.lastId,
           strtpd_d: this.payrollperiodForm.get('daterange.start')?.value!,
           endpd_d: this.payrollperiodForm.get('daterange.end')?.value!,
           prlYear: +this.payrollperiodForm.get('payrollYear')?.value!,

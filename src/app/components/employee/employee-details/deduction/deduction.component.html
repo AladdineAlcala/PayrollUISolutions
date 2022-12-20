@@ -32,12 +32,12 @@
                 <td>
                   <div class="d-flex flex-column">
                     <div> {{deduction.deductionDetails.description}}</div>
-                    <div> active: {{deduction.is_Active?'Active':'False'}}</div>
+                    <div> active: {{deduction.is_active?'Active':'False'}}</div>
                   </div>
 
 
                 </td>
-                <td>{{deduction.deductionDetails.d_type}}</td>
+                <td>{{deduction.deductionDetails.deduction_type}}</td>
                 <td>{{deduction.d_amount| currency:'Php'}}</td>
                 <td>
                   <!-- <button mat-icon-button color="primary">

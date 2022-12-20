@@ -1,5 +1,5 @@
 <div class="spinner-container" *ngIf="loading$|async">
 
-    <mat-spinner [mode]="'indeterminate'" ></mat-spinner>
-
+    <mat-spinner [mode]="'indeterminate'"></mat-spinner>
+    <p style="font-size: 20px; color: white">{{message$|async}}</p>
 </div>

@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -14,12 +14,13 @@ import { PayrollperiodComponent } from "./payrollperiod/payrollperiodmain/payrol
 import { PayrollperiodlistComponent } from "./payrollperiod/payrollperiodlist/payrollperiodlist.component";
 import { PayrollsidebarComponent } from "./payrollsidebar/payrollsidebar.component";
 import { PayrolldeductionscheduleCreateComponent } from './payrolldeductionschedule/payrolldeductionschedule-create/payrolldeductionschedule-create.component';
-import { PayrolldeductionschedTableComponent } from './payrolldeductionschedule/payrolldeductionsched-table/payrolldeductionsched-table.component';
+import { PayrolldeductionschedTableComponent } from './payrolldeductionschedule/payrolldeductionsched-table-main/payrolldeductionsched-table-main.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import {MatCardModule} from '@angular/material/card';
 import { PayrolldeductionscheduleCreatelistComponent } from './payrolldeductionschedule/payrolldeductionschedule-createlist/payrolldeductionschedule-createlist.component';
-import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deductionschedule-tab/deductionschedule-tab.component'; 
+import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deductionschedule-tab/deductionschedule-tab.component';
+import { PayrolldeductionscheduleCreateTableComponent } from './payrolldeductionschedule/payrolldeductionschedule-create-table/payrolldeductionschedule-create-table.component'; 
 
 @NgModule({
     declarations:[
@@ -31,7 +32,8 @@ import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deduct
         PayrolldeductionschedTableComponent,
         PayrolldeductionscheduleCreateComponent,
         PayrolldeductionscheduleCreatelistComponent,
-        DeductionscheduleTabComponent
+        DeductionscheduleTabComponent,
+        PayrolldeductionscheduleCreateTableComponent
     ],
     imports:[
         RouterModule,
@@ -44,6 +46,7 @@ import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deduct
         MatCardModule,
         MatButtonModule,
         SharedModule,
+        FormsModule,
         TabsModule.forRoot()
     ],
     exports:[

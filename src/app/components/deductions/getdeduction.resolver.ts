@@ -22,7 +22,7 @@ export class GetdeductionResolver implements Resolve<DeductionDetails[]> {
     | Observable<DeductionDetails[]>
     | Promise<DeductionDetails[]>
     | DeductionDetails[] {
-    return this.deductionService.getdeductions$.pipe(
+    return this.deductionService.getAllDeductionDetails().pipe(
       delay(2000),
       map(data=> data.result as DeductionDetails[]),
     
