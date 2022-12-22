@@ -19,7 +19,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import {MatCardModule} from '@angular/material/card';
 import { PayrolldeductionscheduleCreatelistComponent } from './payrolldeductionschedule/payrolldeductionschedule-createlist/payrolldeductionschedule-createlist.component';
-import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deductionschedule-tab/deductionschedule-tab.component';
+import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deductionschedule-tab-add/deductionschedule-tab-add.component';
 import { PayrolldeductionscheduleCreateTableComponent } from './payrolldeductionschedule/payrolldeductionschedule-create-table/payrolldeductionschedule-create-table.component'; 
 
 @NgModule({

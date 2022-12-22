@@ -46,9 +46,8 @@ export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestro
     
   }
   ngOnInit(): void {
-    this.payrolldeductionschedtranslist$=this.payrolldeductionscheduleStore.select(state=> state.payrolldeductionschedtranslist);
+    
 
-    this.payrolldeductionschedtranslist$.subscribe(result => console.log(result));
   }
 
 
@@ -63,6 +62,8 @@ export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestro
 
   /**submit form */
   onSubmitForm() {
+
+    
     if (this.optmode == 'add') {
 
       if (this.deductionscheduleForm.valid) {
@@ -101,10 +102,11 @@ export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestro
                         this.router.navigate(
                           [
                             '',
-                            { outlets: { main: ['payroll', 'deductionschedule', 'deductionschedules'] } },
+                            { outlets: { main: ['payroll', 'deductionschedule',this.payrollperiod.pp_id,'add'] } },
                           ],
                           {
-                            queryParams: {period: this.payrollperiod.pp_id,from: this.datepipe.transform(this.payrollperiod.strtpd_d,'yyyy-MM-dd'),to: this.datepipe.transform(this.payrollperiod.endpd_d,'yyyy-MM-dd')},
+                            queryParams: { mode: 'add', allow: true },
+                           // queryParams: {period: this.payrollperiod.pp_id,from: this.datepipe.transform(this.payrollperiod.strtpd_d,'yyyy-MM-dd'),to: this.datepipe.transform(this.payrollperiod.endpd_d,'yyyy-MM-dd')},
                             relativeTo: this.activatedRoute,
                           }
                         );

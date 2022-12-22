@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { catchError, map, Observable, Subscription, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, Subscription, switchMap } from 'rxjs';
 import { DeductionDetails } from '../models/deductiondetails';
+import { DeductionScheduleTrans, EmpDeductionTransaction } from '../models/deductionscheduletransaction';
 import { EmpDeductionSettings } from '../models/employeedeductionsettings';
 import { PayrollDeductionTrans } from '../models/payrolldeductionscheduletransactions';
 import {
@@ -17,24 +18,22 @@ interface PayrollDeductionScheduleState {
   employeedeductiondetails: DeductionDetails[];
   empdeductionsettings: EmpDeductionSettings[];
   payrolldeductionschedtrans: PeriodDeductionSchedule;
-   payrolldeductionschedtranslist: PeriodDeductionSchedule[];
+  payrolldeductionschedtranslist: PeriodDeductionSchedule[];
   payrolldeductionTrans: PayrollDeductionTrans[];
   payrollperiodtranscreate: PayrollPeriodTransactionCreateDTO;
   hasSave: boolean;
 }
 
-
 /** Important Note:
  * employeedeductiondetails: [{} as DeductionDetails]  <------------- can cause error to initial state become undefined */
-
 
 const initialState: PayrollDeductionScheduleState = {
   isloading: false,
   hasSave: false,
-  employeedeductiondetails: [], 
+  employeedeductiondetails: [],
   empdeductionsettings: [],
   payrolldeductionschedtrans: {} as PeriodDeductionSchedule,
-  payrolldeductionschedtranslist:[],
+  payrolldeductionschedtranslist: [],
   payrolldeductionTrans: [],
   payrollperiodtranscreate: {} as PayrollPeriodTransactionCreateDTO,
 };
@@ -57,15 +56,57 @@ export class PayrollDeductionScheduleStore
     super(initialState);
   }
 
-  load_payrolldeductionschedtranslist(){
-    
-   return this.periodDeductionService.getallperioddeductiontransschedule().pipe(map(data => {
-        if(data.isSuccess){
-          this.setState(()=> ({payrolldeductionschedtranslist:[...data.result]}))
-        }
-   }))
-
+  load_payrolldeductionschedtranslist() {
+    return this.periodDeductionService
+      .getallperioddeductiontransschedule()
+      .pipe(
+        map((data) => {
+          if (data.isSuccess) {
+            // console.log(data);
+            this.setState(() => ({
+              payrolldeductionschedtranslist: [...data.result],
+            }));
+            return data.result;
+          }
+        })
+      );
   }
+
+  loadperioddeductiontransactionbypayroll(payrollperiod: number) {
+    
+     
+
+     return this.periodDeductionService
+      .getperioddeductiontransactionbypayroll(payrollperiod)
+      .pipe(
+        map((data) => {
+
+          if(data.isSuccess){
+  
+            //set to state 
+          
+            return data.result
+          
+          }
+
+          return EMPTY
+          
+        })
+      );
+  }
+
+  load_deductiondetails(){
+    return this.deductionService
+          .getAllDeductionDetails()
+          .pipe(map((data) =>{
+            this.setState(()=> ({employeedeductiondetails:[...data.result]}))
+            return data.result;
+
+          }) );
+   
+  
+  }
+
 
 
   load_deductionschedule(pNo: number) {

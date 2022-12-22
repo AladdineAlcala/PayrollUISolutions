@@ -10,8 +10,6 @@ import { ResponseDTO } from "../models/ResponseDTO";
 export class PeriodDeductionScheduleService{
     
     url:string=" ";
-
-
     constructor( private http:HttpClient) {}
     
     public GetDeductionById(payNo:number){
@@ -56,11 +54,15 @@ export class PeriodDeductionScheduleService{
     }
     
 
+    /**
+     * https://localhost:7023/api/perioddeductionschedule 
+     * 
+     * */
     getallperioddeductiontransschedule(){
-
+      //console.log('test call from service load');
       this.url="perioddeductionschedule"
-
-      return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`)  //https://localhost:7023/api/perioddeductionschedule
+   
+      return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`)  
       .pipe(
           map((data) => data),
           catchError(this.handleError)
@@ -68,10 +70,30 @@ export class PeriodDeductionScheduleService{
 
     }
 
+
+
+    /**get all data from period deduction schedule 
+     * 
+     * https://localhost:7023/api/perioddeductionschedule/_getPerodDeductionByPayrollId/1
+    */
+    getperioddeductiontransactionbypayroll(pp_Id:number){
+
+      this.url="perioddeductionschedule"
+
+      return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/_getPerodDeductionByPayrollId/${pp_Id}`)  
+      .pipe(
+          map((data) => data),
+          catchError(this.handleError)
+        );
+
+    }
+
+
     handleError(error: Error) {
         return throwError(() => {
           return 'Unknown Error occured..Please try again';
         });
       }
-  
+   
 }
+

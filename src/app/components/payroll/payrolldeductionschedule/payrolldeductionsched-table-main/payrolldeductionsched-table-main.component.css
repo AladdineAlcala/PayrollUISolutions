@@ -1,3 +1,16 @@
 .deductionschedcard{
-  max-width: 700px;
+  width: 860px;
+  height: 70vh;
+}
+
+mat-card{
+  display: flex;
+  flex-direction:column;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin: auto 0 0;
+}
+
+mat-card-actions{
+  margin: auto 0 0;
 }

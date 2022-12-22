@@ -148,7 +148,14 @@ const approutes: Routes = [
    
   },
   {
-    path: 'payroll/deductionschedule/deductionschedules',
+    path: 'payroll/deductionschedule/:_payperiod/add',
+    component:PayrolldeductionscheduleCreatelistComponent,
+    outlet: 'main'
+      
+   
+  },
+  {
+    path: 'payroll/deductionschedule/:_payperiod/view',
     component:PayrolldeductionscheduleCreatelistComponent,
     outlet: 'main'
       
