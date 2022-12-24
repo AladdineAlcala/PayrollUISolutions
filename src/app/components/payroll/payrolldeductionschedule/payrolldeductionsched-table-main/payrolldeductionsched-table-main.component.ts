@@ -44,6 +44,7 @@ export class PayrolldeductionschedTableComponent implements OnInit {
         )
       );
   }
+   
 
   onviewPayrollDeduction(item: any) {
     // const {payroll_period}=item.map((i:any) => i.payroll_period)

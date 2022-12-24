@@ -35,7 +35,6 @@ export class DeductionscheduleTabComponent implements OnInit {
 
   empdeductionsettings$!: Observable<EmpDeductionSettings[]>;
 
-  grids!: Observable<any[]>;
 
   payrolldeductionTrans!: PayrollDeductionTrans[];
 
@@ -44,27 +43,14 @@ export class DeductionscheduleTabComponent implements OnInit {
   value?: string;
 
   iseditmode: boolean = false;
-
   paramsMode: string = '';
-
   pp_Id!: number;
 
   constructor(
     private ref: ChangeDetectorRef,
-    private activatedRoute: ActivatedRoute,
     private payrolldeductionscheduleStore: PayrollDeductionScheduleStore
   ) {
     this.tabs = [];
-
-    const comobs = combineLatest([
-      this.activatedRoute.params,
-      this.activatedRoute.queryParams,
-    ]);
-
-    comobs.subscribe(([params, queryParams]) => {
-      this.paramsMode = queryParams['mode'];
-      this.pp_Id = +params['_payperiod'];
-    });
   }
 
   ngOnInit(): void {
@@ -72,25 +58,14 @@ export class DeductionscheduleTabComponent implements OnInit {
 
     this.payrolldeductionscheduleStore.emptydeductionsetting();
 
-    if (this.paramsMode === 'edit')
-     {
-
-     
-
-
-    }
-     else {
-
-      this.deductionslist$
+    this.deductionslist$
       .pipe(
         map((deductions) =>
           deductions.filter((t) => t.empDeductionSettings.length > 0)
         )
       )
       .subscribe((result) => {
-        
         result.map((t) => {
-
           this.payrolldeductionscheduleStore.addempdeductionsetting([
             ...(this.empdeductions || []),
             ...t.empDeductionSettings,
@@ -100,26 +75,19 @@ export class DeductionscheduleTabComponent implements OnInit {
             heading: t.description,
             content: t.empDeductionSettings,
           };
-      
-    
+
           this.tabs = [...this.tabs, newTab];
-
-        })
-
-        
-      })
-        
-    }
+        });
+      });
   }
 
   onSelect(data: TabDirective) {
     this.value = data.heading;
     console.log(data.heading);
   }
-  
+
   editDeductionSchedule(item: any) {
     console.log(item);
-    this.iseditmode = true;
+    // this.iseditmode = true;
   }
-
 }

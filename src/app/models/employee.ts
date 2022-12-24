@@ -43,3 +43,14 @@ export interface EmployeeResolved{
     employee: Observable<Employee[]>;
     error:any;
 }
+
+export interface EmployeeListDisplay{
+    emp_Id:string;
+    lname:string;
+    fname:string;
+    empstatus:string;
+    contact:string;
+    address:string;
+    position:string;
+
+}

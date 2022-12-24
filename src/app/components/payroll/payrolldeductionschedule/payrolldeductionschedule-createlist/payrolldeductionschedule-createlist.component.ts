@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { combineLatest, delay, first, forkJoin, map, Observable, switchMap } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { combineLatest, delay, first, forkJoin, map, Observable, switchMap, take } from 'rxjs';
 import { DeductionDetails } from 'src/app/models/deductiondetails';
 import { DeductionScheduleTrans, EmpDeductionTransaction } from 'src/app/models/deductionscheduletransaction';
 import { EmpDeductionSettings } from 'src/app/models/employeedeductionsettings';
@@ -9,6 +10,7 @@ import {
 
   PeriodDeductionScheduleForCreationDTO,
 } from 'src/app/models/payrollperiodtransaction';
+import { PeriodDeductionSchedule } from 'src/app/models/perioddeductionschedule';
 
 import { EmployeeDeductionsScheduleService } from 'src/app/services/employeedeductionschedule.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -19,12 +21,13 @@ import { PayrollDeductionScheduleStore } from 'src/app/store/payrolldeductionsch
   selector: 'app-payrolldeductionschedule-createlist',
   templateUrl: './payrolldeductionschedule-createlist.component.html',
   styleUrls: ['./payrolldeductionschedule-createlist.component.css'],
+ // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
   title: string = 'Payroll Deduction Schedule';
 
   empdeductionlist$!: Observable<DeductionDetails[]>;
-
+ 
   hasSave$: Observable<boolean> = new Observable<boolean>();
 
   payrolldeductionTrans!: PayrollDeductionTrans[];
@@ -35,12 +38,17 @@ export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
   pp_Id!:number;
   paramsMode!:string
 
+  jointdeductiondetails$!: Observable<DeductionScheduleTrans[]>;
+
+ 
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private loadingService: LoadingService,
+    private loadingspinner: NgxSpinnerService,
     private perioddeuctionservice: EmployeeDeductionsScheduleService,
     private payrollperioddeductionservice: PeriodDeductionScheduleService,
-    private payrolldeductionscheduleStore: PayrollDeductionScheduleStore
+    private payrolldeductionscheduleStore: PayrollDeductionScheduleStore,
+    private ref: ChangeDetectorRef,
   ) {
     this.payrolldeductionTrans = [];
 
@@ -66,89 +74,28 @@ export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
       this.empdeductionlist$=this.payrolldeductionscheduleStore.load_deductionschedule(this.pp_Id)
 
     // this.empdeductionlist$= this.payrolldeductionscheduleStore.select((state) => state.employeedeductiondetails);
-  
+    
+
       this.hasSave$ = this.payrolldeductionscheduleStore.select(
         (state) => state.hasSave
       );
 
-     // this.empdeductionlist$.subscribe(t=> console.log(t))
-
-/* 
-      this.empdeductionlist$
-      .pipe(
-        map((deductions) =>
-          deductions.filter((t) => t.empDeductionSettings.length > 0)
-        )
-      ) */
-          //this.empdeductions=[...(this.empdeductions|| []),...t.empDeductionSettings]
-          // const newpayrolldeductionTrans:PayrollDeductionTrans={pNo:this.payrollperiod,emp_ID:}
-
-         
-
-          // this.payrolldeductionscheduleStore
-          //  this.loadingservice.loadingOff();
-      
-
-        //this.ref.detectChanges();
-
-
-
     }
     /** EDIT MODE */
     else{
-
-      let obs2$ =this.payrolldeductionscheduleStore.loadperioddeductiontransactionbypayroll(this.pp_Id);
-
-      let obs1$ = this.payrolldeductionscheduleStore.load_deductiondetails();
-
-      const join$ = forkJoin([obs1$, obs2$]).pipe(
+      
         
-        map(([obs1, obs2]) => {
+        this.payrolldeductionscheduleStore.load_jointdeductiondetails$(this.pp_Id)
+        .pipe(delay(2000)).subscribe();
+       
 
-          let empdeductiontransaction:EmpDeductionTransaction[]=[];
+        this.payrolldeductionscheduleStore.sethasSave();
 
-          const {payrollDeductionTransaction,pdsched_Id,pp_id} =obs2
-
-          payrollDeductionTransaction.map((element:any) => {
-
-            let empdeductiontrans: EmpDeductionTransaction = {
-              prldeductiontrans_Id: element.prldeductiontrans_Id,
-              pdsched_Id:pdsched_Id,
-              deduction_Id:element.deduction_Id,
-              emp_Id: element.emp_Id,
-              emp_First:element.employee.fname,
-              emp_Last:element.employee.lname,
-              deductAmount: element.deductAmount,
-              actualDeductedAmount: element.actualDeductedAmount,
-            };
-
-            empdeductiontransaction.push(empdeductiontrans);
-          })
-
-          let deductionscheduletrans: DeductionScheduleTrans[] = [];
-
-          obs1.map((_mapdata: { deduction_Id: any; description: any }) => {
-
-            let deductionsched: DeductionScheduleTrans = {
-
-              pp_Id:pp_id,
-              pdsched_Id: pdsched_Id,
-              deduction_Id: _mapdata.deduction_Id,
-              description: _mapdata.description,
-            
-            } as DeductionScheduleTrans;
-            deductionscheduletrans.push(deductionsched); 
-          });
-            
-          return [deductionscheduletrans.map(dtrans=>{
-            return{...dtrans,empdeductiontrans:empdeductiontransaction.filter(t=>t.deduction_Id==dtrans.deduction_Id)}
-          })];
-        })
-      );
-
-      join$.subscribe((res) => console.log(res));
-
-
+        this.hasSave$ = this.payrolldeductionscheduleStore.select(
+          (state) => state.hasSave
+        )
+          
+       // this.hasSave$.subscribe(result=>console.log(result))
     }
 
  
@@ -158,9 +105,10 @@ export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
   }
 
   onSavePayrollDeductionTrans() {
+
     const savingloadermessage: string = 'Pls wait while saving record...';
 
-    this.loadingService.loadingOn(savingloadermessage);
+    this.loadingspinner.show();
 
     //route to: Post [Route("api/perioddeductionschedule")]   => PeriodDeductionScheduleServiceController
     //get deduction employee settings
@@ -209,7 +157,7 @@ export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
       ).pipe(delay(3000)).subscribe((result) => {
         if (result.isSuccess) {
          // console.log(result);
-          this.loadingService.loadingOff();
+          this.loadingspinner.hide();
 
           this.payrolldeductionscheduleStore.sethasSave();
 

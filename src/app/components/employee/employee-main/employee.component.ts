@@ -4,9 +4,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {
   BehaviorSubject,
   catchError,
+  delay,
   EMPTY,
   map,
   Observable,
@@ -42,12 +44,15 @@ export class EmployeeComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private loadingspinner: NgxSpinnerService,
     private router:Router
   ) {}
 
   ngOnInit(): void {
+   // this.loadingspinner.show();
     //comes from employee resolver
    this.employee$ = this.activatedRoute.data.pipe(
+    delay(2000),
       map((data: Data) => data?.['employeeresolver']),
       catchError((error) => {
         // console.log(error)

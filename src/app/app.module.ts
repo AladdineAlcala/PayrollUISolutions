@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,10 +20,13 @@ import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.co
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { ButtonLoadingComponent } from './shared/widgets/button-loading/button-loading.component';
 import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
-import { LoaderComponent } from './shared/widgets/loader/loader.component';
 import { SharedModule } from './shared/widgets/shared.module';
 import { PayrollModule } from './components/payroll/payroll.module';
 import { DatePipe } from '@angular/common';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -41,7 +44,7 @@ import { DatePipe } from '@angular/common';
         AttendanceSidebarComponent,
         ButtonLoadingComponent,
         SidebarComponent,
-        LoaderComponent,
+     
     ],
     providers: [
         DatePipe,
@@ -49,17 +52,19 @@ import { DatePipe } from '@angular/common';
     ],
     bootstrap: [AppComponent],
     imports: [
-
+    
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         EmployeeModule,
-        MatProgressSpinnerModule,
         PayrollModule,
-        SharedModule
-       
-    ]
+        SharedModule,
+        NgxSpinnerModule,
+        BrowserAnimationsModule,
+      
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

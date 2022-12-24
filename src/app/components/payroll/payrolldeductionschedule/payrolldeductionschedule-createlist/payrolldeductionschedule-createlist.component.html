@@ -24,6 +24,8 @@
 
                <deductionschedule-tab *ngIf="paramsMode==='add'" [deductionslist$]="empdeductionlist$"></deductionschedule-tab> 
 
+               <app-deductionschedule-tab-edit *ngIf="paramsMode==='edit'" [deductionslist$]="jointdeductiondetails$"></app-deductionschedule-tab-edit>
+
 
             </mat-card-content>
             <mat-card-actions align="end" class="me-2">

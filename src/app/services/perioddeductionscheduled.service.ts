@@ -1,7 +1,9 @@
 import { HttpClient, HttpClientJsonpModule, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, map, Observable, throwError } from "rxjs";
+import { catchError, map, Observable, shareReplay, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
+import { EmpDeductionTransaction } from "../models/deductionscheduletransaction";
+import { PayrollDeductionTransForCreateDTO } from "../models/perioddeductionscheduleForCreationDTO";
 import { ResponseDTO } from "../models/ResponseDTO";
 
 @Injectable({
@@ -83,11 +85,29 @@ export class PeriodDeductionScheduleService{
       return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/_getPerodDeductionByPayrollId/${pp_Id}`)  
       .pipe(
           map((data) => data),
+          shareReplay(),
           catchError(this.handleError)
         );
 
     }
+    
 
+    /** update actual deduction 
+     * 
+     * https://localhost:7023/api/payrollperioddeductionTrans
+     */
+    updateperioddeductiontransschedule_actualdeduction(empdeductiontrans:any){
+
+      this.url="payrollperioddeductionTrans"
+  
+      const body = JSON.stringify(empdeductiontrans);
+      
+      const header = new HttpHeaders()
+      .set('Content-type', 'application/json');
+
+      return this.http.put<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`,body,{headers:header})
+
+    }
 
     handleError(error: Error) {
         return throwError(() => {

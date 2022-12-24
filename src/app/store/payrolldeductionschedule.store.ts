@@ -1,7 +1,19 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { catchError, EMPTY, map, Observable, Subscription, switchMap } from 'rxjs';
+import {
+  catchError,
+  EMPTY,
+  forkJoin,
+  map,
+  Observable,
+  Subscription,
+  switchMap,
+  take,
+} from 'rxjs';
 import { DeductionDetails } from '../models/deductiondetails';
-import { DeductionScheduleTrans, EmpDeductionTransaction } from '../models/deductionscheduletransaction';
+import {
+  DeductionScheduleTrans,
+  EmpDeductionTransaction,
+} from '../models/deductionscheduletransaction';
 import { EmpDeductionSettings } from '../models/employeedeductionsettings';
 import { PayrollDeductionTrans } from '../models/payrolldeductionscheduletransactions';
 import {
@@ -17,9 +29,10 @@ interface PayrollDeductionScheduleState {
   isloading: boolean;
   employeedeductiondetails: DeductionDetails[];
   empdeductionsettings: EmpDeductionSettings[];
-  payrolldeductionschedtrans: PeriodDeductionSchedule;
+  deductionscheduletrans: DeductionScheduleTrans[]; // < ---------------------- used for deduction transaction with payroll periods  included entites [pp_Id , pdsched_Id ,deduction_Id, description , EmpDeductionTransaction[]  used for payroll daduction schedule with payroll period parameter ]
+  payrolldeductionschedtrans: PeriodDeductionSchedule; // < ----------------- raw data from period dedcution schedule  included entities [ pdsched_Id ,pp_id ,PayrollPeriod, PayrollDeductionTrans[]]
   payrolldeductionschedtranslist: PeriodDeductionSchedule[];
-  payrolldeductionTrans: PayrollDeductionTrans[];
+  payrolldeductionTrans: PayrollDeductionTrans[]; //<-----------------------  payroll deduction trans array of
   payrollperiodtranscreate: PayrollPeriodTransactionCreateDTO;
   hasSave: boolean;
 }
@@ -36,6 +49,7 @@ const initialState: PayrollDeductionScheduleState = {
   payrolldeductionschedtranslist: [],
   payrolldeductionTrans: [],
   payrollperiodtranscreate: {} as PayrollPeriodTransactionCreateDTO,
+  deductionscheduletrans: [],
 };
 
 @Injectable({ providedIn: 'root' })
@@ -73,41 +87,34 @@ export class PayrollDeductionScheduleStore
   }
 
   loadperioddeductiontransactionbypayroll(payrollperiod: number) {
-    
-     
+    return this.periodDeductionService
+    .getperioddeductiontransactionbypayroll(payrollperiod)
+    .pipe(
+      map((data) => {
+        if (data.isSuccess) {
+          //set to state
 
-     return this.periodDeductionService
-      .getperioddeductiontransactionbypayroll(payrollperiod)
-      .pipe(
-        map((data) => {
+         // console.log(data.result);
 
-          if(data.isSuccess){
-  
-            //set to state 
-          
-            return data.result
-          
-          }
+          return data.result;
+        }
 
-          return EMPTY
-          
-        })
-      );
+        return EMPTY;
+      })
+    );
+
   }
 
-  load_deductiondetails(){
-    return this.deductionService
-          .getAllDeductionDetails()
-          .pipe(map((data) =>{
-            this.setState(()=> ({employeedeductiondetails:[...data.result]}))
-            return data.result;
+  load_deductiondetails() {
 
-          }) );
-   
-  
+    return this.deductionService.getAllDeductionDetails().pipe(
+      map((data) => {
+        this.setState(() => ({ employeedeductiondetails: [...data.result] }));
+        return data.result;
+      })
+    );
+
   }
-
-
 
   load_deductionschedule(pNo: number) {
     return this.periodDeductionService.GetDeductionById(pNo).pipe(
@@ -128,6 +135,76 @@ export class PayrollDeductionScheduleStore
       catchError((err) => err)
     );
   }
+  
+
+  load_jointdeductiondetails$(pp_id:number): Observable<DeductionScheduleTrans[]>{
+
+    let obs2$ =this.loadperioddeductiontransactionbypayroll(pp_id);
+      
+    let obs1$ = this.load_deductiondetails();
+
+      return forkJoin([ obs1$,obs2$]).pipe(
+      
+      map(([obs1, obs2]) => {
+
+        let empdeductiontransaction:EmpDeductionTransaction[]=[];
+
+        const {payrollDeductionTransaction,pdsched_Id,pp_id} =obs2
+
+        payrollDeductionTransaction.map((element:any) => {
+
+          let empdeductiontrans: EmpDeductionTransaction = {
+            prldeductiontrans_Id: element.prldeductiontrans_Id,
+            pdsched_Id:pdsched_Id,
+            deduction_Id:element.deduction_Id,
+            emp_Id: element.emp_Id,
+            emp_First:element.employee.fname,
+            emp_Last:element.employee.lname,
+            deductAmount: element.deductAmount,
+            actualDeductedAmount: element.actualDeductedAmount,
+            iseditable:false
+          };
+
+          empdeductiontransaction.push(empdeductiontrans);
+        })
+
+        let deductionscheduletrans: DeductionScheduleTrans[] = [];
+
+        obs1.map((_mapdata: { deduction_Id: any; description: any }) => {
+
+          let deductionsched: DeductionScheduleTrans = {
+
+            pp_Id:pp_id,
+            pdsched_Id: pdsched_Id,
+            deduction_Id: _mapdata.deduction_Id,
+            description: _mapdata.description,
+          
+          } as DeductionScheduleTrans;
+          deductionscheduletrans.push(deductionsched); 
+        });
+
+       
+        const deductionscheduletrans$=deductionscheduletrans.map(dtrans=>{
+
+          return{...dtrans,empdeductiontrans:empdeductiontransaction.filter(t=>t.deduction_Id==dtrans.deduction_Id)}
+        });
+
+        this.setState(()=> ({deductionscheduletrans:[]}))
+
+        this.setState(()=> ({deductionscheduletrans:[...deductionscheduletrans$]}))
+
+
+        return deductionscheduletrans$
+      })
+    );
+
+  }
+
+
+
+
+   
+
 
   /**Note: watch:----->>   // ...(state.payrollperiodtransaction.payrolldeductiontrans|| [])
       // [...state.payrollperiodtransaction.payrolldeductiontrans,new_deductionscheduletrans] */

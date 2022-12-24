@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Observable, Subject, Subscription } from 'rxjs';
 import { PayrollPeriod } from 'src/app/models/payrollperiod';
@@ -31,6 +31,8 @@ export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestro
   payrolldeductionschedtranslist$!:Observable<PeriodDeductionSchedule[]>
 
 
+
+  
   constructor(
     private fb: FormBuilder,
     private service: PeriodDeductionScheduleService,
@@ -38,7 +40,6 @@ export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestro
     private router:Router,
     private activatedRoute:ActivatedRoute,
     private payrollperiodStore:PayrollPeriodStore,
-    private payrolldeductionscheduleStore:PayrollDeductionScheduleStore,
     public datepipe: DatePipe
 
   ) {
@@ -54,7 +55,7 @@ export class PayrolldeductionscheduleCreateComponent  implements OnInit,OnDestro
   initForm() {
     this.deductionscheduleForm = this.fb.group(
       {
-        payrollperiod: this.fb.control('', [Validators.required]),
+        payrollperiod: this.fb.control('', [Validators.required,]),
       },
       { updateOn: 'submit' }
     );

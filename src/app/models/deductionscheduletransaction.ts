@@ -10,6 +10,8 @@ export interface EmpDeductionTransaction{
     deductAmount:number,
     actualDeductedAmount:number,
 
+    iseditable?:boolean
+
 }
 
 

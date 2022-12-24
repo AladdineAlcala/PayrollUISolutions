@@ -1,3 +1,5 @@
+
+
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar-->
@@ -15,16 +17,21 @@
     <!-- Top navigation-->
     <app-navbar></app-navbar>
     <!-- Page content-->
-    
+
     <div class="container-fluid" id="mainform-container">
-      <loading></loading>
-      <main role="main" class="pb-3">
+
+       <!-- <loading></loading> -->
+      <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">Loading...</p>
+      </ngx-spinner>
       
+      <main role="main" class="pb-3">
+
         <router-outlet name="main"> </router-outlet>
 
       </main>
 
-      
+
     </div>
 
 
@@ -34,6 +41,6 @@
 
 <footer class="border-top footer text-muted">
   <div class="container">
-      &copy; 2022 - Payroll.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    &copy; 2022 - Payroll.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
   </div>
 </footer>

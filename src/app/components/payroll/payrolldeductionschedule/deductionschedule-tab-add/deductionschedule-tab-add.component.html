@@ -37,20 +37,13 @@
                         <td class="text-start"> {{empde.d_amount|currency:"PHP":"symbol"}}</td>
                         <td class="text-start">
 
-                          <div *ngIf="iseditmode">
-                            <input type="text" class="form-control text-end" [(ngModel)]="empde.d_amount" />
-                          </div>
-
-                          <div *ngIf="!iseditmode">
-                            {{empde.d_amount|currency:"PHP":"symbol"}}
-                          </div>
-                          
+                          {{empde.d_amount|currency:"PHP":"symbol"}}
 
                         </td>
                         <td class="d-flex text-center justify-content-around">
 
-                          <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="edit" (click)="editDeductionSchedule(empde)"></mat-icon>
-                          <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="delete"></mat-icon>
+               <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="edit" (click)="editDeductionSchedule(empde)"></mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="delete"></mat-icon> 
 
                         </td>
                     </tr>
