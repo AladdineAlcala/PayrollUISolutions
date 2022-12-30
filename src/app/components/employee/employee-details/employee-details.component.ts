@@ -39,6 +39,12 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
     private deductionDataService: DeductionDataService
   ) {}
 
+  onClose(){
+    //console.log('closer');
+    this.router.navigate(['',{ outlets: {side:'employees',main:null} }]);
+
+  }
+
 
   ngOnInit(): void {
     //this.empId=this.activatedRoute.snapshot.paramMap.get('id')!;

@@ -7,7 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, combineLatest, delay, map, Observable, Subscription, throwError } from 'rxjs';
 import {
@@ -29,6 +29,9 @@ interface ITab {
   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeductionscheduleTabEditComponent implements OnInit,OnDestroy {
+
+ title:string="Deduction Schedule List"
+
   iseditmode: boolean = false;
   tabs: ITab[] = [];
   oldvalue!: number;
@@ -47,10 +50,18 @@ export class DeductionscheduleTabEditComponent implements OnInit,OnDestroy {
   sub2:Subscription=new Subscription;
   sub3:Subscription=new Subscription;
   
+
+  onClose(){
+    //console.log('closer');
+    this.router.navigate(['',{ outlets: {side:'payroll',main:null} }]);
+
+  }
+
   constructor(
     private payrolltransdeductionservice: PeriodDeductionScheduleService,
     private payrolldeductionscheduleStore: PayrollDeductionScheduleStore,
     private activatedRoute: ActivatedRoute,
+    private router:Router,
     private loadingspinner: NgxSpinnerService,
   ) {
 

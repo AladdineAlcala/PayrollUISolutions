@@ -7,7 +7,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
-import { SharedModule } from "src/app/shared/widgets/shared.module";
+import { SharedModule } from "src/app/shared/shared.module";
 import { PayrollDeductionScheduleComponent } from "./payrolldeductionschedule/payrolldeductionsched-main/payrolldeductionschedule.component";
 import { PayrollperiodCreateComponent } from "./payrollperiod/payrollperiod-create/payrollperiod-create.component";
 import { PayrollperiodComponent } from "./payrollperiod/payrollperiodmain/payrollperiod.component";

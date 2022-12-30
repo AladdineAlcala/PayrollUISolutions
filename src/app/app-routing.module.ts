@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { AttendanceCreateComponent } from './components/attendance/attendance-create/attendance-create.component';
 import { AttendanceMainComponent } from './components/attendance/attendance-main/attendance-main.component';
 import { AttendanceSidebarComponent } from './components/attendance/attendance-sidebar/attendance-sidebar.component';
 
@@ -99,6 +100,11 @@ const approutes: Routes = [
   {
     path: 'attendance/main',
     component: AttendanceMainComponent,
+    outlet: 'main'
+  },
+  {
+    path: 'attendance/create',
+    component: AttendanceCreateComponent,
     outlet: 'main'
   }
   ,

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -22,12 +22,11 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeComponent } from './employee-main/employee.component';
 import { EmployeesidebarComponent } from './employeesidebar/employeesidebar.component';
-import { TitleHeaderComponent } from 'src/app/shared/widgets/title-header/title-header.component';
-import { SharedModule } from 'src/app/shared/widgets/shared.module';
-import { LoaderComponent } from 'src/app/shared/widgets/loader/loader.component';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
     declarations: [
@@ -62,7 +61,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
         MatTableModule,
         MatIconModule,
         MatButtonModule,
-      
+        MatFormFieldModule,
+        MatInputModule
+        
     ],
     imports: [
         RouterModule,
@@ -75,7 +76,10 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
         ReactiveFormsModule,
         BrowserAnimationsModule,
         SharedModule,
-        MatPaginatorModule 
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule
     ]
 })
 export class EmployeeModule {}

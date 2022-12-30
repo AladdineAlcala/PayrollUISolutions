@@ -20,13 +20,16 @@ import { NotfoundpageComponent } from './components/notfoundpage/notfoundpage.co
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { ButtonLoadingComponent } from './shared/widgets/button-loading/button-loading.component';
 import { SidebarComponent } from './shared/widgets/sidebar/sidebar.component';
-import { SharedModule } from './shared/widgets/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { PayrollModule } from './components/payroll/payroll.module';
 import { DatePipe } from '@angular/common';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginator } from '@angular/material/paginator';
+import { AttendanceCreateComponent } from './components/attendance/attendance-create/attendance-create.component';
+import { AttendanceModule } from './components/attendance/attendance.module';
+
 
 
 
@@ -40,10 +43,9 @@ import { MatPaginator } from '@angular/material/paginator';
         NavbarComponent,
         DeductionsidebarComponent,
         DeductionMainComponent,
-        AttendanceMainComponent,
-        AttendanceSidebarComponent,
         ButtonLoadingComponent,
         SidebarComponent,
+
      
     ],
     providers: [
@@ -60,6 +62,7 @@ import { MatPaginator } from '@angular/material/paginator';
         ReactiveFormsModule,
         EmployeeModule,
         PayrollModule,
+        AttendanceModule,
         SharedModule,
         NgxSpinnerModule,
         BrowserAnimationsModule,

@@ -1,7 +1,18 @@
 table {
   width: 100%;
+  overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
   
   .mat-mdc-row:hover {
     background: #f0f0f2;
   }
+  
+}
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+th.mat-sort-header-sorted {
+  color: black;
 }

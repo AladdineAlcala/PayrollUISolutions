@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,11 +14,10 @@ import {
   map,
   Observable,
 } from 'rxjs';
-import { DeductionDetails } from 'src/app/models/deductiondetails';
 import { Employee } from 'src/app/models/employee';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
-import { DeductionService } from 'src/app/services/deduction.service';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeListComponent } from 'src/app/components/employee/employee-list/employee-list.component'
+
 
 @Component({
   selector: 'app-employee',
@@ -28,7 +28,8 @@ import { EmployeeService } from 'src/app/services/employee.service';
 
 export class EmployeeComponent implements OnInit {
 
-  title: string = 'Employee List';
+
+  title: string = 'Employee Main File';
 
   employee$!: Observable<any>;
 
@@ -41,6 +42,18 @@ export class EmployeeComponent implements OnInit {
   private errorSubject = new BehaviorSubject<string>('');
 
   errorMessageAction$ = this.errorSubject.asObservable();
+
+  _searchval!:string
+
+
+   @ViewChild(EmployeeListComponent)
+   emplist!:EmployeeListComponent 
+ 
+   onClose(){
+    //console.log('closer');
+    this.router.navigate(['',{ outlets: {side:'employees',main:null} }]);
+
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -61,7 +74,9 @@ export class EmployeeComponent implements OnInit {
       })
     ); 
      
+   
 
+  
 
 
 

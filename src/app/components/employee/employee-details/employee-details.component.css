@@ -8,3 +8,13 @@ img{
     min-height:400px;
     
 }
+
+.component-container{
+    height:100vh;
+    margin: 0 auto;
+    width: 95%;
+    border-color:#e0a030 1px solid;
+    background: #67ced5;
+    color:#613500;
+   
+}

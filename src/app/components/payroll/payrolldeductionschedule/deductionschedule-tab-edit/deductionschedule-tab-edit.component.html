@@ -1,3 +1,24 @@
+<!------------------------------------------------------------------------------------->
+
+<!-- attendance : 12/09/2022   -->
+
+<!------------------------------------------------------------------------------------->
+
+<!-- 
+<main-container [title]="title" (oncontentEventClose)="onClose()">
+
+  <div class="component-container">
+
+
+
+
+
+  </div>
+
+</main-container>
+ -->
+
+
 <div class="mt-4">
 
   <tabset>
@@ -27,76 +48,65 @@
               <th class="text-center">ACTION</th>
             </tr>
           </thead>
-          
+
           <tbody>
 
-              <tr *ngFor="let empde of tab.content;let i=index">
-                     
-                 
-                    <td class="align-middle"> {{empde.emp_Id }}</td>
-                    <td class="align-middle"> {{empde.emp_First}}</td>
-                    <td class="align-middle"> {{empde.emp_Last }}</td>
-                    <td class="align-middle text-start"> {{empde.deductAmount|currency:'PHP':'symbol-narrow'}}</td>
-                    <td class="align-middle text-start">
+            <tr *ngFor="let empde of tab.content;let i=index">
 
-                     <ng-container *ngIf="empde.iseditable">
 
-                        <input type="text" 
-                        class="form-control text-end" 
-                        [formControl]="convertToFormControl(getdeduction(i,'actualDeductedAmount'))"
-                        placeholder="0.00"
-                        Numberonly
-                        focusable
-                        [class.is-invalid]="convertToFormControl(getdeduction(i,'actualDeductedAmount')).invalid"
-                        />
+              <td class="align-middle"> {{empde.emp_Id }}</td>
+              <td class="align-middle"> {{empde.emp_First}}</td>
+              <td class="align-middle"> {{empde.emp_Last }}</td>
+              <td class="align-middle text-start"> {{empde.deductAmount|currency:'PHP':'symbol-narrow'}}</td>
+              <td class="align-middle text-start">
 
-                     </ng-container>
-                     
-                      <ng-container *ngIf="!empde.iseditable">
-                          {{empde.actualDeductedAmount|currency:'PHP':'symbol-narrow'}}
-                      </ng-container> 
-      
-                    </td>
+                <ng-container *ngIf="empde.iseditable">
 
-                    <td class="text-center">
-                      
-                          <button mat-icon-button class="material-icons app-toolbar-menu save-button"
-                           *ngIf="empde.iseditable"
-                            (click)="saveDSched(i,empde)"
-                            [disabled]="convertToFormControl(getdeduction(i,'actualDeductedAmount')).invalid"
-                            color="primary">
-                          <mat-icon>check_circle</mat-icon>
-                          </button>
-          
-                          <button mat-icon-button class="material-icons app-toolbar-menu save-button"
-                            (click)="editDSched(i,empde)"
-                            *ngIf="!empde.iseditable"
-                            color="primary">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-          
-                          <button mat-icon-button class="material-icons app-toolbar-menu delete-button"
-                            *ngIf="!empde.iseditable"
-                            color="warn">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                          
-                          
-                          <button mat-icon-button class="material-icons app-toolbar-menu delete-button"
-                            *ngIf="empde.iseditable"
-                            (click)="cancelDSched(empde)"
-                            color="warn">
-                            <mat-icon>cancel</mat-icon>
-                          </button>
-      
-                      <!--    <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="edit" (click)="editDeductionSchedule(empde)"></mat-icon>
-                                  <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="delete"></mat-icon> -->
-      
-                    </td>
+                  <input type="text" class="form-control text-end"
+                    [formControl]="convertToFormControl(getdeduction(i,'actualDeductedAmount'))" placeholder="0.00"
+                    Numberonly focusable
+                    [class.is-invalid]="convertToFormControl(getdeduction(i,'actualDeductedAmount')).invalid" />
 
-           
-              </tr>
-           
+                </ng-container>
+
+                <ng-container *ngIf="!empde.iseditable">
+                  {{empde.actualDeductedAmount|currency:'PHP':'symbol-narrow'}}
+                </ng-container>
+
+              </td>
+
+              <td class="text-center">
+
+                <button mat-icon-button class="material-icons app-toolbar-menu save-button" *ngIf="empde.iseditable"
+                  (click)="saveDSched(i,empde)"
+                  [disabled]="convertToFormControl(getdeduction(i,'actualDeductedAmount')).invalid" color="primary">
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+
+                <button mat-icon-button class="material-icons app-toolbar-menu save-button"
+                  (click)="editDSched(i,empde)" *ngIf="!empde.iseditable" color="primary">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button class="material-icons app-toolbar-menu delete-button"
+                  *ngIf="!empde.iseditable" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+
+                <button mat-icon-button class="material-icons app-toolbar-menu delete-button"
+                  *ngIf="empde.iseditable" (click)="cancelDSched(empde)" color="warn">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+
+                <!--    <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="edit" (click)="editDeductionSchedule(empde)"></mat-icon>
+                              <mat-icon aria-hidden="false" aria-label="Edit deduction" fontIcon="delete"></mat-icon> -->
+
+              </td>
+
+
+            </tr>
+
 
           </tbody>
         </table>

@@ -1,27 +1,26 @@
 <!-- {{employeetablelist$|async|json}} -->
 
 <div class="row ms-2">
-
   <div class="col-sm-12">
 
-    <div class="mt-3 mat-elevation-z8">
-      <table mat-table [dataSource]="empdataSource" multiTemplateDataRows >
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="empdataSource" matSort  multiTemplateDataRows >
 
         <!--id column-->
         <ng-container matColumnDef="emp_Id">
-          <th mat-header-cell *matHeaderCellDef> ID.</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > ID.</th>
           <td mat-cell *matCellDef="let element">{{element.emp_Id}}</td>
         </ng-container>
   
         <!--firstname column-->
         <ng-container matColumnDef="fname">
-          <th mat-header-cell *matHeaderCellDef> FIRSTNAME</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > FIRSTNAME</th>
           <td mat-cell *matCellDef="let element">{{element.fname}}</td>
         </ng-container>
   
         <!--lastname column-->
         <ng-container matColumnDef="lname">
-          <th mat-header-cell *matHeaderCellDef> LASTNAME.</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > LASTNAME.</th>
           <td mat-cell *matCellDef="let element">{{element.lname}}</td>
         </ng-container>
   
@@ -39,13 +38,13 @@
   
         <!--EmployeeStatus column-->
         <ng-container matColumnDef="empStatus">
-          <th mat-header-cell *matHeaderCellDef> EMP STATUS.</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > EMP STATUS.</th>
           <td mat-cell *matCellDef="let element">{{element.empstatus}}</td>
         </ng-container>
   
         <!--Position column-->
         <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> POSITION.</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > POSITION.</th>
           <td mat-cell *matCellDef="let element">{{element?.position || 'Not Available'}}</td>
         </ng-container>
   

@@ -1,0 +1,22 @@
+<div class="container-fluid mt-3">
+
+  <div class="border rounded-2 shadow" id="main-component-container">
+
+    <div class="d-flex flex-row justify-content-between">
+      <!--header-->
+      <div class="mt-4 ms-4 p-0" id="page-title">
+        <h2 class="fs-3 title-head">{{title}}</h2>
+      </div>
+
+
+      <div class="m-3" id="close-button">
+        <button type="button" class="btn-close btn-close-black" aria-label="Close" (click)="oncontentClose()"></button>
+      </div>
+    </div>
+    <hr>
+
+    <ng-content></ng-content>
+
+
+  </div>
+</div>

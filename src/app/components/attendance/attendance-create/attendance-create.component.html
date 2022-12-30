@@ -1,0 +1,69 @@
+<!------------------------------------------------------------------------------------->
+
+<!-- attendance : 12/09/2022   -->
+
+<!------------------------------------------------------------------------------------->
+
+
+<main-container [title]="title" (oncontentEventClose)="onClose()" >
+
+    <div class="component-container">
+        
+      <div class="d-flex flex-column justify content start">
+
+        <div class="d-flex justify-content-row">
+           
+            <div class="border rounded-2 shadow bg-light mt-2 datefilter ">
+              <p class="ms-3 mt-2 fs-6 text-muted"> Filter Date Duration:</p>
+ 
+                <div class="my-2 ms-2">
+
+                    <mat-form-field appearance="fill">
+
+                        <mat-label>Enter a date range</mat-label>
+
+                        <mat-date-range-input [formGroup]="attlogrange" [rangePicker]="attendancelogpicker">
+                          <input matStartDate
+                           formControlName="start"
+                            placeholder="Start date"
+                            #daterangeStart
+                            >
+
+                          <input
+                           matEndDate 
+                           formControlName="end"
+                            placeholder="End date"
+                            #daterangeEnd
+                            (dateChange)="ondaterangeChange(daterangeStart,daterangeEnd)"
+                            >
+                        </mat-date-range-input>
+
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="attendancelogpicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #attendancelogpicker></mat-date-range-picker>
+                      
+                        <mat-error *ngIf="attlogrange.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="attlogrange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                      </mat-form-field>
+
+                     
+                    
+                </div>
+              </div>
+
+            
+
+            </div>
+        </div>
+        
+        <div class="mt-2">
+
+            <attendance-logs> </attendance-logs>
+
+        </div>
+    
+      </div>
+    
+   
+    
+</main-container>

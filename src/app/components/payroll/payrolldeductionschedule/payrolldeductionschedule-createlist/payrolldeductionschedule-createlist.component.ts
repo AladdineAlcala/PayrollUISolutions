@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { combineLatest, delay, first, forkJoin, map, Observable, switchMap, take } from 'rxjs';
 import { DeductionDetails } from 'src/app/models/deductiondetails';
@@ -41,6 +41,11 @@ export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
   jointdeductiondetails$!: Observable<DeductionScheduleTrans[]>;
 
  
+  onClose(){
+    //console.log('closer');
+    this.router.navigate(['',{ outlets: {side:'payroll',main:null} }]);
+
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -49,6 +54,7 @@ export class PayrolldeductionscheduleCreatelistComponent implements OnInit {
     private payrollperioddeductionservice: PeriodDeductionScheduleService,
     private payrolldeductionscheduleStore: PayrollDeductionScheduleStore,
     private ref: ChangeDetectorRef,
+    private router:Router
   ) {
     this.payrolldeductionTrans = [];
 

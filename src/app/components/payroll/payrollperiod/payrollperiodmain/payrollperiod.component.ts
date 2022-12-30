@@ -24,8 +24,15 @@ export class PayrollperiodComponent implements OnInit {
     { Head: 'Action', FieldName: '', FieldType: null },
   ];
 
+  onClose(){
+    //console.log('closer');
+    this.router.navigate(['',{ outlets: {side:'payroll',main:null} }]);
+
+  }
+
   constructor(
-    private payrolperiodStore:PayrollPeriodStore
+    private payrolperiodStore:PayrollPeriodStore,
+    private router:Router
   ) {}
 
   ngOnInit(): void {

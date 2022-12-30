@@ -1,11 +1,17 @@
 
-<div class="container-fluid mt-3">
 
-    <div class="border rounded-2 shadow component-vh" id="main-component-container">
 
-         <!--header-->
-         <app-title-header [title_head]="title"></app-title-header>
+<!------------------------------------------------------------------------------------->
 
+<!-- payroll : 12/26/2022   -->
+
+<!------------------------------------------------------------------------------------->
+
+
+<main-container [title]="title" (oncontentEventClose)="onClose()" >
+
+    <div class="component-container">
+        
         <div class="row row-cols-lg-2">
 
             <div class="col-sm-6">
@@ -32,6 +38,6 @@
 
         </div>
 
-
     </div>
-</div>
+    
+</main-container>

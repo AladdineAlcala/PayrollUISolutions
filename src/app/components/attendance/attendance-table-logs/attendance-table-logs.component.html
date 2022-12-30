@@ -1,0 +1,29 @@
+
+
+<div class="tablelog-container mat-elevation-z8 bg-light" tabindex="0">
+
+    <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="{{col}}"  *ngFor="let col of displayedcolumns;let i =index" [sticky]="i<2" [stickyEnd]="i > displayedcolumns.length-2">
+            <mat-header-cell *matHeaderCellDef> {{col}}</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element[col]}} </mat-cell>
+         <!--    <mat-footer-cell *matFooterCellDef="let element"> <b>{{calculatefooter(element[col])}}</b> </mat-footer-cell> -->
+        </ng-container>
+
+
+       <!--  <ng-container matColumnDef="emp">
+            <th mat-header-cell *matHeaderCellDef> EMPLOYEE </th>
+            <td mat-cell *matCellDef="let element"> {{element.emp}} </td>
+        </ng-container>
+ -->
+
+
+          <mat-row mat-header-row *matHeaderRowDef="displayedcolumns;sticky:true"></mat-row>
+       
+          <mat-row *matRowDef="let row; columns: displayedcolumns;"></mat-row>
+        
+       <!--    <mat-row mat-footer-row *matFooterRowDef="displayedcolumns; sticky: true"></mat-row> -->
+
+    </mat-table>
+   <!--  {{dateStart}} -->
+</div>

@@ -1,7 +1,9 @@
-.component-vh{
-    height:100vh;
-}
-
-#comp-container{
-    height: 500px;
+.component-container{
+    height:90vh;
+    margin: 0 auto;
+    width: 95%;
+    border-color:#e0a030 1px solid;
+    background: #67ced5;
+    color:#613500;
+   
 }
