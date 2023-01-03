@@ -24,9 +24,17 @@ export interface AttendanceLog{
     workcode:number
 
     Employee:Employee
-
+    
 }
 
+
+export interface AttendanceLogCreate{
+    emp_Id:string,
+    verificationMode:number,
+    datetimeVerify:Date,
+    inoutMode:number,
+    pp_id:number;
+}
 
 export const dwInOutMode= {
     0:"Check-In",

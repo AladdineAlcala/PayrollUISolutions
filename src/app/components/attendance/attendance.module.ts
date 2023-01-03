@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { AttendanceTableLogsComponent } from './attendance-table-logs/attendance-table-logs.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatSelectModule,
     SharedModule,
 
   ]

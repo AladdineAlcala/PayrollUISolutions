@@ -8,62 +8,102 @@
 <main-container [title]="title" (oncontentEventClose)="onClose()" >
 
     <div class="component-container">
-        
-      <div class="d-flex flex-column justify content start">
 
-        <div class="d-flex justify-content-row">
-           
-            <div class="border rounded-2 shadow bg-light mt-2 datefilter ">
-              <p class="ms-3 mt-2 fs-6 text-muted"> Filter Date Duration:</p>
- 
-                <div class="my-2 ms-2">
+        <form
+          [formGroup]="attlogForm"
+          (submit)="onSubmitLogs()">
 
-                    <mat-form-field appearance="fill">
+            <div class="d-flex flex-column">     
 
-                        <mat-label>Enter a date range</mat-label>
+                <div class="border rounded-2 shadow bg-light mt-2 datefilter ">
+                      <p class="ms-3 mt-2 fs-6 text-muted"> Filter Date Duration:</p>
 
-                        <mat-date-range-input [formGroup]="attlogrange" [rangePicker]="attendancelogpicker">
-                          <input matStartDate
-                           formControlName="start"
-                            placeholder="Start date"
-                            #daterangeStart
-                            >
+                        <div class="my-2 ms-2">
 
-                          <input
-                           matEndDate 
-                           formControlName="end"
-                            placeholder="End date"
-                            #daterangeEnd
-                            (dateChange)="ondaterangeChange(daterangeStart,daterangeEnd)"
-                            >
-                        </mat-date-range-input>
+                            <mat-form-field appearance="fill">
 
-                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="attendancelogpicker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #attendancelogpicker></mat-date-range-picker>
-                      
-                        <mat-error *ngIf="attlogrange.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                        <mat-error *ngIf="attlogrange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-                      </mat-form-field>
+                                <mat-label>Enter a date range</mat-label>
 
-                     
-                    
+                                  <mat-date-range-input formGroupName="logrange" [rangePicker]="attendancelogpicker">
+                                    <input matStartDate
+                                      formControlName="start"
+                                      placeholder="Start date"
+                                      #daterangeStart
+                                      >
+
+                                    <input
+                                    matEndDate 
+                                    formControlName="end"
+                                      placeholder="End date"
+                                      #daterangeEnd
+                                      (dateChange)="ondaterangeChange(daterangeStart,daterangeEnd)"
+                                      >
+                                  </mat-date-range-input>
+
+                                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="attendancelogpicker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #attendancelogpicker></mat-date-range-picker>
+
+
+                                    <mat-error *ngIf="rangeStart.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                                    <mat-error *ngIf="rangeEnd.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                            
+
+
+                            </mat-form-field>
+
+                              <mat-form-field appearance="fill">
+                                <mat-label>Select Payroll Period</mat-label>
+                                <mat-select formControlName="payrollperiod">
+                                  <mat-option *ngFor="let pp of payrollperiod" [value]="pp.pp_id">
+                                  Period from: {{pp.strtpd_d |date}} to: {{pp.endpd_d |date}}
+                                  </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="attlogForm.get('payrollperiod')?.hasError('required')">
+                                  This field is required
+                                </mat-error>
+
+                              </mat-form-field>
+                            
+                            
+                        </div>
+
+
                 </div>
-              </div>
 
-            
+                <div class="mt-2 tablelogs-container">
+                  <attendance-logs [payrollperiod]="$any(attlogForm.controls['payrollperiod'])"> </attendance-logs>
+                </div>
+
+                <div class=" my-2 d-inline-flex flex flex-row justify-content-start">
+
+                  <button
+                  mat-raised-button
+                  class="me-2"
+                  type="submit"
+                  style="width:200px;"
+                  color="primary"
+                  [disabled]="attlogForm.invalid"
+                  >
+                    Save Logs
+                  </button>
+
+                  <button
+                  mat-raised-button
+                  class="mx-2"
+                  style="width:200px;"
+                  (click)="resetFormLogs()"
+                  >
+                  Reset
+                  </button>
+
+                </div> 
 
             </div>
-        </div>
-        
-        <div class="mt-2">
 
-            <attendance-logs> </attendance-logs>
+        </form>
 
-        </div>
-    
-      </div>
-    
-   
-    
+    </div>
+       
 </main-container>

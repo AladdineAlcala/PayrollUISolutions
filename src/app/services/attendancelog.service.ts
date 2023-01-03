@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, delay, map, shareReplay, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { dateconvert } from 'src/HelperFunctions/Utilities';
 import { AttendanceLogFetch } from '../models/attendancelog';
+import { ResponseDTO } from '../models/ResponseDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -18,17 +20,14 @@ export class AttendanceLogService {
   //call to device attendance log
   //https://localhost:7066/api/timelog?DtStart=2022-12-15&DtEnd=2022-12-31
   getlogs(dateStart: Date, dateEnd: Date) {
-    let dateparam = {
-      DtStart: dateStart.toISOString(),
-      DtEnd: dateEnd.toISOString(),
-    };
+
     this.url = 'timelog';
-
+  
     let params = new HttpParams();
-    params = params.append('DtStart', dateparam.DtStart);
-    params = params.append('DtEnd', dateparam.DtEnd);
+    params = params.append('DtStart',dateconvert(dateStart));
+    params = params.append('DtEnd',dateconvert(dateEnd));
 
-    // console.log(dateparam)
+   //console.log(`${dateconvert(dateStart)} ${dateconvert(dateEnd)}`)
 
     return this.http
       .get<AttendanceLogFetch[]>(`${environment.base_api_DeviceUrl}/${this.url}/`, {
@@ -39,10 +38,26 @@ export class AttendanceLogService {
       );
   }
 
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  /** Save logs to database call api */
+
+  postlogs(data:unknown){
+    this.url="attlogs"
+
+    const body = JSON.stringify(data);
+    const headers = new HttpHeaders()
+    .set('Content-type', 'application/json');
+    
+    return this.http.post<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`,body,{headers:headers})
+    .pipe(map(data=>data),
+    catchError(this.handleError)
+    );
+  }
+
+
+
 
   //-----------------------------------------------------------------------------------------------------------------------------------
-
-
 
   /** Error Handling ----------------------------------------------------------------------------------------------------------------- */
   handleError(error: Error) {

@@ -17,10 +17,10 @@
         "owner": "typescript",
         "source": "ts",
         "applyTo": "closedDocuments",
-        "fileLocation": [
+      /*   "fileLocation": [
           "relative",
           "${cwd}"
-        ],
+        ],  */
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,

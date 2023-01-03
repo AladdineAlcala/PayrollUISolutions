@@ -44,7 +44,7 @@ export class PeriodDeductionScheduleService{
     
     //https://localhost:7023/api/perioddeductionschedule
 
-    generatepayrolldeductionschedule(payrollperiod:any){
+    generatepayrolldeductionschedule(payrollperiod:unknown){
       this.url="perioddeductionschedule"
 
       const body = JSON.stringify(payrollperiod);
