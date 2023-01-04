@@ -4,19 +4,76 @@
 
 <!------------------------------------------------------------------------------------->
 
-
-<main-container [title]="title" (oncontentEventClose)="onClose()" >
-
-<div class="component-container">
+<main-container [title]="title" (oncontentEventClose)="onClose()">
+  <div class="component-container">
     
-  <div class="d-flex flex-column justify content start">
-    <div class="d-flex justify-content-row">
-        <button class="btn btn-info" (click)="oncreate_dtr()">Create DTR</button>
+    <div class="d-flex flex-column justify content start">
+      <div class="d-flex justify-content-row">
+
+        <button class="btn btn-info" (click)="oncreate_dtr()">
+          Create DTR
+        </button>
+
+      </div>
+
+      <div class="my-3 table-attperiod">
+        <mat-card>
+          <mat-card-content class="mat-elevation-z8">
+            <mat-table [dataSource]="dataSource">
+              <!--Period Column-->
+              <ng-container matColumnDef="pp_id">
+                <mat-header-cell *matHeaderCellDef>Period</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.pp_id }}</mat-cell>
+              </ng-container>
+
+              <!--From Column-->
+              <ng-container matColumnDef="strtpd_d">
+                <mat-header-cell *matHeaderCellDef>From:</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.strtpd_d|date }}</mat-cell>
+              </ng-container>
+
+              <!--To Column-->
+              <ng-container matColumnDef="endpd_d">
+                <mat-header-cell *matHeaderCellDef>To:</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.endpd_d|date }}</mat-cell>
+              </ng-container>
+
+
+              <!--Period Year Column-->
+              <ng-container matColumnDef="prlYear">
+                <mat-header-cell *matHeaderCellDef>Year Period</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.prlYear }}</mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <button mat-icon-button color="primary" (click)="onSelectLogs(row)" >
+                    <mat-icon>launch</mat-icon> 
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+            </mat-table>
+            
+            
+          </mat-card-content>
+
+          <mat-card-footer>
+
+            <mat-paginator [pageSizeOptions]="[6, 12, 24]" showFirstLastButtons aria-label="Select page of payroll period">
+            </mat-paginator>
+
+          </mat-card-footer>
+
+        </mat-card>
+
+      </div>
     </div>
-
-
   </div>
-
-</div>
-
 </main-container>

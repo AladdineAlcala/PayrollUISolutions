@@ -15,7 +15,12 @@ export class PayrollperiodService {
     private http: HttpClient,
   ) {}
 
-  //getallpayrollperiod$=this.getallpayrollperiod();
+
+
+
+
+   //------------------------------------------------------------------------------------------------------------------------
+  // ===== Get All Payroll Period  ======================================================================
 
   public getallpayrollperiod() {
     return this.http.get<ResponseDTO>(
@@ -26,6 +31,11 @@ export class PayrollperiodService {
       catchError(this.handleError)
     );
   }
+
+
+
+  //------------------------------------------------------------------------------------------------------------------------
+  // ===== Add Payroll Period  ======================================================================
 
   public AddPayrollPeriod(newPayrollPeriod:PayrollPeriod){
     return this.addpayrollperiod(newPayrollPeriod);
@@ -40,11 +50,39 @@ export class PayrollperiodService {
       catchError(this.handleError)
     );
   }
+ 
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------
+  // ===== Remove Payroll Period  ======================================================================
 
   public removepayrollperiod(id:number){
 
   }
   
+
+
+
+  //------------------------------------------------------------------------------------------------------------------------
+  // ===== Get All Payroll Period with Attendance Logs ======================================================================
+
+  public getallpayrollperiodbyattendancelogs(){
+
+    return this.http.get<ResponseDTO>(
+      `${environment.base_apiUrl}/${this.url}/GetPayperiodByAttendanceLogs`
+    ).pipe(
+      map((data: ResponseDTO) => data.result as PayrollPeriod[]),
+      shareReplay(),
+      catchError(this.handleError)
+    );
+
+  }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+
 
 
   handleError(error: Error) {

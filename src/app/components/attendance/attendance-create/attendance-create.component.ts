@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormGroup,
@@ -13,7 +13,7 @@ import {
   AttendanceLogCreate,
 } from 'src/app/models/attendancelog';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { forkJoin, map, Observable } from 'rxjs';
+import { forkJoin, map, Observable, Subscription } from 'rxjs';
 import { ConvertID } from 'src/HelperFunctions/Utilities';
 import { AttendanceLogsStore } from 'src/app/store/attlogsstore';
 import { EmployeeStore } from 'src/app/store/employee.store';
@@ -26,22 +26,34 @@ import { PayrollPeriodStore } from 'src/app/store/payrollperiod.store';
   templateUrl: './attendance-create.component.html',
   styleUrls: ['./attendance-create.component.css'],
 })
-export class AttendanceCreateComponent implements OnInit {
+export class AttendanceCreateComponent implements OnInit,OnDestroy {
   title: string = 'Create DTR Logs';
 
   attfetchlogs: AttendanceLogFetch[];
 
   payrollperiod!: PayrollPeriod[];
 
-  attranslogs$!: Observable<AttendanceLog[]>;
+  attranslogs!: AttendanceLog[];
 
   attlogForm!: FormGroup;
 
   _datestart!: Date;
   _dateend!: Date;
 
+  sub$1:Subscription=new Subscription();
+  sub$2:Subscription=new Subscription();
+  sub$3:Subscription=new Subscription();
+
+
   @ViewChild(AttendanceTableLogsComponent)
   attlogcomp!: AttendanceTableLogsComponent;
+ 
+  ngOnDestroy(): void {
+    this.sub$1 && this.sub$1.unsubscribe();
+    this.sub$2 && this.sub$2.unsubscribe();
+    this.sub$3 && this.sub$3.unsubscribe();
+  }
+
 
   constructor(
     private router: Router,
@@ -56,8 +68,9 @@ export class AttendanceCreateComponent implements OnInit {
     this.initForm();
 
     this.attfetchlogs = [];
-    this.attranslogs$ = new Observable<AttendanceLog[]>();
+    // this.attranslogs$ = new Observable<AttendanceLog[]>();
   }
+  
 
   //tempDate = new Date().setMonth(new Date().getMonth() - 1)
 
@@ -80,17 +93,21 @@ export class AttendanceCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ppStore
+   this.sub$1= this.ppStore
       .select((state) => state.payrollperiods)
       .subscribe((data) => {
-        // console.log(data);
+         //console.log(data);
         this.payrollperiod = data;
+
+        
       });
+
+    
   }
 
   onClose() {
     //console.log('closer');
-    this.router.navigate(['', { outlets: { main: ['attendance', 'main'] } }], {
+    this.router.navigate(['', { outlets: { main: ['attendance'] } }], {
       relativeTo: this.activatedRoute,
     });
   }
@@ -120,63 +137,63 @@ export class AttendanceCreateComponent implements OnInit {
 
       const employees$ = this.empservice.getEmployees$;
 
-      this.attranslogs$ = forkJoin([logs$, employees$]).pipe(
-        map(([logs, emps]) => {
-          logs.map((log) => {
-            let attlog: AttendanceLog = {
-              indexNo: log.lCount,
-              EmpID:
-                emps.find((e) => ConvertID(e.emp_Id) == +log.enrollNumber)
-                  ?.emp_Id || log.enrollNumber,
-              verificationMode: log.verifyMode,
-              inoutMode: log.inOutMode,
-              datetimeVerify: new Date(log.dateTimeVerify),
-              workcode: log.workcode,
-              Employee: emps.find(
-                (e) => ConvertID(e.emp_Id) == +log.enrollNumber
-              )!,
-            };
+     this.sub$2=forkJoin([logs$, employees$])
+        .pipe(
+          map(([logs, emps]) => {
+            logs.map((log) => {
+              let attlog: AttendanceLog = {
+                indexNo: log.lCount,
+                EmpID:
+                  emps.find((e) => ConvertID(e.emp_Id) == +log.enrollNumber)
+                    ?.emp_Id || log.enrollNumber,
+                verificationMode: log.verifyMode,
+                inoutMode: log.inOutMode,
+                datetimeVerify: new Date(log.dateTimeVerify),
+                workcode: log.workcode,
+                Employee: emps.find(
+                  (e) => ConvertID(e.emp_Id) == +log.enrollNumber
+                )!,
+              };
 
-            attendancedetailsList.push(attlog);
-          });
+              attendancedetailsList.push(attlog);
+            });
 
-          return attendancedetailsList;
-        })
-      );
+            return attendancedetailsList;
+          })
+        )
+        .subscribe((data) => {
+          //  console.log(data)
+          if (data.length > 0) {
+            this.logstore.set_attendancelogs([...data]);
 
-      this.attranslogs$.subscribe((data) => {
-        //  console.log(data)
-        if (data.length > 0) {
-          this.logstore.set_attendancelogs([...data]);
-
-          console.log(data);
-          //this.attlogForm.controls['payrollperiod'].enable();
-        }
-      });
+            this.attranslogs = [...data];
+            
+            console.log(data);
+            //this.attlogForm.controls['payrollperiod'].enable();
+          }
+        });
     }
   }
 
   onSubmitLogs() {
+
     if (this.attlogForm.valid) {
 
-       const {payrollperiod}=this.attlogForm.value;
+      const { payrollperiod } = this.attlogForm.value;
 
-       this.logstore.select(state=> state.attendancelog).subscribe(data =>{
+        let save_createdlogs = {
+          pp_id: payrollperiod,
+          logs: this.attranslogs,
+        };
+      //save to database
+    this.sub$3 =this.logsService
+        .postlogs(save_createdlogs)
+        .subscribe((result) =>{
 
-        let save_createdlogs={
-          pp_id:payrollperiod,
-          logs:data
-        }
+          console.log(result);
 
-        //save to database
-        this.logsService.postlogs(save_createdlogs)
-        .subscribe(result => console.log(result))
-
-        console.log(save_createdlogs)
-       })
+        });
     }
-
-
   }
 
   resetFormLogs() {
@@ -184,25 +201,6 @@ export class AttendanceCreateComponent implements OnInit {
     this.attlogForm.reset();
     this, this.initForm();
   }
-
-/*   loglistforcreate(logs: AttendanceLog[], payperiod: number) {
-    const createlogs: AttendanceLogCreate[] = [];
-
-      logs.map((log) => {
-      let createdlog = {
-        emp_Id: log.EmpID,
-        verificationMode: log.verificationMode,
-        datetimeVerify: log.datetimeVerify,
-        inoutMode: log.inoutMode,
-        pp_id: payperiod,
-      };
-      createlogs.push(createdlog);
-
-    });
-
-  } */
-
-
 
 }
 

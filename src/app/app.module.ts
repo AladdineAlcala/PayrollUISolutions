@@ -6,12 +6,9 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpServiceInterceptor } from './interceptors/http-service.interceptor';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 
 import { NavbarComponent } from './shared/widgets/navbar/navbar.component';
 import { EmployeeModule } from './components/employee/employee.module';
-import { AttendanceMainComponent } from './components/attendance/attendance-main/attendance-main.component';
-import { AttendanceSidebarComponent } from './components/attendance/attendance-sidebar/attendance-sidebar.component';
 import { HomeComponent } from './components/home/home.component';
 import { DeductionCreateComponent } from './components/deductions/deduction-create/deduction-create.component';
 import { DeductionMainComponent } from './components/deductions/deduction-main/deduction-main.component';
@@ -26,8 +23,6 @@ import { DatePipe } from '@angular/common';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginator } from '@angular/material/paginator';
-import { AttendanceCreateComponent } from './components/attendance/attendance-create/attendance-create.component';
 import { AttendanceModule } from './components/attendance/attendance.module';
 
 
@@ -56,13 +51,13 @@ import { AttendanceModule } from './components/attendance/attendance.module';
     imports: [
     
         BrowserModule,
+        EmployeeModule,
+        AttendanceModule,
+        PayrollModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        EmployeeModule,
-        PayrollModule,
-        AttendanceModule,
         SharedModule,
         NgxSpinnerModule,
         BrowserAnimationsModule,

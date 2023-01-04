@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 
 
 import { EmployeeCreateComponent } from './employee-create/employee-create.component';
@@ -27,6 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { EmployeeRoutingModule } from './employee-routing.module';
 
 @NgModule({
     declarations: [
@@ -46,18 +46,8 @@ import {MatInputModule} from '@angular/material/input';
        
     ],
     exports: [
-        EmployeeComponent,
-        EmployeeListComponent,
-        EmployeeDetailsComponent,
-        EmployeeCreateComponent,
-        EmployeeEditComponent,
-        EmployeesidebarComponent,
+
         TabtemplateComponent,
-        WageComponent,
-        AdvancesComponent,
-        CashbondComponent,
-        DeductionComponent,
-        ProfileComponent,
         MatTableModule,
         MatIconModule,
         MatButtonModule,
@@ -66,8 +56,8 @@ import {MatInputModule} from '@angular/material/input';
         
     ],
     imports: [
-        RouterModule,
         CommonModule,
+        EmployeeRoutingModule,
         MatIconModule,
         MatButtonModule,
         MatTableModule,

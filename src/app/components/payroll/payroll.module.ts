@@ -6,7 +6,6 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
-import { RouterModule } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { PayrollDeductionScheduleComponent } from "./payrolldeductionschedule/payrolldeductionsched-main/payrolldeductionschedule.component";
 import { PayrollperiodCreateComponent } from "./payrollperiod/payrollperiod-create/payrollperiod-create.component";
@@ -23,6 +22,7 @@ import { DeductionscheduleTabComponent } from './payrolldeductionschedule/deduct
 import { PayrolldeductionscheduleCreateTableComponent } from './payrolldeductionschedule/payrolldeductionschedule-create-table/payrolldeductionschedule-create-table.component';
 import { DeductionscheduleTabEditComponent } from './payrolldeductionschedule/deductionschedule-tab-edit/deductionschedule-tab-edit.component'; 
 import { NumberonlyDirective } from "src/app/directives/numberonly.directive";
+import { PayrollRoutingModule } from "./payroll-routing.module";
 
 
 
@@ -44,8 +44,8 @@ import { NumberonlyDirective } from "src/app/directives/numberonly.directive";
     
     ],
     imports:[
-        RouterModule,
         CommonModule,
+        PayrollRoutingModule,
         MatDatepickerModule,
         MatFormFieldModule,
         MatNativeDateModule,
@@ -58,13 +58,7 @@ import { NumberonlyDirective } from "src/app/directives/numberonly.directive";
         TabsModule.forRoot()
     ],
     exports:[
-        PayrollsidebarComponent,
-        PayrollperiodComponent,
-        PayrollperiodlistComponent,
-        PayrollperiodCreateComponent,
-        PayrollDeductionScheduleComponent,
-        PayrolldeductionscheduleCreateComponent,
-        NumberonlyDirective,
+            NumberonlyDirective,
         
     ]
 })

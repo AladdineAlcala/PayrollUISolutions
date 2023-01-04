@@ -16,6 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { AttendanceTableLogsComponent } from './attendance-table-logs/attendance-table-logs.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AttendanceLogdetailsComponent } from './attendance-logdetails/attendance-logdetails.component';
+import { AttendanceRoutingModule } from './attendance-routing.module';
 
 
 @NgModule({
@@ -24,10 +28,11 @@ import {MatSelectModule} from '@angular/material/select';
     AttendanceSidebarComponent,
     AttendanceCreateComponent,
     AttendanceTableLogsComponent,
+    AttendanceLogdetailsComponent,
   ],
 
   imports: [
-    RouterModule,
+    AttendanceRoutingModule,
     CommonModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
@@ -40,14 +45,14 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatTableModule,
     MatSelectModule,
+    MatPaginatorModule,
+    MatCardModule,
     SharedModule,
 
   ]
   ,
   exports:[
-    AttendanceMainComponent,
-    AttendanceSidebarComponent,
-    AttendanceCreateComponent,
+
   ]
 })
 export class AttendanceModule { }
