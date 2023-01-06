@@ -20,6 +20,11 @@ import {MatCardModule} from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AttendanceLogdetailsComponent } from './attendance-logdetails/attendance-logdetails.component';
 import { AttendanceRoutingModule } from './attendance-routing.module';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AttendanceLogdatailsTableLogsComponent } from './attendance-logdatails-table-logs/attendance-logdatails-table-logs.component';
+import { LoglistTableEmpComponent } from './loglist-table-emp/loglist-table-emp.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -29,6 +34,8 @@ import { AttendanceRoutingModule } from './attendance-routing.module';
     AttendanceCreateComponent,
     AttendanceTableLogsComponent,
     AttendanceLogdetailsComponent,
+    AttendanceLogdatailsTableLogsComponent,
+    LoglistTableEmpComponent
   ],
 
   imports: [
@@ -48,6 +55,9 @@ import { AttendanceRoutingModule } from './attendance-routing.module';
     MatPaginatorModule,
     MatCardModule,
     SharedModule,
+    MatTabsModule,
+    MatSortModule,
+    MatProgressSpinnerModule
 
   ]
   ,

@@ -41,7 +41,11 @@ export class EmployeeDetailsComponent implements OnInit, OnDestroy {
 
   onClose(){
     //console.log('closer');
-    this.router.navigate(['',{ outlets: {side:'employees',main:null} }]);
+    //this.router.navigate(['',{ outlets: {side:'employees',main:''} }]);
+
+    this.router.navigate(['', { outlets: { main: ['employees'] } }], {
+      relativeTo: this.activatedRoute,
+    });
 
   }
 

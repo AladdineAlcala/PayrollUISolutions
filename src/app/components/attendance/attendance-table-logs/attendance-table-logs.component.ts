@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AttendanceLog } from 'src/app/models/attendancelog';
 import { Employee } from 'src/app/models/employee';
 import { AttendanceLogsStore } from 'src/app/store/attlogsstore';
+import { getdaynum } from 'src/HelperFunctions/Utilities';
 
 export interface TimeLogs {
   ID: string;
@@ -73,7 +74,7 @@ export class AttendanceTableLogsComponent implements OnInit,OnDestroy {
           
           let numofdays: number = this.getnumberofdays(datestart,dateend); //get total number of days frem startdate to end date
           
-          const strdate: number = this.getdaynum(datestart);
+          const strdate: number = getdaynum(datestart);
           
           
           numofdays = numofdays+2;
@@ -239,10 +240,7 @@ export class AttendanceTableLogsComponent implements OnInit,OnDestroy {
     // return this.dataSource.map((data:any) => data.reduce((acc: any,value: { cell: (arg0: any) => any; }) => acc+=value,0))
   }
   
-  getdaynum(date: Date): number {
-    let strday = date.getDate();
-    return strday;
-  }
+
   
   
   getnumberofdays(dt1:Date,dt2:Date){
@@ -259,7 +257,7 @@ export class AttendanceTableLogsComponent implements OnInit,OnDestroy {
     
     return logs.filter(emp=>emp.EmpID==empID).filter(t =>{
       
-      return this.getdaynum(t.datetimeVerify)==intdayoflog;
+      return getdaynum(t.datetimeVerify)==intdayoflog;
 
     }).map(t=>{
       return this.converMHour(t.datetimeVerify)
@@ -270,7 +268,7 @@ export class AttendanceTableLogsComponent implements OnInit,OnDestroy {
     
     return logs.filter(emp=>emp.EmpID==empID).filter(t =>{
       
-      return this.getdaynum(t.datetimeVerify)==intdayoflog;
+      return getdaynum(t.datetimeVerify)==intdayoflog;
       
     }).map(t=>t.verificationMode).includes(0|1)
     

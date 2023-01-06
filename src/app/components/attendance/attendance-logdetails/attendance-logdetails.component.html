@@ -3,6 +3,73 @@
 <main-container [title]="title" (oncontentEventClose)="onClose()">
     <div class="component-container">
 
-        
+        <div class="d-flex flex-column">
+
+            <div class="my-2 border rounded-2 bg-light shadow period-details">
+
+                <div class=" d-flex flex-row mt-3 ms-2">
+                    <p class="fs-6">Payroll Period:</p>
+                    <p class="fs-6 fw-bold mx-3">{{payrollperiod.pp_id}}</p>
+                </div>
+
+                <div class=" d-flex flex-row mt-2 ms-2">
+                    <p class="fs-6">From:</p>
+                    <div class="text-center" style="width:170px;"><p class="fs-6 fw-light border-bottom border-primary mx-3">{{payrollperiod.strtpd_d | date}}</p></div>
+
+                    <p class="fs-6 ms-4">To:</p>
+                    <div class="text-center" style="width:170px;"> <p class="fs-6 fw-light border-bottom border-primary mx-3">{{payrollperiod.endpd_d | date}}</p></div>
+
+                </div>
+
+                <div class=" d-flex flex-row mt-3 ms-2">
+                    <p class="fs-6">Total Days:</p>
+                    <p class="fs-6 fw-light mx-3">15</p>
+                </div>
+
+            </div>
+
+
+            <div class="my-2">
+
+                
+                <mat-card class="logcard">
+
+                    <mat-card-content>
+
+                        <div class="row row-cols-lg-2">
+
+                            <div class="col-lg-6 col-md-12">
+
+                                <loglist-table-emp [loglist$]="attlogs$"
+                                (selectedEmpLogEvent)="selectedEmpLogEvt($event)">
+                                </loglist-table-emp>    
+
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-12">
+
+                             <div class="loglist" *ngIf="attlogsEmpView$|async">
+                                    
+                                    <table-logs [logs$]="attlogsEmpView$"></table-logs>
+    
+                                </div> 
+
+                            </div>
+
+                          
+
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+
+      
+
+
+            </div>
+
+        </div>
+
     </div>
 </main-container>

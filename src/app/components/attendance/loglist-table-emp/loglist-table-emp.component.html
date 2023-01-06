@@ -1,0 +1,48 @@
+<div class="my-3 border shadow-sm rouded-2">
+  
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort multiTemplateDataRows >
+
+    <!--id column-->
+    <ng-container matColumnDef="em_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID.</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.empId}}</mat-cell>
+    </ng-container>
+
+    <!--fullname column-->
+    <ng-container matColumnDef="fullname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> FULLNAME</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.fullname}}</mat-cell>
+    </ng-container>
+
+    <!--position column-->
+    <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> POSITION</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.position}}</mat-cell>
+    </ng-container>
+
+    <!--button-->
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row;">
+
+          <button 
+          mat-icon-button
+           color="primary"
+           (click)="onSelectViewLogs(row)"
+           >
+            <mat-icon>event_note</mat-icon> 
+          </button>
+
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row  [ngClass]="{'highlighted':selectedIndex===row.empId}" *matRowDef="let row;columns: displayedColumns;let i=index;"></mat-row>
+
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of employees">
+</mat-paginator>
+
+</div>
+

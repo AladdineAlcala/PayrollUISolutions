@@ -21,16 +21,16 @@ export class AttendanceMainComponent implements OnInit {
 
   sub$1:Subscription=new Subscription();
 
-  onSelectLogs(data:any){
+  onSelectLogs(data:any):void{
      // console.log(data)
-     this.router.navigate(['',{outlets:{main:['attendance','log-details']}}], {relativeTo: this.activatedRoute});
+     this.router.navigate(['',{outlets:{main:['attendance','log-details',data.pp_id]}}], {relativeTo: this.activatedRoute});
   }
 
-  oncreate_dtr(){
+  oncreate_dtr():void{
     this.router.navigate(['',{outlets:{main:['attendance','create']}}], {relativeTo: this.activatedRoute});
   }
 
-  onClose(){
+  onClose():void{
     //console.log('closer');
     this.router.navigate(['',{ outlets: {side:'attendance',main:null} }]);
 

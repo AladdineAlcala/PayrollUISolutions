@@ -6,7 +6,7 @@
 
 <main-container [title]="title" (oncontentEventClose)="onClose()">
   <div class="component-container">
-    
+
     <div class="d-flex flex-column justify content start">
       <div class="d-flex justify-content-row">
 
@@ -52,6 +52,11 @@
                   <button mat-icon-button color="primary" (click)="onSelectLogs(row)" >
                     <mat-icon>launch</mat-icon> 
                   </button>
+
+                  <button mat-icon-button color="warn" (click)="onSelectLogs(row)" >
+                    <mat-icon>delete</mat-icon> 
+                  </button>
+
                 </mat-cell>
               </ng-container>
 

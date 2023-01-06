@@ -22,7 +22,7 @@ const employeeRoutes:Routes=[
   { path: 'employees', component: EmployeesidebarComponent, outlet: 'side' },
 
   {
-    path: 'employees/all',
+    path: 'employees',
     component: EmployeeComponent,
     outlet: 'main',
     resolve: {

@@ -1,0 +1,19 @@
+/* mat-table.mat-cell {
+    text-align:right;
+    justify-content:center;
+  } */
+  table {
+    width: 100%;
+  }
+
+  tr:hover {
+    opacity: 0.5;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .highlighted {
+    background:#B9F4D5; /* green */
+  }

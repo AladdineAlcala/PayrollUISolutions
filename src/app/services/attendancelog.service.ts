@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, delay, map, shareReplay, throwError } from 'rxjs';
+import { catchError, delay, map, share, shareReplay, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { dateconvert } from 'src/HelperFunctions/Utilities';
 import { AttendanceLogFetch } from '../models/attendancelog';
@@ -14,11 +14,33 @@ export class AttendanceLogService {
 
   constructor(private http: HttpClient) {}
 
+   
+
+
+
+
+   /** -------------------------------------------------------------------------------------------------------------------------------------- */
+   // Get All Logs By Payroll Period
+  //https://localhost:7023/api/attlogs/GetByPayrollPeriod/24
+
+   getlogsbyPeriod(pp_Id:number){
+    this.url="attlogs"
+
+    return this.http.get<ResponseDTO>(`${environment.base_apiUrl}/${this.url}/GetByPayrollPeriod/${pp_Id}`)
+                .pipe(delay(2000),
+                map(data=>data),
+                shareReplay(),
+                catchError(this.handleError)
+                )
+    }
+
+  /**------------------------------------------------------------------------------------------------------------------------------------------ */
 
 
   /**------------------------------------------------------------------------------------------------------------------------------------------ */
   //call to device attendance log
   //https://localhost:7066/api/timelog?DtStart=2022-12-15&DtEnd=2022-12-31
+
   getlogs(dateStart: Date, dateEnd: Date) {
 
     this.url = 'timelog';

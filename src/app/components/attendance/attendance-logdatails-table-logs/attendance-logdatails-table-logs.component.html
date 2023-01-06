@@ -1,0 +1,47 @@
+<div class="d-flex flex-column my-2 position-relative">
+
+  <div class="logloading position-absolute top-50 start-50" *ngIf="isloading$|async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="logsviewlist">
+    
+    <table class="table table-sm table-bordered">
+      <thead>
+        <tr>
+          <th rowspan="2" class="align-middle text-center">Date</th>
+          <th colspan="2" class="text-center bo">AM</th>
+          <th colspan="2" class="text-center">PM</th>
+          <th rowspan="2" class="align-middle text-center">Late In</th>
+          <th rowspan="2" class="align-middle text-center">Early Leave</th>
+        </tr>
+        <tr>
+          <th class="text-center">In</th>
+          <th class="text-center">Out</th>
+          <th class="text-center">In</th>
+          <th class="text-center">Out</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of logsviewlist">
+          <td class="text-center">{{ row.logdate | date : "MM/dd/yyyy" }}</td>
+          <!--date log-->
+          <td class="text-center">{{ row.logtimeINAM }}</td>
+          <!--AM In-->
+          <td class="text-center">{{ row.logtimeOUTAM }}</td>
+          <!--AM Out-->
+          <td class="text-center">{{ row.logtimeINPM }}</td>
+          <!--PM In-->
+          <td class="text-center">{{ row.logtimeOUTPM }}</td>
+          <!--PM Out-->
+          <td></td>
+          <!-- late-->
+          <td></td>
+          <!--Early Leave-->
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+
+</div>

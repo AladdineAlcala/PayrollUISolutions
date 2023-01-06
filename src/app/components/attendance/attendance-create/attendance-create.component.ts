@@ -168,7 +168,7 @@ export class AttendanceCreateComponent implements OnInit,OnDestroy {
 
             this.attranslogs = [...data];
             
-            console.log(data);
+            //console.log(data);
             //this.attlogForm.controls['payrollperiod'].enable();
           }
         });

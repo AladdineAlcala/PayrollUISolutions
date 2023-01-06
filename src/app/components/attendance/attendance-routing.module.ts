@@ -27,7 +27,7 @@ const attendanceRoutes:Routes=[
       },
 
       {
-        path: 'attendance/log-details',
+        path: 'attendance/log-details/:payperiod',
         component:AttendanceLogdetailsComponent,
         outlet: 'main'
       }

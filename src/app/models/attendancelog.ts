@@ -1,4 +1,4 @@
-import { Type } from "@angular/core"
+
 import { Employee } from "./employee"
 
 
@@ -26,6 +26,8 @@ export interface AttendanceLog{
     Employee:Employee
     
 }
+
+
 
 
 export interface AttendanceLogCreate{

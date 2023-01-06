@@ -10,7 +10,7 @@ img{
 }
 
 .component-container{
-    height:100vh;
+ /*    height:100vh; */
     margin: 0 auto;
     width: 95%;
     border-color:#e0a030 1px solid;
