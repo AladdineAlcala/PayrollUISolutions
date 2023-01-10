@@ -25,6 +25,12 @@ import { AttendanceLogdatailsTableLogsComponent } from './attendance-logdatails-
 import { LoglistTableEmpComponent } from './loglist-table-emp/loglist-table-emp.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { TableCellClickEventDirective } from 'src/app/directives/oncellclick.directive';
+import { EditModeDirective } from 'src/app/directives/editmode.directive';
+import { ViewModeDirective } from 'src/app/directives/viewmode.directive';
+/* import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';   */
+
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -35,7 +41,10 @@ import { MatSortModule } from '@angular/material/sort';
     AttendanceTableLogsComponent,
     AttendanceLogdetailsComponent,
     AttendanceLogdatailsTableLogsComponent,
-    LoglistTableEmpComponent
+    LoglistTableEmpComponent,
+    TableCellClickEventDirective,
+    EditModeDirective,
+    ViewModeDirective
   ],
 
   imports: [
@@ -57,12 +66,16 @@ import { MatSortModule } from '@angular/material/sort';
     SharedModule,
     MatTabsModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+  /*   NgxMatTimepickerModule */
 
+  NgxMaterialTimepickerModule
   ]
   ,
   exports:[
-
+    TableCellClickEventDirective,
+    EditModeDirective,
+    ViewModeDirective
   ]
 })
 export class AttendanceModule { }

@@ -2,8 +2,9 @@
     text-align:right;
     justify-content:center;
   } */
-  table {
+  mat-table {
     width: 100%;
+
   }
 
   tr:hover {
@@ -17,3 +18,19 @@
   .highlighted {
     background:#B9F4D5; /* green */
   }
+
+  mat-cell:nth-child(1) {
+      color: blue !important;
+      font-weight:500;
+    
+  }
+
+  .mat-column-em_id {
+    flex: 0 0 15%;
+
+}
+
+  .mat-column-actions {
+    flex: 0 0 15%;
+    text-align:center !important;
+}

@@ -9,6 +9,7 @@ import { LoaderComponent } from "./widgets/loader/loader.component";
 import { TableBootstrapComponent } from "./widgets/table-bootstrap/table-bootstrap.component";
 import { TitleHeaderComponent } from "./widgets/title-header/title-header.component";
 import { ClosebuttonComponent } from './widgets/closebutton/closebutton.component';
+import { EditableComponent } from './widgets/editable/editable.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ClosebuttonComponent } from './widgets/closebutton/closebutton.componen
         LoaderComponent,
         MaincontainerComponent,
         ClosebuttonComponent,
+        EditableComponent,
 
     ],
     imports:[
@@ -35,7 +37,8 @@ import { ClosebuttonComponent } from './widgets/closebutton/closebutton.componen
         DynamictransformPipe,
         LoaderComponent,
         MaincontainerComponent,
-        ClosebuttonComponent
+        ClosebuttonComponent,
+        EditableComponent
  
     ]
 })

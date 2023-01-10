@@ -2,7 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { param } from 'jquery';
-import { delay, map, mergeMap, Observable, switchMap } from 'rxjs';
+import { delay, map, mergeMap, Observable, switchMap, tap } from 'rxjs';
+import { FinalAttLogs } from 'src/app/models/attendancelog';
 import { EmpLogView } from 'src/app/models/logattendanceview';
 import { PayrollPeriod } from 'src/app/models/payrollperiod';
 import { PeriodAttLogs } from 'src/app/models/periodattendancelog';
@@ -23,9 +24,9 @@ export class AttendanceLogdetailsComponent implements OnInit {
 
   pp_id!:number
 
-  attlogs$!:Observable<PeriodAttLogs[]>
+  attlogs$!:Observable<FinalAttLogs[]>
 
-  attlogsEmpView$!:Observable<PeriodAttLogs[]>
+  attlogsEmpView$!:Observable<FinalAttLogs[]>
 
   constructor(
   private router:Router,
@@ -35,11 +36,10 @@ export class AttendanceLogdetailsComponent implements OnInit {
   private payperiodstore:PayrollPeriodStore
   ) {
 
-    this.pp_id = this.activatedRoute.snapshot.params['payperiod'];
-    
-    this.attlogsEmpView$=new Observable<PeriodAttLogs[]>()
+    this.attlogsEmpView$=new Observable<FinalAttLogs[]>()
 
-    
+    this.pp_id = this.activatedRoute.snapshot.params['payperiod'];
+
     this.activatedRoute.params.pipe(switchMap(param=>this.payperiodstore.select(state => state.payrollperiods).pipe(map(data => data.find(t=>t.pp_id==param['payperiod']))))
     ).subscribe(res => {
      // console.log(res);
@@ -53,9 +53,10 @@ export class AttendanceLogdetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
    // console.log(`ppid ${this.pp_id}`)
     this.attlogs$=this.attlogservice.getlogsbyPeriod(this.pp_id)
-    .pipe(map(data => {
+    .pipe(tap(t=> console.log(t)) ,map(data => {
         if(data.isSuccess){
           return data.result
         }

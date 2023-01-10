@@ -14,7 +14,9 @@
 }
 
 
-
+mat-card.logcard{
+    height:80vh;
+}
 
 
 /* table{

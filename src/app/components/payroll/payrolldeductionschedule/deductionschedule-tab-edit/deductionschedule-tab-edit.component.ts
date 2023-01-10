@@ -16,6 +16,8 @@ import {
 } from 'src/app/models/deductionscheduletransaction';
 import { PeriodDeductionScheduleService } from 'src/app/services/perioddeductionscheduled.service';
 import { PayrollDeductionScheduleStore } from 'src/app/store/payrolldeductionschedule.store';
+import{ toFormControl } from 'src/HelperFunctions/Utilities'
+
 
 interface ITab {
   heading: string;
@@ -90,10 +92,9 @@ export class DeductionscheduleTabEditComponent implements OnInit,OnDestroy {
     this.formcontrols = new FormArray(formgroup);
   }
 
-  convertToFormControl(absCtrl: AbstractControl | null): FormControl {
-    const ctrl = absCtrl as FormControl;
-    return ctrl;
-  }
+ get toformControl(){
+  return toFormControl;
+ }
 
   getdeduction(index: number, field: string): FormControl {
     return this.formcontrols.at(index).get(field) as FormControl;

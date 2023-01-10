@@ -1,3 +1,4 @@
+import { AbstractControl, FormControl } from "@angular/forms";
 import { exhaustMap } from "rxjs";
 import { Employee } from "src/app/models/employee";
 
@@ -33,4 +34,9 @@ export function dateconvert(date:Date):string{
 
   export function tofullname(employee:Employee){
     return `${employee.fname} ${employee.lname}`
+  }
+
+  export function toFormControl(absCtrl: AbstractControl | null): FormControl {
+    const ctrl = absCtrl as FormControl;
+    return ctrl;
   }

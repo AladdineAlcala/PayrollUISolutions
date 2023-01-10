@@ -63,9 +63,9 @@
                 <ng-container *ngIf="empde.iseditable">
 
                   <input type="text" class="form-control text-end"
-                    [formControl]="convertToFormControl(getdeduction(i,'actualDeductedAmount'))" placeholder="0.00"
+                    [formControl]="toformControl(getdeduction(i,'actualDeductedAmount'))" placeholder="0.00"
                     Numberonly focusable
-                    [class.is-invalid]="convertToFormControl(getdeduction(i,'actualDeductedAmount')).invalid" />
+                    [class.is-invalid]="toformControl(getdeduction(i,'actualDeductedAmount')).invalid" />
 
                 </ng-container>
 
@@ -79,7 +79,7 @@
 
                 <button mat-icon-button class="material-icons app-toolbar-menu save-button" *ngIf="empde.iseditable"
                   (click)="saveDSched(i,empde)"
-                  [disabled]="convertToFormControl(getdeduction(i,'actualDeductedAmount')).invalid" color="primary">
+                  [disabled]="toformControl(getdeduction(i,'actualDeductedAmount')).invalid" color="primary">
                   <mat-icon>check_circle</mat-icon>
                 </button>
 

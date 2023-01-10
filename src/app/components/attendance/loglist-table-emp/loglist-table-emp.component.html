@@ -1,5 +1,7 @@
-<div class="my-3 border shadow-sm rouded-2">
-  
+<div class="mt-2 border shadow-sm rouded-2">
+  <div class="my-2 col-sm-6">
+      <input type="text" class="form-control ms-2" placeholder="Search Employee">
+  </div>
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort multiTemplateDataRows >
 
     <!--id column-->
@@ -25,12 +27,12 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row;">
 
-          <button 
-          mat-icon-button
-           color="primary"
-           (click)="onSelectViewLogs(row)"
-           >
-            <mat-icon>event_note</mat-icon> 
+          <button          
+             mat-icon-button
+             color="primary"
+            (click)="onSelectViewLogs(row)"
+            >
+              <mat-icon>event_note</mat-icon> 
           </button>
 
         </mat-cell>

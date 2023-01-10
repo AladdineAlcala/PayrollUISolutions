@@ -11,10 +11,12 @@ import {
   AttendanceLog,
   AttendanceLogFetch,
   AttendanceLogCreate,
+  FinalAttLogs,
+  FinalAttLogsCreate,
 } from 'src/app/models/attendancelog';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { forkJoin, map, Observable, Subscription } from 'rxjs';
-import { ConvertID } from 'src/HelperFunctions/Utilities';
+import { ConvertID, dateconvert, getdaynum } from 'src/HelperFunctions/Utilities';
 import { AttendanceLogsStore } from 'src/app/store/attlogsstore';
 import { EmployeeStore } from 'src/app/store/employee.store';
 import { AttendanceTableLogsComponent } from '../attendance-table-logs/attendance-table-logs.component';
@@ -115,7 +117,7 @@ export class AttendanceCreateComponent implements OnInit,OnDestroy {
   ondaterangeChange(
     daterangeStart: HTMLInputElement,
     daterangeEnd: HTMLInputElement
-  ) {
+  ):void {
     let attendancedetailsList: AttendanceLog[] = [];
 
     let datestart = isvalidDate(daterangeStart.value);
@@ -175,7 +177,7 @@ export class AttendanceCreateComponent implements OnInit,OnDestroy {
     }
   }
 
-  onSubmitLogs() {
+public onSubmitLogs():void{
 
     if (this.attlogForm.valid) {
 
@@ -183,18 +185,21 @@ export class AttendanceCreateComponent implements OnInit,OnDestroy {
 
         let save_createdlogs = {
           pp_id: payrollperiod,
-          logs: this.attranslogs,
+         // rawlogs: this.attranslogs,
+           refinelogs:segregatelogs(this.attranslogs)
         };
+
+        console.log(save_createdlogs)
       //save to database
-    this.sub$3 =this.logsService
-        .postlogs(save_createdlogs)
-        .subscribe((result) =>{
+      this.sub$3 =this.logsService
+            .postlogs(save_createdlogs)
+            .subscribe((result) =>{
 
-          console.log(result);
+              //console.log(result);
 
-        });
+            }); 
     }
-  }
+}
 
   resetFormLogs() {
     this.attlogcomp.displayedcolumns = [];
@@ -211,4 +216,81 @@ function isvalidDate(testdate: string) {
     return false;
   }
   return true;
+}
+
+
+export function segregatelogs(logs:AttendanceLog[]):FinalAttLogsCreate[]{
+
+ return  logs.filter(
+                    (val, index, arr) =>
+                      arr.findIndex((d) =>
+                          getdaynum(d.datetimeVerify) === getdaynum(val.datetimeVerify) &&
+                          d.EmpID === val.EmpID
+                      ) === index
+                    )
+                    .map((res) => {
+                    //console.log(getlogtime('am', 0, res.EmpID, res.datetimeVerify,logs));
+                      return ({
+                        emp_Id:res.EmpID,
+                        date_in:dateconvert(res.datetimeVerify),
+                        time_inAM: checkvalidTime(getlogtime('am', 0, res.EmpID, res.datetimeVerify,logs)),
+                        time_outAM:checkvalidTime(getlogtime('am', 1, res.EmpID, res.datetimeVerify,logs)),
+                        date_out:dateconvert(res.datetimeVerify),
+                        time_inPM:checkvalidTime(getlogtime('pm', 0, res.EmpID, res.datetimeVerify, logs)),
+                        time_outPM:checkvalidTime(getlogtime('pm', 1, res.EmpID, res.datetimeVerify, logs)),
+                        shiftcode:1
+                      })
+
+                    })
+                    .sort((a, b) => (a.emp_Id < b.emp_Id ? -1 : 1));
+
+
+
+
+
+}
+
+
+          function getlogtime(
+            ampm: string,
+            logmode: number,
+            emp: string,
+            logdatefilter: Date,
+            data: AttendanceLog[]
+          )
+          {
+            const filterempdate= data.filter((ele) => ele.EmpID === emp && getdaynum(ele.datetimeVerify) === getdaynum(logdatefilter)).map(d=>{
+                return ({time:d.datetimeVerify.toLocaleTimeString([], { hour: '2-digit', minute: "2-digit",second:'2-digit', hour12: false }),logmode:d.inoutMode });
+            })
+
+              return filterempdate.find((t) => {
+
+                  if(typeof(t.time)==='string'){
+
+                    const hr = parseInt(t.time.split(':')[0]);
+                    let _ampm = hr >= 12 ? 'pm' : 'am';
+
+                    if (t.logmode === logmode && _ampm === ampm) return t;
+
+                  }
+
+                  return null; 
+
+                })?.time;
+
+
+            
+
+}
+
+
+function checkvalidTime(strtime?:string){
+  if(strtime!= undefined){
+
+    let hr:number=parseInt(strtime.split(':')[0]);
+    return hr > 0? strtime : ' ';
+  }
+ 
+  return ' ';
+
 }

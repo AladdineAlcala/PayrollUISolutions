@@ -1,5 +1,33 @@
 <div class="d-flex flex-column my-2 position-relative">
 
+  <div class="optbtncontainer d-inline-flex border-top border-start border-end">
+
+    <div class="col-sm-6 g-2">
+
+      <button mat-icon-button class="mx-2" (click)="onEditlog()" >
+
+        <mat-icon *ngIf="viewflag">edit_calendar</mat-icon>
+        <mat-icon *ngIf="!viewflag">save</mat-icon>
+      </button>
+
+      <button  mat-icon-button class="mx-2">
+        <mat-icon>print</mat-icon>
+      </button>
+
+      <button mat-icon-button class="mx-2" (click)="onrefreshlog()">
+        <mat-icon *ngIf="viewflag">refresh</mat-icon>
+        <mat-icon *ngIf="!viewflag">cancel</mat-icon>
+      </button>
+
+    </div>
+   
+    <div class="d-inline-flex">
+      <p class="p-0 mb-0 mt-3 fs-6 text-primary">Shift Schedule:</p>
+      <p class=" ms-2 p-0 mb-0 mt-3 fw-light">Flex Time </p>
+    </div>
+
+  </div>
+
   <div class="logloading position-absolute top-50 start-50" *ngIf="isloading$|async">
     <mat-spinner></mat-spinner>
   </div>
@@ -7,7 +35,7 @@
   <ng-container *ngIf="logsviewlist">
     
     <table class="table table-sm table-bordered">
-      <thead>
+      <thead class="table-light">
         <tr>
           <th rowspan="2" class="align-middle text-center">Date</th>
           <th colspan="2" class="text-center bo">AM</th>
@@ -23,16 +51,98 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of logsviewlist">
-          <td class="text-center">{{ row.logdate | date : "MM/dd/yyyy" }}</td>
+        <tr *ngFor="let row of logsviewlist;index as index;">
+
           <!--date log-->
-          <td class="text-center">{{ row.logtimeINAM }}</td>
+          <td class="text-center">{{ row.logdate | date : "MM/dd/yyyy" }}</td>
+
+       
           <!--AM In-->
-          <td class="text-center">{{ row.logtimeOUTAM }}</td>
-          <!--AM Out-->
-          <td class="text-center">{{ row.logtimeINPM }}</td>
+          <td class="text-center">
+
+            <editable [viewFlag]="viewflagsubj"  (update)="updateField(index,'logtimeINAM')" >
+
+              <ng-template viewMode> {{ row.logtimeINAM||'--' }} </ng-template>
+
+              <ng-template editMode>
+         
+                <ngx-timepicker-field
+                [formControl]="toformcontrol(getControl(index, 'logtimeINAM'))"
+                [format]="24"
+                [defaultTime]="'00:00'"
+                ></ngx-timepicker-field>
+
+              </ng-template>
+
+            </editable>
+            
+          </td>
+
+           <!--AM Out-->
+          <td class="text-center">
+
+            <editable  [viewFlag]="viewflagsubj"  (update)="updateField(index,'logtimeOUTAM')" >
+
+              <ng-template viewMode> {{ row.logtimeOUTAM||'--' }} </ng-template>
+              
+              <ng-template editMode>
+         
+                <ngx-timepicker-field
+                [formControl]="toformcontrol(getControl(index, 'logtimeOUTAM'))"
+                [format]="24"
+                [defaultTime]="'00:00'"
+                ></ngx-timepicker-field>
+
+              </ng-template>
+
+            </editable>
+
+          </td>
+
+         
+          <td class="text-center">
+
+            <editable  [viewFlag]="viewflagsubj"  (update)="updateField(index,'logtimeINPM')" >
+
+              <ng-template viewMode> {{ row.logtimeINPM||'--' }} </ng-template>
+
+              <ng-template editMode>
+         
+                <ngx-timepicker-field
+                [formControl]="toformcontrol(getControl(index, 'logtimeINPM'))"
+                [format]="24"
+                [defaultTime]="'00:00'"
+                ></ngx-timepicker-field>
+
+              </ng-template>
+              
+            </editable>
+          
+          </td>
+
+
           <!--PM In-->
-          <td class="text-center">{{ row.logtimeOUTPM }}</td>
+          <td class="text-center">
+
+            <editable  [viewFlag]="viewflagsubj"  (update)="updateField(index,'logtimeOUTPM')" >
+
+              <ng-template viewMode> {{ row.logtimeOUTPM||'--' }} </ng-template>
+
+              <ng-template editMode>
+         
+                <ngx-timepicker-field
+                [formControl]="toformcontrol(getControl(index, 'logtimeOUTPM'))"
+                [format]="24"
+                [defaultTime]="'00:00'"
+                ></ngx-timepicker-field>
+
+              </ng-template>
+              
+            </editable>
+          
+          </td>
+
+
           <!--PM Out-->
           <td></td>
           <!-- late-->

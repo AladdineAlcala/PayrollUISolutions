@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { distinct, map, Observable, tap } from 'rxjs';
+import { FinalAttLogs } from 'src/app/models/attendancelog';
 import { EmpLogView } from 'src/app/models/logattendanceview';
 import { PeriodAttLogs } from 'src/app/models/periodattendancelog';
 import { tofullname } from 'src/HelperFunctions/Utilities';
@@ -19,7 +20,7 @@ export class LoglistTableEmpComponent implements OnInit ,OnDestroy,AfterViewInit
 
   dataSource = new MatTableDataSource<EmpLogView>();
 
-  @Input() loglist$!: Observable<PeriodAttLogs[]>;
+  @Input() loglist$!: Observable<FinalAttLogs[]>;
 
   @Output() 
   selectedEmpLogEvent=new EventEmitter<EmpLogView>();
@@ -43,7 +44,7 @@ export class LoglistTableEmpComponent implements OnInit ,OnDestroy,AfterViewInit
           const uniqueSet = new Set();
 
           return response
-            .reduce((arr: PeriodAttLogs[], current) => {
+            .reduce((arr: FinalAttLogs[], current) => {
               if (!uniqueSet.has(current.emp_Id)) {
                 arr.push(current);
                 uniqueSet.add(current.emp_Id);
@@ -52,8 +53,8 @@ export class LoglistTableEmpComponent implements OnInit ,OnDestroy,AfterViewInit
             }, [])
             .map((emp) => ({
               empId: emp.emp_Id,
-              fullname: tofullname(emp.employee),
-              position: emp.employee.position.positionName,
+              fullname: tofullname(emp.employee!),
+              position: emp?.employee?.position.positionName,
             }));
         })
       )

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, delay, map, share, shareReplay, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, share, shareReplay, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { dateconvert } from 'src/HelperFunctions/Utilities';
 import { AttendanceLogFetch } from '../models/attendancelog';
@@ -66,18 +66,27 @@ export class AttendanceLogService {
   postlogs(data:unknown){
     this.url="attlogs"
 
-    const body = JSON.stringify(data);
+    //const body = JSON.stringify(data);
     const headers = new HttpHeaders()
     .set('Content-type', 'application/json');
     
-    return this.http.post<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`,body,{headers:headers})
+    return this.http.post<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`,data,{headers:headers})
     .pipe(map(data=>data),
     catchError(this.handleError)
     );
   }
 
+   //**------------------------------------------------------------------------------------------------------------------------------- */
+  /** === Update logs ------ */
 
+  updatelogs(body:unknown):Observable<ResponseDTO>{
+    this.url="attlogs";
 
+    return this.http.put<ResponseDTO>(`${environment.base_apiUrl}/${this.url}`,body).pipe(map(data => data),
+    catchError(this.handleError)
+    );
+
+  }
 
   //-----------------------------------------------------------------------------------------------------------------------------------
 
